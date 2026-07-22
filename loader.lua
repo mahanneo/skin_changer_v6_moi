@@ -156,6 +156,6 @@ if not chunk then
 end
 
 updater.current_version = source:match('local MOI_MULTSCRIPT_VERSION = "([^"]+)"') or "unknown"
-print(string.format("[rgn loader] v%s from %s", updater.current_version, tostring(where)))
+print(string.format("[MAHANMOI loader] v%s from %s", updater.current_version, tostring(where)))
 local ok, err = pcall(chunk)
-if not ok then print("[rgn loader] " .. tostring(err)) end
+if not ok then print("[MAHANMOI loader] " .. tostring(err)) end
