@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/rgnmultitool-banner.png" alt="MAHANMOI — Aimware Lua Toolkit — Created and owned by ragnarokcs" width="100%">
+  <img src="assets/MOImultitool-banner.png" alt="MAHANMOI — Aimware Lua Toolkit — Created and owned by mahanneo" width="100%">
 </p>
 
 <h1 align="center">MAHANMOI</h1>
@@ -13,12 +13,12 @@
   <img alt="Lua" src="https://img.shields.io/badge/Lua-Aimware-43A9FF?style=flat-square">
   <img alt="Platform" src="https://img.shields.io/badge/Platform-CS2-43A9FF?style=flat-square">
   <img alt="Source" src="https://img.shields.io/badge/Source-Visible-43A9FF?style=flat-square">
-  <img alt="Owner" src="https://img.shields.io/badge/Owner-ragnarokcs-43A9FF?style=flat-square">
+  <img alt="Owner" src="https://img.shields.io/badge/Owner-mahanneo-43A9FF?style=flat-square">
 </p>
 
 ## Download
 
-[**Download `loader.lua`**](https://raw.githubusercontent.com/ragnarokcs/rgnMultitool/main/loader.lua)
+[**Download `loader.lua`**](https://raw.githubusercontent.com/mahanneo/MOIMultitool/main/loader.lua)
 
 `loader.lua` is the primary and recommended entry point. It validates and runs the current public source, keeps a last-known-good offline cache and downloads the full Lua again only when `version.txt` changes. `MAHANMOI.lua` remains available for source review and development; regular users do not need to install it manually.
 
@@ -151,7 +151,7 @@ The distributed `loader.lua` checks the small `version.txt` manifest on startup.
 
 ## Installation
 
-1. Download only [`loader.lua`](https://raw.githubusercontent.com/ragnarokcs/rgnMultitool/main/loader.lua) and place it in Aimware's Lua scripts folder.
+1. Download only [`loader.lua`](https://raw.githubusercontent.com/mahanneo/MOIMultitool/main/loader.lua) and place it in Aimware's Lua scripts folder.
 2. In Aimware Lua permissions, allow internet connections and editing Lua files.
 3. Run `loader.lua`.
 4. Keep only one MAHANMOI loader/source active at a time.
@@ -163,7 +163,7 @@ Keep `loader.lua` as the only MAHANMOI script configured for autorun. The loader
 Before replacing its cache, the loader verifies:
 
 - the response is large enough to be a complete release;
-- the fixed `RGN_MULTITOOL_SOURCE_V1` signature is present;
+- the fixed `MOI_MULTITOOL_SOURCE_V1` signature is present;
 - the source version matches the manifest;
 - `loadstring` can compile the complete source.
 
@@ -171,7 +171,7 @@ If GitHub is unavailable, the last validated cache is used. The source is intent
 
 ## Credits
 
-Created and owned by **ragnarokcs**. The project was developed with API and implementation references from the Aimware Lua documentation, `cachorropacoca/aw_cs2v6_femboytap`, `mahanneo/SkinChanger_aw_v6`, public Aimware Lua examples and community research. See `NOTICE.md`.
+Created and owned by **mahanneo**. The project was developed with API and implementation references from the Aimware Lua documentation, `cachorropacoca/aw_cs2v6_femboytap`, `mahanneo/SkinChanger_aw_v6`, public Aimware Lua examples and community research. See `NOTICE.md`.
 
 ## Disclaimer
 
