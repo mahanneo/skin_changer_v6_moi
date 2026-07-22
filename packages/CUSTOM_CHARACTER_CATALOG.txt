@@ -1,4 +1,4 @@
-rgnMultitool Custom Character Catalog
+MAHANMOI Custom Character Catalog
 Generated from the curated working package.
 Models: 279
 
