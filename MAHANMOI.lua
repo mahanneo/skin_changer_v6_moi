@@ -1,7 +1,7 @@
--- MAHANMOI 1.4.0
-local MOI_MULTSCRIPT_VERSION = "1.4.0"
-local MOI_MULTSCRIPT_SIGNATURE = "MOI_MULTSCRIPT_SOURCE_V1"
-_G.MOI_MULTSCRIPT_VERSION = MOI_MULTSCRIPT_VERSION
+-- MOIMAHANMOI 1.4.1
+local MOI_MAHANMOI_VERSION = "1.4.1"
+local MOI_MAHANMOI_SIGNATURE = "MOI_MAHANMOI_SOURCE_V1"
+_G.MOI_MAHANMOI_VERSION = MOI_MAHANMOI_VERSION
 
 local staleEvents = { "Draw", "CreateMove", "PreMove", "DrawESP", "FireGameEvent", "Unload" }
 local function clearCallbacks(ids)
@@ -13,10 +13,10 @@ local function clearCallbacks(ids)
 end
 
 clearCallbacks({
-    "MAHANMOI_Watermark", "MAHANMOI_MISCLogic",
-    "MAHANMOI_MISCLogicMove", "MAHANMOI_MISCEvents",
-    "MAHANMOI_WeaponsSessionEvents", "MAHANMOI_GameEvents",
-    "MAHANMOI_GameEventsUnload", "MAHANMOI_MISCUnload"
+    "MOIMAHANMOI_Watermark", "MOIMAHANMOI_MISCLogic",
+    "MOIMAHANMOI_MISCLogicMove", "MOIMAHANMOI_MISCEvents",
+    "MOIMAHANMOI_WeaponsSessionEvents", "MOIMAHANMOI_GameEvents",
+    "MOIMAHANMOI_GameEventsUnload", "MOIMAHANMOI_MISCUnload"
 })
 if type(M) == "table" and type(M.Watermark) == "function" then
     pcall(M.Watermark, M, false)
@@ -31,17 +31,18 @@ if type(UnloadScript) == "function" then
 end
 
 clearCallbacks({
-    "MOISkins_UIDraw", "Skins_UIInput", "Skins_UIUnload",
-    "MOISkins_StableEvents", "Skins_SpawnWatch", "Skins_SetModelUnload",
-    "MOIMISC_UIDraw", "MISC_UIInput", "MISC_UIUnload",
-    "MOIMISC_Logic", "MISC_Events", "MISC_Unload",
-    "MOIWEAPONS_UIDraw", "WEAPONS_UIInput", "WEAPONS_UIUnload",
-    "MOIWEAPONS_Engine", "WEAPONS_Unload", "WEAPONS_Watermark",
+    "MOISkins_UIDraw", "MOISkins_UIInput", "MOISkins_UIUnload",
+    "MOISkins_StableEvents", "MOISkins_SpawnWatch", "MOISkins_SetModelUnload",
+    "MOIMISC_UIDraw", "MOIMISC_UIInput", "MOIMISC_UIUnload",
+    "MOIMISC_Logic", "MOIMISC_Events", "MOIMISC_Unload",
+    "MOIWEAPONS_UIDraw", "MOIWEAPONS_UIInput", "MOIWEAPONS_UIUnload",
+    "MOIWEAPONS_Engine", "MOIWEAPONS_Unload", "MOIWEAPONS_Watermark",
     "MOIWEAPONS_LateMesh",
-    "MAHANMOI_ManualAADraw", "MAHANMOI_ManualAAMove",
-    "MAHANMOI_ManualAAUnload", "MAHANMOI_WhitelistRefresh",
-    "MAHANMOI_WhitelistESP", "MAHANMOI_WhitelistUnload",
-    "MAHANMOI_RegionDraw", "MAHANMOI_RegionUnload"
+    "MOIMAHANMOI_ManualAADraw", "MOIMAHANMOI_ManualAAMove",
+    "MOIMAHANMOI_ManualAAUnload", "MOIMAHANMOI_WhitelistRefresh",
+    "MOIMAHANMOI_WhitelistPanel", "MOIMAHANMOI_WhitelistESP", "MOIMAHANMOI_WhitelistUnload",
+    "MOIMAHANMOI_KillTimerDraw", "MOIMAHANMOI_KillTimerUnload",
+    "MOIMAHANMOI_RegionDraw", "MOIMAHANMOI_RegionUnload"
 })
 
 local __MOI_GUILIB = [===[
@@ -51,23 +52,23 @@ M.VERSION = "1.0"
 local T = {
     x = 360, y = 200, w = 600, h = 440,
 
-    accent    = { 255, 215, 0 },       -- Gold
-    accent2   = { 255, 215, 0, 255 },  -- Gold
-    accent_bg = { 255, 215, 0, 40 },   -- Gold transparent
-    bg        = { 10, 10, 10, 252 },   -- Black
-    bg2       = { 18, 18, 18, 252 },   -- Dark gray
-    section   = { 25, 25, 25, 252 },   -- Dark gray
-    border    = { 255, 215, 0, 180 },  -- Gold
-    divider   = { 40, 40, 40, 255 },   -- Darker gray
-    text      = { 235, 235, 235, 255 },-- Light gray
-    textdim   = { 150, 150, 150, 255 },-- Gray
-    texthi    = { 255, 255, 255, 255 },-- White
-    widget    = { 15, 15, 15, 255 },   -- Darker black
-    widgethi  = { 30, 30, 30, 255 },   -- Dark gray
-    shadow    = { 0, 0, 0, 255 },      -- Black
+    accent    = { 74, 166, 255 },
+    accent2   = { 107, 219, 255, 255 },
+    accent_bg = { 20, 43, 68, 255 },
+    bg        = { 8, 10, 14, 252 },
+    bg2       = { 11, 14, 19, 252 },
+    section   = { 15, 19, 26, 252 },
+    border    = { 40, 48, 61, 255 },
+    divider   = { 29, 36, 47, 255 },
+    text      = { 205, 213, 225, 255 },
+    textdim   = { 119, 132, 150, 255 },
+    texthi    = { 247, 249, 255, 255 },
+    widget    = { 19, 25, 34, 255 },
+    widgethi  = { 26, 36, 48, 255 },
+    shadow    = { 0, 0, 0, 115 },
 
     title     = "MOI",
-    title_tld = "MULTITOOL",
+    title_tld = "MAHANMOI",
     titlebar  = 58,
     pad       = 18,
     sec_gap   = 16,
@@ -80,9 +81,9 @@ local T = {
     notif_w      = 290,
     notif_margin = 18,
     notif_life   = 3.5,
-    notif_info    = { 255, 215, 0 },   -- Gold
-    notif_success = { 50, 205, 50 },   -- Green
-    notif_error   = { 235, 90, 90 },   -- Red
+    notif_info    = { 230, 230, 235 },
+    notif_success = { 170, 220, 185 },
+    notif_error   = { 235, 90, 90 },
 }
 
 local WH = { check = 28, button = 36, slider = 36, combo = 52, multicombo = 52, input = 52, color = 28, keybox = 52 }
@@ -687,7 +688,7 @@ function Section:_widget(wd, x, y, w)
         local buttonText = fitText(wd.label, mmax(20, w - 18), FONT)
         text(x + w / 2, y + 6, lerpc(T.text, T.texthi, wd._h), buttonText, FONT, "center")
         if clicked(x, y + 1, w, bh) then
-            local ok, err = pcall(wd.cb); if not ok then print("[MAHANMOI] button error: " .. tostring(err)) end
+            local ok, err = pcall(wd.cb); if not ok then print("[MOIMAHANMOI] button error: " .. tostring(err)) end
         end
 
     elseif wd.kind == "slider" then
@@ -885,7 +886,7 @@ function Section:_widget(wd, x, y, w)
         if wd.fn then
             UI._x, UI._cy, UI._w = x, y, w
             local ok, err = pcall(wd.fn, UI, x, y, w)
-            if not ok then print("[MAHANMOI] custom widget error: " .. tostring(err)) end
+            if not ok then print("[MOIMAHANMOI] custom widget error: " .. tostring(err)) end
             local used = UI._cy - y
             wd._measured = used > 0 and used or wd.h
         end
@@ -944,7 +945,7 @@ local function renderSectionAt(s, x, y, w)
     if clipTop and (y + h) <= clipTop then return h end
     local rh = h
     local ok, err = pcall(function() rh = s:render(x, y, w) or h end)
-    if not ok then print("[MAHANMOI] section '" .. tostring(s.title) .. "' error: " .. tostring(err)); return h end
+    if not ok then print("[MOIMAHANMOI] section '" .. tostring(s.title) .. "' error: " .. tostring(err)); return h end
     return rh
 end
 
@@ -1163,7 +1164,7 @@ M._watermark = {
     enabled    = false,
     parts      = { cheat = false, lua = true, user = false, nick = true, fps = true, ping = true },
     cheat_name = "AIMWARE.NET",
-    lua_name   = "MAHANMOI",
+    lua_name   = "MOIMAHANMOI",
     user       = nil,
     nick       = nil,
     ping       = nil,
@@ -1537,7 +1538,7 @@ function M:_drawWatermark()
 
     local segs = {}
     if wm.parts.cheat then segs[#segs + 1] = nameSeg(wm.cheat_name or "AIMWARE.NET") end
-    if wm.parts.lua   then segs[#segs + 1] = nameSeg(wm.lua_name or "Skins") end
+    if wm.parts.lua   then segs[#segs + 1] = nameSeg(wm.lua_name or "MOISkins") end
     if wm.parts.user  then segs[#segs + 1] = { { tostring(wm.user or "?"), T.text, FONT } } end
     if wm.parts.nick  then segs[#segs + 1] = { { tostring(wm.nick or "?"), T.text, FONT } } end
     if wm.parts.fps   then segs[#segs + 1] = { { floor(wm._fps + 0.5) .. " fps", T.text, FONT } } end
@@ -1597,7 +1598,8 @@ local NAV_LABELS = {
     ["WEAPONS"] = "Weapons", ["AGENTS"] = "Agents", ["SKINS CUSTOM"] = "Custom skins",
     ["VIEWMODEL"] = "Viewmodel", ["SCOPE OVERLAY"] = "Scope overlay", ["CUSTOM SOUNDS"] = "Custom sounds",
     ["MOVEMENT"] = "Movement", ["REGION"] = "Region", ["IDENTITY"] = "Identity",
-    ["KILLSAY"] = "Killsay", ["WHITELIST"] = "Whitelist", ["CONFIGS"] = "Settings",
+    ["KILLSAY"] = "Killsay", ["KILL TIMER"] = "Kill timer",
+    ["WHITELIST"] = "Whitelist", ["CONFIGS"] = "Settings",
 }
 local HEADER_USER
 local function aimwareHeaderUser()
@@ -1642,7 +1644,7 @@ end
 
 function M:_drawTabBar(win)
     drawLogo(win.x + 15, win.y + 15, 40, 28)
-    text(win.x + 67, win.y + 11, T.texthi, "MAHANMOI", FONT_LOGO)
+    text(win.x + 67, win.y + 11, T.texthi, "MOIMAHANMOI", FONT_LOGO)
     text(win.x + 67, win.y + 33, T.textdim, "Aimware Lua Suite", FONT_SMALL)
     local credit = fitText("Made by " .. aimwareHeaderUser(), 180, FONT_SMALL)
     text(win.x + win.w - 50, win.y + 22, T.textdim, credit, FONT_SMALL, "right")
@@ -1907,7 +1909,7 @@ function M:_frame()
         rbox(real.x, real.y, miniW, miniH, 9, T.bg, T.border)
         rfill(real.x, real.y, miniW, 2, 9, T.accent, true, true, false, false)
         drawLogo(real.x + 7, real.y + 8, 36, 26)
-        text(real.x + 53, real.y + 13, T.texthi, "MAHANMOI", FONT_LOGO)
+        text(real.x + 53, real.y + 13, T.texthi, "MOIMAHANMOI", FONT_LOGO)
         rbox(expandX, real.y + 10, 22, 22, 5, T.widget, T.border)
         text(expandX + 11, real.y + 12, T.texthi, "+", FONT_B, "center")
         return
@@ -2001,7 +2003,7 @@ function M:_frame()
     clipTop, clipBottom = win.y + T.titlebar, win.y + win.h - 2
     if tab then
         local ok, err = pcall(function() tab:render(cx, cy, cw) end)
-        if not ok then print("[MAHANMOI] tab '" .. tostring(tab.name) .. "' error: " .. tostring(err)) end
+        if not ok then print("[MOIMAHANMOI] tab '" .. tostring(tab.name) .. "' error: " .. tostring(err)) end
     end
     clipTop, clipBottom = nil, nil
 
@@ -2082,7 +2084,7 @@ function M:Build(opts)
     _getWheel = resolveWheel()
     _clock    = resolveClock()
     initFonts()
-    if not _getMouse then print("[MAHANMOI] WARNING: mouse position API not found -- cursor won't track") end
+    if not _getMouse then print("[MOIMAHANMOI] WARNING: mouse position API not found -- cursor won't track") end
 
     local menuRef
     pcall(function() menuRef = gui.Reference("MENU") end)
@@ -2091,6 +2093,21 @@ function M:Build(opts)
     -- Keep this dispatcher outside Draw so Lua does not allocate a fresh
     -- closure on every rendered frame.
     local function drawRuntimeOverlays(t)
+        local whitelistRuntimeActive = self._whitelistRuntimeActive
+        if type(self._whitelistRuntimeCallback) == "function"
+            and (type(whitelistRuntimeActive) ~= "function" or whitelistRuntimeActive()) then
+            local ok, err = pcall(self._whitelistRuntimeCallback)
+            self._whitelistRuntimeAliveAt = t
+            if ok then
+                self._whitelistRuntimeError = nil
+            else
+                local message = tostring(err)
+                if self._whitelistRuntimeError ~= message then
+                    self._whitelistRuntimeError = message
+                    print("[MOIWhitelist] main runtime error: " .. message)
+                end
+            end
+        end
         local movementDrawActive = self._movementDrawActive
         if type(self._movementDrawCallback) == "function"
             and (type(movementDrawActive) ~= "function" or movementDrawActive()) then
@@ -2102,7 +2119,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if self._movementDrawError ~= message then
                     self._movementDrawError = message
-                    print("[Movement] main Draw hook error: " .. message)
+                    print("[MOIMovement] main Draw hook error: " .. message)
                 end
             end
         end
@@ -2117,7 +2134,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if self._killsayDrawError ~= message then
                     self._killsayDrawError = message
-                    print("[Killsay] main Draw hook error: " .. message)
+                    print("[MOIKillsay] main Draw hook error: " .. message)
                 end
             end
         end
@@ -2131,7 +2148,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if self._scopeDrawError ~= message then
                     self._scopeDrawError = message
-                    print("[Scope] main Draw hook error: " .. message)
+                    print("[MOIScope] main Draw hook error: " .. message)
                 end
             end
         end
@@ -2146,7 +2163,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if self._manualAADrawError ~= message then
                     self._manualAADrawError = message
-                    print("[ManualAA] main Draw hook error: " .. message)
+                    print("[MOIManualAA] main Draw hook error: " .. message)
                 end
             end
         end
@@ -2161,13 +2178,28 @@ function M:Build(opts)
                 local message = tostring(err)
                 if self._whitelistDrawError ~= message then
                     self._whitelistDrawError = message
-                    print("[Whitelist] main Draw hook error: " .. message)
+                    print("[MOIWhitelist] main Draw hook error: " .. message)
+                end
+            end
+        end
+        local killTimerDrawActive = self._killTimerDrawActive
+        if type(self._killTimerDrawCallback) == "function"
+            and (type(killTimerDrawActive) ~= "function" or killTimerDrawActive()) then
+            local ok, err = pcall(self._killTimerDrawCallback)
+            self._killTimerDrawAliveAt = t
+            if ok then
+                self._killTimerDrawError = nil
+            else
+                local message = tostring(err)
+                if self._killTimerDrawError ~= message then
+                    self._killTimerDrawError = message
+                    print("[MOIKillTimer] main Draw hook error: " .. message)
                 end
             end
         end
     end
 
-    callbacks.Register("Draw", "MAHANMOI_UIDraw", function()
+    callbacks.Register("Draw", "MOIMAHANMOI_UIDraw", function()
         local open = true
         if menuRef then pcall(function() open = menuRef:IsActive() end) end
         self._open = open
@@ -2210,12 +2242,12 @@ function M:Build(opts)
         end
 
         local ok, err = pcall(function() self:_frame() end)
-        if not ok then print("[MAHANMOI] frame error: " .. tostring(err)) end
+        if not ok then print("[MOIMAHANMOI] frame error: " .. tostring(err)) end
         drawRuntimeOverlays(t)
     end)
 
     pcall(function()
-        callbacks.Register("CreateMove", "MAHANMOI_UIInput", function(cmd)
+        callbacks.Register("CreateMove", "MOIMAHANMOI_UIInput", function(cmd)
         local viewmodelCommandActive = M._viewmodelCommandActive
         if cmd and type(M._viewmodelCommandCallback) == "function"
             and (type(viewmodelCommandActive) ~= "function" or viewmodelCommandActive()) then
@@ -2227,7 +2259,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if M._viewmodelCommandError ~= message then
                     M._viewmodelCommandError = message
-                    print("[MAHANMOI] viewmodel command hook error: " .. message)
+                    print("[MOIMAHANMOI] viewmodel command hook error: " .. message)
                 end
             end
         end
@@ -2242,7 +2274,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if M._movementCommandError ~= message then
                     M._movementCommandError = message
-                    print("[Movement] main CreateMove hook error: " .. message)
+                    print("[MOIMovement] main CreateMove hook error: " .. message)
                 end
             end
         end
@@ -2258,7 +2290,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if M._whitelistCommandError ~= message then
                     M._whitelistCommandError = message
-                    print("[Whitelist] main CreateMove hook error: " .. message)
+                    print("[MOIWhitelist] main CreateMove hook error: " .. message)
                 end
             end
         end
@@ -2272,7 +2304,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if M._manualAACommandError ~= message then
                     M._manualAACommandError = message
-                    print("[ManualAA] main CreateMove hook error: " .. message)
+                    print("[MOIManualAA] main CreateMove hook error: " .. message)
                 end
             end
         end
@@ -2289,9 +2321,9 @@ function M:Build(opts)
     end)
 
     pcall(function()
-        callbacks.Register("Unload", "MAHANMOI_UIUnload", function()
-            pcall(callbacks.Unregister, "Draw", "MAHANMOI_UIDraw")
-            pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_UIInput")
+        callbacks.Register("Unload", "MOIMAHANMOI_UIUnload", function()
+            pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_UIDraw")
+            pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_UIInput")
         end)
     end)
 
@@ -2300,12 +2332,12 @@ end
 
 return M
 ]===]
-local __chunk, __err = loadstring(___GUILIB, "=MAHANMOI_guilib.lua")
-if not __chunk then print("[MAHANMOI] UI compile error: " .. tostring(__err)); return end
+local __chunk, __err = loadstring(__MOI_GUILIB, "=MOIMAHANMOI_guilib.lua")
+if not __chunk then print("[MOIMAHANMOI] UI compile error: " .. tostring(__err)); return end
 local __ok, M = pcall(__chunk)
-if not __ok or type(M) ~= "table" then print("[MAHANMOI] UI load error: " .. tostring(M)); return end
-local _MULTI = rawget(_G, "MOI_MULTSCRIPT_STATE") or {}
-local CUSTOM_MODE_FILE = "multitool_custom_enabled.txt"
+if not __ok or type(M) ~= "table" then print("[MOIMAHANMOI] UI load error: " .. tostring(M)); return end
+local MOI_MULTI = rawget(_G, "MOI_MAHANMOI_STATE") or {}
+local CUSTOM_MODE_FILE = "MOIMAHANMOI_custom_enabled.txt"
 local function loadCustomEnabled()
     local value
     pcall(function()
@@ -2322,52 +2354,52 @@ local function saveCustomEnabled(enabled)
     end)
 end
 
-_MULTI.customEnabled = loadCustomEnabled()
-_MULTI.characterMode = _MULTI.customEnabled and "custom" or "none"
-_MULTI.setAgentEnabled = nil
-_MULTI.setCustomEnabled = nil
-_MULTI.suspendCustomModel = nil
+MOI_MULTI.customEnabled = loadCustomEnabled()
+MOI_MULTI.characterMode = MOI_MULTI.customEnabled and "custom" or "none"
+MOI_MULTI.setAgentEnabled = nil
+MOI_MULTI.setCustomEnabled = nil
+MOI_MULTI.suspendCustomModel = nil
 
-function _MULTI.activateAgents(reason)
-    _MULTI.customEnabled = false
-    _MULTI.characterMode = "agents"
-    _MULTI.reason = reason or "official agents enabled"
+function MOI_MULTI.activateAgents(reason)
+    MOI_MULTI.customEnabled = false
+    MOI_MULTI.characterMode = "agents"
+    MOI_MULTI.reason = reason or "official agents enabled"
     saveCustomEnabled(false)
-    if _MULTI.suspendCustomModel then pcall(_MULTI.suspendCustomModel) end
-    if _MULTI.setCustomEnabled then pcall(_MULTI.setCustomEnabled, false) end
-    if _MULTI.setAgentEnabled then pcall(_MULTI.setAgentEnabled, true) end
+    if MOI_MULTI.suspendCustomModel then pcall(MOI_MULTI.suspendCustomModel) end
+    if MOI_MULTI.setCustomEnabled then pcall(MOI_MULTI.setCustomEnabled, false) end
+    if MOI_MULTI.setAgentEnabled then pcall(MOI_MULTI.setAgentEnabled, true) end
 end
 
-function _MULTI.activateCustom(reason)
-    _MULTI.customEnabled = true
-    _MULTI.characterMode = "custom"
-    _MULTI.reason = reason or "custom characters enabled"
+function MOI_MULTI.activateCustom(reason)
+    MOI_MULTI.customEnabled = true
+    MOI_MULTI.characterMode = "custom"
+    MOI_MULTI.reason = reason or "custom characters enabled"
     saveCustomEnabled(true)
-    if _MULTI.setCustomEnabled then pcall(_MULTI.setCustomEnabled, true) end
-    if _MULTI.setAgentEnabled then pcall(_MULTI.setAgentEnabled, false) end
+    if MOI_MULTI.setCustomEnabled then pcall(MOI_MULTI.setCustomEnabled, true) end
+    if MOI_MULTI.setAgentEnabled then pcall(MOI_MULTI.setAgentEnabled, false) end
 end
 
-function _MULTI.disableCustom(reason)
-    _MULTI.customEnabled = false
-    if _MULTI.characterMode ~= "agents" then _MULTI.characterMode = "none" end
-    _MULTI.reason = reason or "custom characters disabled"
+function MOI_MULTI.disableCustom(reason)
+    MOI_MULTI.customEnabled = false
+    if MOI_MULTI.characterMode ~= "agents" then MOI_MULTI.characterMode = "none" end
+    MOI_MULTI.reason = reason or "custom characters disabled"
     saveCustomEnabled(false)
-    if _MULTI.suspendCustomModel then pcall(_MULTI.suspendCustomModel) end
-    if _MULTI.setCustomEnabled then pcall(_MULTI.setCustomEnabled, false) end
+    if MOI_MULTI.suspendCustomModel then pcall(MOI_MULTI.suspendCustomModel) end
+    if MOI_MULTI.setCustomEnabled then pcall(MOI_MULTI.setCustomEnabled, false) end
 end
 
-function _MULTI.deactivateAgents(reason)
-    if _MULTI.setAgentEnabled then pcall(_MULTI.setAgentEnabled, false) end
-    _MULTI.characterMode = _MULTI.customEnabled and "custom" or "none"
-    _MULTI.reason = reason or "official agents disabled"
+function MOI_MULTI.deactivateAgents(reason)
+    if MOI_MULTI.setAgentEnabled then pcall(MOI_MULTI.setAgentEnabled, false) end
+    MOI_MULTI.characterMode = MOI_MULTI.customEnabled and "custom" or "none"
+    MOI_MULTI.reason = reason or "official agents disabled"
 end
 
-_G.MOI_MULTSCRIPT_STATE = _MULTI
+_G.MOI_MAHANMOI_STATE = MOI_MULTI
 
 local function loadModule(name, fn)
     local ok, err = pcall(fn)
     if not ok then
-        print("[] " .. name .. ": " .. tostring(err))
+        print("[MOI] " .. name .. ": " .. tostring(err))
         return false
     end
     return true
@@ -2375,7 +2407,7 @@ end
 
 loadModule("MANUAL AA", function()
 -- Native Aimware controls stay under Ragebot > Anti-Aim. Runtime drawing and
--- callbacks are owned by MAHANMOI so reloading cannot duplicate them.
+-- callbacks are owned by MOIMAHANMOI so reloading cannot duplicate them.
 local rbotAA = gui.Reference("Ragebot", "Anti-Aim")
 local yawOffsetRef = gui.Reference("Ragebot", "Anti-Aim", "Yaw Offset")
 local pitchRef = gui.Reference("Ragebot", "Anti-Aim", "Pitch Angle")
@@ -2393,6 +2425,7 @@ local inactiveColor = gui.ColorPicker(rbotAA, "manual_indicator_inactive", "Inac
 
 local manualState = 0 -- back, left, right, forward
 local jumpBugHeld, savedAutostrafe = false, nil
+local manualKeyHeld = { false, false, false }
 local capturedYaw, capturedPitch, capturedOriginals = nil, nil, false
 local wasEnabled = enabled:GetValue() == true
 local titleFont, rowFont
@@ -2425,19 +2458,29 @@ local function releaseJumpBug()
     setValue("misc.autostrafe", restore)
 end
 
+local function buttonDown(box)
+    local key = tonumber(box:GetValue()) or 0
+    if key == 0 then return false end
+    local down = false
+    pcall(function() down = input.IsButtonDown(key) == true end)
+    return down
+end
+
 local function checkHotkeys()
-    if enabled:GetValue() ~= true then
+    local active = enabled:GetValue() == true
+    local boxes = { keyLeft, keyRight, keyForward }
+    for i = 1, 3 do
+        local down = buttonDown(boxes[i])
+        if active and down and not manualKeyHeld[i] then
+            manualState = manualState == i and 0 or i
+        end
+        manualKeyHeld[i] = down
+    end
+
+    if not active then
         releaseJumpBug()
         return
     end
-
-    local function pressed(box)
-        local key = tonumber(box:GetValue()) or 0
-        return key ~= 0 and input.IsButtonPressed(key)
-    end
-    if pressed(keyLeft) then manualState = manualState == 1 and 0 or 1 end
-    if pressed(keyRight) then manualState = manualState == 2 and 0 or 2 end
-    if pressed(keyForward) then manualState = manualState == 3 and 0 or 3 end
 
     local jumpKey = tonumber(keyJumpBug:GetValue()) or 0
     local down = jumpKey ~= 0 and input.IsButtonDown(jumpKey) or false
@@ -2510,21 +2553,15 @@ local function restoreOrientation()
     capturedYaw, capturedPitch, capturedOriginals = nil, nil, false
 end
 
-local function manualDraw()
-    local current = enabled:GetValue() == true
-    if wasEnabled and not current then
-        releaseJumpBug()
-        restoreOrientation()
-    end
-    wasEnabled = current
-    drawIndicator()
+local function antiAimEnabled()
+    local value = getValue("rbot.antiaim.enabled")
+    local numeric = tonumber(value)
+    if numeric ~= nil then return numeric ~= 0 end
+    return value == true
 end
 
-local function manualMove()
-    -- Input belongs to the command-rate path; this avoids polling hotkeys at
-    -- the render frame rate on high-FPS clients.
-    checkHotkeys()
-    if enabled:GetValue() ~= true or not getValue("rbot.antiaim.enabled") then return end
+local function applyManualOrientation()
+    if enabled:GetValue() ~= true or not antiAimEnabled() then return end
     local player
     pcall(function() player = entities.GetLocalPlayer() end)
     if not player then pcall(function() player = entities.GetLocalPawn() end) end
@@ -2539,8 +2576,30 @@ local function manualMove()
     if manualState == 1 then yaw, pitch = -90, sidePitch
     elseif manualState == 2 then yaw, pitch = 90, sidePitch
     elseif manualState == 3 then yaw, pitch = 180, 1 end
-    pcall(function() yawOffsetRef:SetValue(yaw) end)
-    pcall(function() pitchRef:SetValue(pitch) end)
+
+    local currentYaw, currentPitch
+    pcall(function() currentYaw = yawOffsetRef:GetValue() end)
+    pcall(function() currentPitch = pitchRef:GetValue() end)
+    if currentYaw ~= yaw then pcall(function() yawOffsetRef:SetValue(yaw) end) end
+    if currentPitch ~= pitch then pcall(function() pitchRef:SetValue(pitch) end) end
+end
+
+local function manualDraw()
+    -- Draw and CreateMove share the same edge latch. Polling both paths keeps
+    -- short key taps reliable without ever toggling twice for one press.
+    checkHotkeys()
+    local current = enabled:GetValue() == true
+    if wasEnabled and not current then
+        releaseJumpBug()
+        restoreOrientation()
+    end
+    wasEnabled = current
+    drawIndicator()
+end
+
+local function manualMove()
+    checkHotkeys()
+    applyManualOrientation()
 end
 
 M._manualAADrawCallback = manualDraw
@@ -2548,7 +2607,7 @@ M._manualAADrawActive = function() return true end
 M._manualAACommandCallback = manualMove
 M._manualAACommandActive = function() return enabled:GetValue() == true end
 
-callbacks.Register("Unload", "MAHANMOI_ManualAAUnload", function()
+callbacks.Register("Unload", "MOIMAHANMOI_ManualAAUnload", function()
     releaseJumpBug()
     restoreOrientation()
     if M._manualAADrawCallback == manualDraw then M._manualAADrawCallback = nil end
@@ -2566,7 +2625,7 @@ local SetModel = {
 }
 local setModelError
 local ffi, bit_ = rawget(_G, "ffi"), rawget(_G, "bit")
-local MODEL_CONFIG_FILE = "skins_character.txt"
+local MODEL_CONFIG_FILE = "MOIskins_character.txt"
 
 if type(ffi) ~= "table" or type(bit_) ~= "table" then
     setModelError = "LuaJIT ffi/bit unavailable"
@@ -2580,7 +2639,7 @@ else
             int32_t length;
             uint32_t allocated;
             union { char* p; char s[8]; } data;
-        } _CBufferString;
+        } MOI_CBufferString;
     ]] end)
 
     local band, rshift = bit_.band, bit_.rshift
@@ -2655,7 +2714,7 @@ else
         -- Keep the resource alive by precaching immediately before SetModel.
         -- This function is reached only after a respawn/round event and cooldown.
         if not resolvePrecache() then return false end
-        local buffer = ffi.new("_CBufferString")
+        local buffer = ffi.new("MOI_CBufferString")
         buffer.length, buffer.allocated, buffer.data.p = 0, 0xC0000008, nil
         local ok = pcall(function()
             fnInsert(buffer, 0, path, -1, 0)
@@ -2708,7 +2767,7 @@ else
 
     local function scheduleApply(reason, freshPawn, delay)
         if not SetModel.path then return end
-        if _MULTI.characterMode ~= "custom" then
+        if MOI_MULTI.characterMode ~= "custom" then
             SetModel.phase = "custom characters disabled"
             return
         end
@@ -2777,7 +2836,7 @@ else
 
     function SetModel.ApplyNow(forceFinal)
         if not SetModel.path then return true end
-        if _MULTI.characterMode ~= "custom" then
+        if MOI_MULTI.characterMode ~= "custom" then
             SetModel.phase = "custom characters disabled"
             return true
         end
@@ -2840,7 +2899,7 @@ else
     end)
 
     pcall(function()
-        callbacks.Register("FireGameEvent", "MAHANMOI_SkinsEvents", function(event)
+        callbacks.Register("FireGameEvent", "MOIMAHANMOI_SkinsEvents", function(event)
 
             local name
             pcall(function() name = event:GetName() end)
@@ -2871,13 +2930,13 @@ else
         end)
     end)
 
-    _MULTI.suspendCustomModel = function()
+    MOI_MULTI.suspendCustomModel = function()
         applyAt, pendingReason, pendingFreshPawn = nil, nil, false
         finalizingRefresh = false
         if SetModel.path then SetModel.phase = "custom characters disabled" end
     end
 
-    callbacks.Register("CreateMove", "MAHANMOI_SkinsSpawnWatch", function()
+    callbacks.Register("CreateMove", "MOIMAHANMOI_SkinsSpawnWatch", function()
         tick = tick + 1
         if tick % 8 == 0 then
             local _, alive, pawnKey = pawnState()
@@ -2888,7 +2947,7 @@ else
             wasAlive = alive
             if pawnKey then lastPawnKey = pawnKey end
         end
-        if applyAt and SetModel.path and _MULTI.characterMode == "custom" and clock() >= applyAt then
+        if applyAt and SetModel.path and MOI_MULTI.characterMode == "custom" and clock() >= applyAt then
             local _, alive, pawnKey = pawnState()
             if not alive or not pawnKey then
                 -- Do not touch a controller or a pawn that is not ready. The
@@ -2920,7 +2979,7 @@ else
                     else
                         SetModel.error = tostring(err or applyOk)
                         SetModel.phase = "apply failed; waiting for next spawn"
-                        print("[Skins] spawn apply failed: " .. SetModel.error)
+                        print("[MOISkins] spawn apply failed: " .. SetModel.error)
                     end
                 end
             end
@@ -2928,14 +2987,14 @@ else
     end)
 
     pcall(function()
-        callbacks.Register("Unload", "MAHANMOI_SkinsUnload", function()
-            pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_SkinsEvents")
-            pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_SkinsSpawnWatch")
+        callbacks.Register("Unload", "MOIMAHANMOI_SkinsUnload", function()
+            pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_SkinsEvents")
+            pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_SkinsSpawnWatch")
         end)
     end)
 end
 
-if setModelError then print("[Skins:LITE] " .. setModelError) end
+if setModelError then print("[MOISkins:LITE] " .. setModelError) end
 local savedCharacter = SetModel.GetPath and SetModel.GetPath() or nil
 
 -- Runtime catalogue: populated only from filenames inside csgo/characters.
@@ -3014,7 +3073,7 @@ pcall(function() ffi.cdef[[
         uint32_t reserved0, reserved1;
         char filename[260];
         char alternate[14];
-    } _CHARACTER_FIND_DATA;
+    } MOI_CHARACTER_FIND_DATA;
 ]] end)
 
 -- Resolve WinAPI functions as private pointers. Declaring FindFirstFileA in
@@ -3072,7 +3131,7 @@ end
 
 local function listCharacterModels(directory, root, output)
     if not findFirstA or not findNextA or not findClose then return end
-    local data = ffi.new("_CHARACTER_FIND_DATA")
+    local data = ffi.new("MOI_CHARACTER_FIND_DATA")
     local handle = findFirstA(directory .. "\\*", data)
     if handle == invalidFindHandle() then return end
     repeat
@@ -3104,13 +3163,13 @@ if type(ffi) == "table" and type(bit_) == "table" then
         local ok, err = pcall(listCharacterModels, root .. "\\characters", root, VALIDATED_MODELS)
         if not ok then
             VALIDATED_MODELS = {}
-            print("[Skins] characters listing failed: " .. tostring(err))
+            print("[MOISkins] characters listing failed: " .. tostring(err))
         end
     else
-        print("[Skins] game/csgo/characters could not be resolved on this PC")
+        print("[MOISkins] game/csgo/characters could not be resolved on this PC")
     end
 else
-    print("[Skins] FFI unavailable: enable 'Allow insecure FFI' and rerun")
+    print("[MOISkins] FFI unavailable: enable 'Allow insecure FFI' and rerun")
 end
 
 table.sort(VALIDATED_MODELS, function(a, b)
@@ -3118,7 +3177,7 @@ table.sort(VALIDATED_MODELS, function(a, b)
     return an == bn and a.path:lower() < b.path:lower() or an < bn
 end)
 if #VALIDATED_MODELS == 0 then
-    print("[Skins] SETUP: copy the complete game/csgo/characters folder, enable game scripting + insecure FFI, then rerun")
+    print("[MOISkins] SETUP: copy the complete game/csgo/characters folder, enable game scripting + insecure FFI, then rerun")
 end
 
 -- Only restore paths that still exist in this PC's local catalogue. The spawn
@@ -3132,14 +3191,14 @@ if savedCharacter then
         end
     end
     if not savedCharacterIndex then
-        print("[Skins] saved character is no longer in the validated catalogue")
+        print("[MOISkins] saved character is no longer in the validated catalogue")
         savedCharacter = nil
         if SetModel.SetPath then pcall(SetModel.SetPath, nil) end
     end
 end
 
 if savedCharacter then
-    print("[Skins] restored saved character: " .. savedCharacter)
+    print("[MOISkins] restored saved character: " .. savedCharacter)
 end
 
 local function catalogue(query, categoryIndex)
@@ -3189,8 +3248,8 @@ searchSection:Button("Apply category / search", function()
 end)
 
 local infoSection = tab:Section("Selected character")
-local customEnabledToggle = infoSection:Checkbox("Enable custom characters", _MULTI.customEnabled)
-_MULTI.setCustomEnabled = function(enabled)
+local customEnabledToggle = infoSection:Checkbox("Enable custom characters", MOI_MULTI.customEnabled)
+MOI_MULTI.setCustomEnabled = function(enabled)
     customEnabledToggle:Set(enabled and true or false)
 end
 local lastCustomEnabled = customEnabledToggle:Get()
@@ -3199,9 +3258,9 @@ M:OnFrame(function()
     if enabled ~= lastCustomEnabled then
         lastCustomEnabled = enabled
         if enabled then
-            _MULTI.activateCustom("custom characters enabled")
+            MOI_MULTI.activateCustom("custom characters enabled")
         else
-            _MULTI.disableCustom("custom characters disabled")
+            MOI_MULTI.disableCustom("custom characters disabled")
         end
     end
 end)
@@ -3211,20 +3270,20 @@ infoSection:Button("Save for every spawn / team", function()
     if path == "" then M:Notify("select a character first", "error"); return end
     if not SetModel.SetPath or setModelError then
         M:Notify("SetModel unavailable; check console", "error")
-        print("[Skins] SetModel error: " .. tostring(setModelError))
+        print("[MOISkins] SetModel error: " .. tostring(setModelError))
         return
     end
     local callOk, savedOk, result = pcall(SetModel.SetPath, path)
     if not callOk or not savedOk then
-        print("[Skins] SetModel error: " .. tostring(result))
+        print("[MOISkins] SetModel error: " .. tostring(result))
         M:Notify(tostring(result or "SetModel save failed"), "error")
         return
     end
     savedCharacter = path
-    _MULTI.activateCustom("custom character selected")
-    print("[Skins] local model saved for every spawn/team: " .. path)
+    MOI_MULTI.activateCustom("custom character selected")
+    print("[MOISkins] local model saved for every spawn/team: " .. path)
     if result then
-        print("[Skins] warning: " .. tostring(result))
+        print("[MOISkins] warning: " .. tostring(result))
         M:Notify("queued for this session; config was not saved", "info")
     else
         M:Notify("saved; applies 1s after every spawn", "success")
@@ -3235,14 +3294,14 @@ infoSection:Button("Turn model override OFF", function()
     if not SetModel.SetPath or setModelError then M:Notify("SetModel unavailable", "error"); return end
     local callOk, savedOk, err = pcall(SetModel.SetPath, nil)
     if not callOk or not savedOk then
-        print("[Skins] SetModel OFF error: " .. tostring(err))
+        print("[MOISkins] SetModel OFF error: " .. tostring(err))
         M:Notify("failed to disable model", "error")
         return
     end
     savedCharacter = nil
-    _MULTI.disableCustom("custom model cleared")
+    MOI_MULTI.disableCustom("custom model cleared")
     if err then
-        print("[Skins] warning: " .. tostring(err))
+        print("[MOISkins] warning: " .. tostring(err))
         M:Notify("override disabled; config could not be updated", "info")
     else
         M:Notify("saved model cleared; respawn to restore", "info")
@@ -3252,7 +3311,7 @@ end)
 infoSection:Button("Show model path", function()
     local path = modelPaths[modelList:Get() or 1] or ""
     if path == "" then M:Notify("select a character first", "error"); return end
-    print("[Skins] selected character: " .. path)
+    print("[MOISkins] selected character: " .. path)
     M:Notify("path printed in console", "info")
 end)
 
@@ -3279,7 +3338,7 @@ local M = M
 -- Lightweight XYZ-only viewmodel positioning for this CS2 build.
 
 local ffi = rawget(_G, "ffi")
-local CONFIG_FILE = "multitool_viewmodel.txt"
+local CONFIG_FILE = "MOIMAHANMOI_viewmodel.txt"
 local DEFAULT = { enabled = false, knifeLeft = false, x = 1.0, y = 1.0, z = -1.0 }
 local original = { x = DEFAULT.x, y = DEFAULT.y, z = DEFAULT.z, preset = 1 }
 local status = "ready"
@@ -3714,7 +3773,7 @@ local function knifeHandTick()
 end
 
 -- Aimware may discard additional CreateMove callbacks. Route this through the
--- Multitool's proven main command hook, shared with Movement, and emit a hand
+-- MAHANMOI's proven main command hook, shared with Movement, and emit a hand
 -- command only on spawn or weapon transitions.
 M._viewmodelCommandActive = function()
     -- Keep one final command tick available after disabling so an owned
@@ -3726,7 +3785,7 @@ M._viewmodelCommandCallback = function()
     if not ok then
         knifeHandWasAlive = false
         knifeHandStatus = "error"
-        print("[MAHANMOI] knife-hand error: " .. tostring(err))
+        print("[MOIMAHANMOI] knife-hand error: " .. tostring(err))
     end
 end
 
@@ -3751,14 +3810,14 @@ M:OnFrame(function()
 end)
 
 pcall(function()
-    callbacks.Register("Unload", "MAHANMOI_ViewmodelUnload", function()
+    callbacks.Register("Unload", "MOIMAHANMOI_ViewmodelUnload", function()
         pcall(saveConfig)
         if knifeLeftOwned then pcall(commandHand, false) end
         M._viewmodelCommandCallback = nil
         M._viewmodelCommandActive = nil
         if enabled:Get() then pcall(restore) end
         pcall(EXT.uninstall)
-        pcall(callbacks.Unregister, "Unload", "MAHANMOI_ViewmodelUnload")
+        pcall(callbacks.Unregister, "Unload", "MOIMAHANMOI_ViewmodelUnload")
     end)
 end)
 
@@ -3766,7 +3825,7 @@ end)
 
 loadModule("SCOPE OVERLAY", function()
 local M = M
-local CONFIG_FILE = "scope_config.txt"
+local CONFIG_FILE = "MOIscope_config.txt"
 -- Aimware exposes the two native scope layers separately:
 --   world.noscope        -> removes the game's scope presentation
 --   world.noscopeoverlay -> draws Aimware's full-screen replacement cross lines
@@ -4194,14 +4253,14 @@ end)
 syncRemoval()
 
 pcall(function()
-    callbacks.Register("Unload", "MAHANMOI_ScopeUnload", function()
+    callbacks.Register("Unload", "MOIMAHANMOI_ScopeUnload", function()
         pcall(saveConfig)
         pcall(restoreRemoval)
         pcall(draw.SetTexture, nil)
         scopeTexture = nil
         M._scopeDrawCallback = nil
         M._scopeDrawActive = nil
-        pcall(callbacks.Unregister, "Unload", "MAHANMOI_ScopeUnload")
+        pcall(callbacks.Unregister, "Unload", "MOIMAHANMOI_ScopeUnload")
     end)
 end)
 
@@ -4209,12 +4268,12 @@ end)
 
 loadModule("WEAPONS", function()
 local M = M
--- WEAPONS - weapon-only frontend for Aimware CS2.
--- The memory engine is loaded separately so SKINS remains untouched.
+-- MOIWEAPONS - weapon-only frontend for Aimware CS2.
+-- The memory engine is loaded separately so MOISKINS remains untouched.
 
 -- Remove the legacy render guard from earlier builds when this file is
 -- reloaded without restarting Aimware.
-pcall(function() callbacks.Unregister("Draw", "WEAPONS_LateMesh") end)
+pcall(function() callbacks.Unregister("Draw", "MOIWEAPONS_LateMesh") end)
 
 -- Pin the repository revision inspected for this build. Its preview changer
 -- contains the current weapon/viewmodel mesh handling; character code is
@@ -4222,7 +4281,7 @@ pcall(function() callbacks.Unregister("Draw", "WEAPONS_LateMesh") end)
 local ENGINE_REV = "957eedf27b832e505656475ee57f91b3b14b4340"
 local ENGINE_URL = "https://raw.githubusercontent.com/cachorropacoca/aw_cs2v6_femboytap/" .. ENGINE_REV .. "/preview/femboytap_changer.lua"
 local OFFSETS_URL = "https://raw.githubusercontent.com/a2x/cs2-dumper/main/output/offsets.json"
-local ENGINE_CACHE = "weapons_preview_engine_cache.lua"
+local ENGINE_CACHE = "MOIweapons_preview_engine_cache.lua"
 local ENGINE_MIN_SIZE = 90000
 local EMBEDDED_ENGINE = [====[
 local ffi  = ffi
@@ -5759,7 +5818,7 @@ local function fetchEngine()
     local source
     if type(http) == "table" and type(http.Get) == "function" then
         pcall(function()
-            source = http.Get(ENGINE_URL .. "?=" .. tostring({}):gsub("%W", ""))
+            source = http.Get(ENGINE_URL .. "?MOI=" .. tostring({}):gsub("%W", ""))
         end)
         if type(source) ~= "string" or #source < ENGINE_MIN_SIZE then
             pcall(function() source = http.Get(ENGINE_URL) end)
@@ -5779,7 +5838,7 @@ end
 local function fetchRuntimeOffsets()
     local json
     if type(http) == "table" and type(http.Get) == "function" then
-        pcall(function() json = http.Get(OFFSETS_URL .. "?=" .. tostring({}):gsub("%W", "")) end)
+        pcall(function() json = http.Get(OFFSETS_URL .. "?MOI=" .. tostring({}):gsub("%W", "")) end)
         if type(json) ~= "string" or #json < 1000 then pcall(function() json = http.Get(OFFSETS_URL) end) end
     end
     -- Validated fallback for the packaged CS2 build. Live cs2-dumper values,
@@ -5907,17 +5966,17 @@ end]])
 
     source, okConfig = replaceLiteral(source,
         'local CFG_FILE = "awchanger.txt"',
-        'local CFG_FILE = "weapons_config.txt"')
+        'local CFG_FILE = "MOIweapons_config.txt"')
     source, okCallback = replaceLiteral(source,
         'callbacks.Register("CreateMove", function()',
-        'callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()')
+        'callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()')
     local runtimeLiteral = string.format(
         "{ dwEntityList=%s, dwLocalPlayerController=%s, dwNetworkGameClient=%s, dwNetworkGameClient_signOnState=%s }",
         tostring(runtimeOffsets.dwEntityList), tostring(runtimeOffsets.dwLocalPlayerController),
         tostring(runtimeOffsets.dwNetworkGameClient), tostring(runtimeOffsets.dwNetworkGameClient_signOnState))
     source, okRuntime = replaceLiteral(source,
         'local off = {}',
-        'local off = {}\nlocal RuntimeOffsets = ' .. runtimeLiteral)
+        'local off = {}\nlocal MOIRuntimeOffsets = ' .. runtimeLiteral)
 
     source, okNetworkedAttributesOffset = replaceLiteral(source,
         '    m_AttributeList        = "m_AttributeList",\n    m_Attributes           = "m_Attributes",',
@@ -5935,21 +5994,21 @@ end]])
         off.dwEntityList = FALLBACK_ENTITYLIST
         print(string.format("[changer] entlist pattern miss, using fallback RVA 0x%X", FALLBACK_ENTITYLIST))
     end]], [[    if not off.dwEntityList then
-        off.dwEntityList = RuntimeOffsets.dwEntityList
+        off.dwEntityList = MOIRuntimeOffsets.dwEntityList
         print("[changer] entity-list pattern miss; using current cs2-dumper offset")
     end]])
     source, okController = replaceLiteral(source, [[    if not off.dwLocalPlayerController then
         off.dwLocalPlayerController = FALLBACK_LOCALCTRL
         print(string.format("[changer] localctrl pattern miss, using fallback RVA 0x%X", FALLBACK_LOCALCTRL))
     end]], [[    if not off.dwLocalPlayerController then
-        off.dwLocalPlayerController = RuntimeOffsets.dwLocalPlayerController
+        off.dwLocalPlayerController = MOIRuntimeOffsets.dwLocalPlayerController
         print("[changer] local-controller pattern miss; using current cs2-dumper offset")
     end]])
     source, okNetwork = replaceLiteral(source, [[    off.dwNetworkGameClient     = sig_rva(eb, "engine2.dll", "48 89 3D ?? ?? ?? ?? FF 87", 7)
     off.dwNetworkGameClient_signOnState = sig_disp("engine2.dll", "44 8B 81 ?? ?? ?? ?? 48 8D 0D")]], [[    off.dwNetworkGameClient = sig_rva(eb, "engine2.dll", "48 89 3D ?? ?? ?? ?? FF 87", 7)
-        or RuntimeOffsets.dwNetworkGameClient
+        or MOIRuntimeOffsets.dwNetworkGameClient
     off.dwNetworkGameClient_signOnState = sig_disp("engine2.dll", "44 8B 81 ?? ?? ?? ?? 48 8D 0D")
-        or RuntimeOffsets.dwNetworkGameClient_signOnState]])
+        or MOIRuntimeOffsets.dwNetworkGameClient_signOnState]])
 
     -- The current client moved CEconEntity::OnDataChanged from vtable 110 to
     -- 111. Index 110 now returns immediately and cannot rebuild a paint.
@@ -5970,21 +6029,21 @@ end]])
     w_u8 (item + off.m_bInitialized, 1)
     w_u8 (item + off.m_bDisallowSOC, 0)
     w_u8 (item + off.m_bRestoreCustomMat, 1)
-end]], [[local _item_alloc
+end]], [[local MOI_item_alloc
 local function alloc_item_attributes(bytes)
-    if not _item_alloc then
+    if not MOI_item_alloc then
         pcall(function() ffi.cdef("void* GetModuleHandleA(const char*); void* GetProcAddress(void*, const char*);") end)
         local tier0
         pcall(function() tier0 = ffi.C.GetModuleHandleA("tier0.dll") end)
         if tier0 then
             local proc
             pcall(function() proc = ffi.C.GetProcAddress(tier0, "MemAlloc_AllocFunc") end)
-            if proc then _item_alloc = ffi.cast("void*(*)(size_t)", proc) end
+            if proc then MOI_item_alloc = ffi.cast("void*(*)(size_t)", proc) end
         end
     end
-    if not _item_alloc then return nil end
+    if not MOI_item_alloc then return nil end
     local raw
-    pcall(function() raw = _item_alloc(bytes) end)
+    pcall(function() raw = MOI_item_alloc(bytes) end)
     local ptr
     pcall(function() ptr = tonumber(ffi.cast("uintptr_t", raw)) end)
     return valid(ptr) and ptr or nil
@@ -6120,15 +6179,15 @@ end]])
     -- frames after the pawn becomes alive. Repeat only the complete spawn
     -- initialization, with a short bounded schedule, so the knife cannot keep
     -- a stale/default viewmodel after a rapid death/respawn cycle.
-    if (state.RespawnRetries or 0) > 0 and retryNow >= (state.RespawnNext or 0) then
-        state.RespawnRetries = state.RespawnRetries - 1
-        state.RespawnNext = retryNow + 0.25
+    if (state.MOIRespawnRetries or 0) > 0 and retryNow >= (state.MOIRespawnNext or 0) then
+        state.MOIRespawnRetries = state.MOIRespawnRetries - 1
+        state.MOIRespawnNext = retryNow + 0.25
         state.applied = {}
         applied = state.applied
     end
-    if (state.MaterialRetries or 0) > 0 and retryNow >= (state.MaterialNext or 0) then
-        state.MaterialRetries = state.MaterialRetries - 1
-        state.MaterialNext = retryNow + 0.35
+    if (state.MOIMaterialRetries or 0) > 0 and retryNow >= (state.MOIMaterialNext or 0) then
+        state.MOIMaterialRetries = state.MOIMaterialRetries - 1
+        state.MOIMaterialNext = retryNow + 0.35
         state.applied = {}
         applied = state.applied
     end
@@ -6166,7 +6225,7 @@ end]])
     end]], [[    local lp = get_live_local()
     if not lp or not in_game() then
         if next(state.applied) then state.applied = {} end
-        state.WasAlive = false
+        state.MOIWasAlive = false
         return
     end]])
 
@@ -6202,23 +6261,23 @@ end]])
     if not valid(r_ptr(pawn + off.m_pGameSceneNode)) then return end
 
     local currentTeam = r_u8(pawn + off.m_iTeamNum)
-    local freshLife = state.WasAlive ~= true
+    local freshLife = state.MOIWasAlive ~= true
     if freshLife or state.lastPawnHandle ~= myHandle or state.lastTeam ~= currentTeam then
         state.lastPawnHandle = myHandle
         state.lastTeam = currentTeam
-        state.WasAlive = true
+        state.MOIWasAlive = true
         state.applied = {}
         glove_key, glove_apply = nil, 6
         local spawnNow = 0
         pcall(function() spawnNow = globals.RealTime() end)
-        state.RespawnRetries = 4
-        state.RespawnNext = spawnNow + 0.15
+        state.MOIRespawnRetries = 4
+        state.MOIRespawnNext = spawnNow + 0.15
     end]])
 
     -- Keep the broad custom-character subsystem disabled. The replacement
     -- below applies only a user-selected official CS2 agent to the local pawn.
     source, okNoModelTick = replaceLiteral(source, [[    apply_all_model_assignments()
-    apply_local_model(pawn, lp)]], [[    apply__agent(pawn, lp)]])
+    apply_local_model(pawn, lp)]], [[    apply_MOI_agent(pawn, lp)]])
     source, okNoModelResolve = replaceLiteral(source,
         'pcall(resolve_model_fns)',
         'pcall(resolve_model_fns) -- official-agent precache support')
@@ -6238,30 +6297,30 @@ end]])
         state.appliedLocalModel = "OFF"
     end
 end]], [[local function apply_local_model(pawn, lp)
-    -- Disabled: arbitrary character models belong to SKINS.
+    -- Disabled: arbitrary character models belong to MOISKINS.
 end
 
-local function apply__agent(pawn, lp)
-    local multi = rawget(_G, "MOI_MULTSCRIPT_STATE")
+local function apply_MOI_agent(pawn, lp)
+    local multi = rawget(_G, "MOI_MAHANMOI_STATE")
     if multi and multi.characterMode ~= "agents" then return end
-    if not state.opts._agent_enabled then
-        state.modelApplied["-agent"] = nil
+    if not state.opts.MOI_agent_enabled then
+        state.modelApplied["MOI-agent"] = nil
         return
     end
     if not lp or not valid(pawn) or not in_game() then return end
     local team = r_u8(pawn + off.m_iTeamNum)
-    local path = team == 3 and state.opts._agent_ct or team == 2 and state.opts._agent_t or nil
+    local path = team == 3 and state.opts.MOI_agent_ct or team == 2 and state.opts.MOI_agent_t or nil
     if type(path) ~= "string" or path == "" or not path:find("^agents/models/") or not path:find("%.vmdl$") then
         return
     end
-    local info = { pawn = lp, raw = pawn, key = "-agent", is_local = false, idx = 0 }
+    local info = { pawn = lp, raw = pawn, key = "MOI-agent", is_local = false, idx = 0 }
     pcall(function() info.idx = lp:GetIndex() end)
     apply_path_to_player(info, path)
 end]])
     source, okNoModelDiagnostic = replaceLiteral(source, [[local ok_root, root_str = pcall(models_root)
 print(string.format("[changer] precache: fn=%s irs=%s cbuf=%s root=%s",
     fnptr.precache and "ok" or "NIL", g_IRS and "ok" or "NIL",
-    fnptr.cbuf_insert and "ok" or "NIL", tostring(ok_root and root_str or "ERR")))]], [[print("[WEAPONS engine] character filesystem/model diagnostics disabled")]])
+    fnptr.cbuf_insert and "ok" or "NIL", tostring(ok_root and root_str or "ERR")))]], [[print("[MOIWEAPONS engine] character filesystem/model diagnostics disabled")]])
 
     -- Preview applies the mesh before regenerate_weapon_skins; the global
     -- rebuild then restores the stock mask on normal weapons. Make the mesh
@@ -6337,8 +6396,8 @@ end]])
     Config.save()
 end]], [[local function commit()
     state.applied = {}
-    state.MaterialRetries = 4
-    state.MaterialNext = 0
+    state.MOIMaterialRetries = 4
+    state.MOIMaterialNext = 0
     Config.save()
 end]])
     okMaterialRetry = okMaterialRetry and okRetryCommit
@@ -6518,43 +6577,43 @@ end]])
         return
     end]], [[    if not pawn_alive(pawn) then
         if next(state.applied) then state.applied = {} end
-        state.WasAlive = false
-        state.RespawnRetries = 0
+        state.MOIWasAlive = false
+        state.MOIRespawnRetries = 0
         glove_apply = 0
         return
     end]])
 
     source, okPlayableTeamGuard = replaceLiteral(source, [[    local currentTeam = r_u8(pawn + off.m_iTeamNum)
-    local freshLife = state.WasAlive ~= true
+    local freshLife = state.MOIWasAlive ~= true
     if freshLife or state.lastPawnHandle ~= myHandle or state.lastTeam ~= currentTeam then
         state.lastPawnHandle = myHandle
         state.lastTeam = currentTeam
-        state.WasAlive = true
+        state.MOIWasAlive = true
         state.applied = {}
         glove_key, glove_apply = nil, 6
         local spawnNow = 0
         pcall(function() spawnNow = globals.RealTime() end)
-        state.RespawnRetries = 4
-        state.RespawnNext = spawnNow + 0.15
+        state.MOIRespawnRetries = 4
+        state.MOIRespawnNext = spawnNow + 0.15
     end]], [[    local currentTeam = r_u8(pawn + off.m_iTeamNum)
     if currentTeam ~= 2 and currentTeam ~= 3 then
-        state.WasAlive = false
+        state.MOIWasAlive = false
         state.lastTeam = currentTeam
-        state.RespawnRetries = 0
+        state.MOIRespawnRetries = 0
         glove_apply = 0
         return
     end
-    local freshLife = state.WasAlive ~= true
+    local freshLife = state.MOIWasAlive ~= true
     if freshLife or state.lastPawnHandle ~= myHandle or state.lastTeam ~= currentTeam then
         state.lastPawnHandle = myHandle
         state.lastTeam = currentTeam
-        state.WasAlive = true
+        state.MOIWasAlive = true
         state.applied = {}
         local spawnNow = 0
         pcall(function() spawnNow = globals.RealTime() end)
         glove_key, glove_apply, glove_next, glove_repair_after = nil, 5, spawnNow + 0.10, spawnNow + 1.50
-        state.RespawnRetries = 4
-        state.RespawnNext = spawnNow + 0.15
+        state.MOIRespawnRetries = 4
+        state.MOIRespawnNext = spawnNow + 0.15
     end]])
 
     -- A full mesh notification must perform a real group transition. Writing
@@ -6703,16 +6762,16 @@ end]])
     -- Aimware may invoke CreateMove well over 100 times per second. Detect
     -- inventory/pawn changes at 20 Hz, which is still effectively immediate to
     -- the player, instead of traversing Source 2 entities on every command.
-    source, okEngineThrottle = replaceLiteral(source, [[callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
-    local okd, d = pcall(active_weapon_def); g_activeDef = okd and d or nil]], [[local NextEngineTick = 0
-callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+    source, okEngineThrottle = replaceLiteral(source, [[callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
+    local okd, d = pcall(active_weapon_def); g_activeDef = okd and d or nil]], [[local MOINextEngineTick = 0
+callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
     local tickNow = now_s()
-    if tickNow < NextEngineTick then return end
-    NextEngineTick = tickNow + 0.05
+    if tickNow < MOINextEngineTick then return end
+    MOINextEngineTick = tickNow + 0.05
     local okd, d = pcall(active_weapon_def); g_activeDef = okd and d or nil
-    if state.LastActiveDef ~= g_activeDef then
-        state.LastActiveDef = g_activeDef
-        state.StickyNext = 0
+    if state.MOILastActiveDef ~= g_activeDef then
+        state.MOILastActiveDef = g_activeDef
+        state.MOIStickyNext = 0
     end]])
 
     -- A full apply remains event-driven through state.applied. Steady-state
@@ -6721,8 +6780,8 @@ callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
     source, okSparseStickyState = replaceLiteral(source, [[    local applied = state.applied
     local retryNow = 0]], [[    local applied = state.applied
     local stickyClock = now_s()
-    local stickyPass = stickyClock >= (state.StickyNext or 0)
-    if stickyPass then state.StickyNext = stickyClock + 1.0 end
+    local stickyPass = stickyClock >= (state.MOIStickyNext or 0)
+    if stickyPass then state.MOIStickyNext = stickyClock + 1.0 end
     local retryNow = 0]])
 
     source, okSparseKnife = replaceLiteral(source, [[                            else
@@ -6757,94 +6816,94 @@ callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
     local lp = get_live_local()
     if not lp or not in_game() then
         if next(state.applied) then state.applied = {} end
-        state.WasAlive = false
+        state.MOIWasAlive = false
         return
-    end]], [[local SessionInGame = false
-local function ResetSession(reason)
+    end]], [[local MOISessionInGame = false
+local function MOIResetSession(reason)
     local resetNow = now_s()
     state.applied = {}
     state.modelApplied = {}
     state.appliedLocalModel = nil
-    state.WasAlive = false
+    state.MOIWasAlive = false
     state.lastPawnHandle = nil
     state.lastTeam = nil
-    state.LastActiveDef = nil
-    state.StickyNext = 0
-    state.RespawnRetries = 6
-    state.RespawnNext = resetNow + 0.15
-    state.MaterialRetries = 5
-    state.MaterialNext = resetNow + 0.20
+    state.MOILastActiveDef = nil
+    state.MOIStickyNext = 0
+    state.MOIRespawnRetries = 6
+    state.MOIRespawnNext = resetNow + 0.15
+    state.MOIMaterialRetries = 5
+    state.MOIMaterialNext = resetNow + 0.20
     state.modelNextTry = {}
     state.modelNextGlobal = 0
     glove_key, glove_apply, glove_next, glove_repair_after = nil, 0, 0, 0
     g_activeDef = nil
     g_precached_paths = {}
     if reason ~= "round_start" then
-        print("[WEAPONS engine] session cache reset: " .. tostring(reason or "transition"))
+        print("[MOIWEAPONS engine] session cache reset: " .. tostring(reason or "transition"))
     end
 end
 
 local function run()
     local sessionOnline = in_game()
     if not sessionOnline then
-        if SessionInGame then ResetSession("left game") end
-        SessionInGame = false
+        if MOISessionInGame then MOIResetSession("left game") end
+        MOISessionInGame = false
         if next(state.applied) then state.applied = {} end
-        state.WasAlive = false
+        state.MOIWasAlive = false
         return
     end
-    if not SessionInGame then
-        SessionInGame = true
-        ResetSession("entered game")
+    if not MOISessionInGame then
+        MOISessionInGame = true
+        MOIResetSession("entered game")
     end
 
     local lp = get_live_local()
     if not lp then
         if next(state.applied) then state.applied = {} end
-        state.WasAlive = false
+        state.MOIWasAlive = false
         return
     end]])
 
-    source, okLocalSessionClock = replaceLiteral(source, [[local NextEngineTick = 0
-callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+    source, okLocalSessionClock = replaceLiteral(source, [[local MOINextEngineTick = 0
+callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
     local tickNow = now_s()
-    if tickNow < NextEngineTick then return end]], [[local NextEngineTick = 0
-local LastEngineClock = 0
-callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+    if tickNow < MOINextEngineTick then return end]], [[local MOINextEngineTick = 0
+local MOILastEngineClock = 0
+callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
     local tickNow = now_s()
-    if tickNow + 0.25 < LastEngineClock then
-        NextEngineTick = 0
-        SessionInGame = false
-        ResetSession("clock rollback / map load")
+    if tickNow + 0.25 < MOILastEngineClock then
+        MOINextEngineTick = 0
+        MOISessionInGame = false
+        MOIResetSession("clock rollback / map load")
     end
-    LastEngineClock = tickNow
-    if tickNow < NextEngineTick then return end]])
+    MOILastEngineClock = tickNow
+    if tickNow < MOINextEngineTick then return end]])
 
-    source, okLocalSessionEvents = replaceLiteral(source, [[local NextEngineTick = 0
-local LastEngineClock = 0]], [[pcall(function()
+    source, okLocalSessionEvents = replaceLiteral(source, [[local MOINextEngineTick = 0
+local MOILastEngineClock = 0]], [[pcall(function()
     if client and client.AllowListener then
         client.AllowListener("server_spawn")
         client.AllowListener("game_newmap")
         client.AllowListener("cs_game_disconnected")
         client.AllowListener("round_start")
     end
-    callbacks.Register("FireGameEvent", "MAHANMOI_WeaponsSessionEvents", function(event)
+    callbacks.Register("FireGameEvent", "MOIMAHANMOI_WeaponsSessionEvents", function(event)
         local name
         pcall(function() name = event:GetName() end)
         if name == "server_spawn" or name == "game_newmap" or name == "cs_game_disconnected" or name == "round_start" then
-            if name ~= "round_start" then SessionInGame = false end
-            ResetSession(name)
+            if name ~= "round_start" then MOISessionInGame = false end
+            MOIResetSession(name)
         end
     end)
 end)
 
-local NextEngineTick = 0
-local LastEngineClock = 0]])
+local MOINextEngineTick = 0
+local MOILastEngineClock = 0]])
 
     if not (okLocalSessionRun and okLocalSessionClock and okLocalSessionEvents) then
         return nil, "local session lifecycle patch refused"
     end
-    source = source:gsub("%[changer%]", "[WEAPONS engine]")
+    source = source:gsub("%[changer%]", "[MOIWEAPONS engine]")
     if not (okConfig and okCallback and okRuntime and okNetworkedAttributesOffset
         and okAttributesInitializedOffset and okFullItemIDOffset
         and okEntity and okController and okNetwork and okExtraPaints
@@ -6917,7 +6976,7 @@ else
             writeFile(ENGINE_CACHE, rawSource)
         end
         if prepared then
-            local chunk, compileError = loadstring(prepared, "=weapons_engine.lua")
+            local chunk, compileError = loadstring(prepared, "=MOIweapons_engine.lua")
             if not chunk then
                 engineError = "engine compile error: " .. tostring(compileError)
             else
@@ -6953,8 +7012,8 @@ if C then
         if type(C.offsets[key]) ~= "number" then missing[#missing + 1] = key end
     end
     if #missing > 0 then
-        pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_WeaponsEngine")
-        pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_WeaponsSessionEvents")
+        pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_WeaponsEngine")
+        pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_WeaponsSessionEvents")
         engineError = "current offsets unavailable: " .. table.concat(missing, ", ")
         C = nil
     end
@@ -6981,7 +7040,7 @@ if #namesByKind.knife == 0 then namesByKind.knife[1] = "[ no knives available ]"
 if #namesByKind.glove == 0 then namesByKind.glove[1] = "[ no gloves available ]" end
 
 -- Official CS2 agent catalogue. These models ship with the game and do not
--- depend on the custom characters folder used by SKINS.
+-- depend on the custom characters folder used by MOISKINS.
 local AGENTS = {
     { name = "1st Lieutenant Farlow | SWAT", team = "CT", def = 4712, path = "agents/models/ctm_swat/ctm_swat_variantf.vmdl" },
     { name = "3rd Commando Company | KSK", team = "CT", def = 5400, path = "agents/models/ctm_st6/ctm_st6_variantk.vmdl" },
@@ -7167,9 +7226,9 @@ autoConfigSection:Button("Show automatic save status", function()
     end
     M:Notify(tostring(configured) .. " configured items | saved after every change", "success")
 end)autoConfigSection:Button("Check for updates", function()
-    local updater = rawget(_G, "MOI_MULTSCRIPT_UPDATER")
+    local updater = rawget(_G, "MOI_MAHANMOI_UPDATER")
     if type(updater) ~= "table" or type(updater.check) ~= "function" then
-        M:Notify("updates are available when MAHANMOI is launched with loader.lua", "info")
+        M:Notify("updates are available when MOIMAHANMOI is launched with loader.lua", "info")
         return
     end
     local callOk, success, message, state = pcall(updater.check)
@@ -7186,7 +7245,7 @@ end)
 
 configTab:Col()
 local profileSection = configTab:Section("Saved profiles")
-local PROFILE_NAMES_FILE = "weapons_profile_names.txt"
+local PROFILE_NAMES_FILE = "MOIweapons_profile_names.txt"
 local profileNames = { "Profile 1", "Profile 2", "Profile 3", "Profile 4", "Profile 5" }
 local namesRaw = readFile(PROFILE_NAMES_FILE)
 if type(namesRaw) == "string" then
@@ -7201,7 +7260,7 @@ local function saveProfileNames()
     for index = 1, 5 do lines[index] = tostring(index) .. " " .. profileNames[index] end
     return writeFile(PROFILE_NAMES_FILE, table.concat(lines, "\n"))
 end
-local function profilePath(slot) return "weapons_profile_" .. tostring(slot) .. ".txt" end
+local function profilePath(slot) return "MOIweapons_profile_" .. tostring(slot) .. ".txt" end
 
 local profileSlot = profileSection:Combo("Profile slot", { "Slot 1", "Slot 2", "Slot 3", "Slot 4", "Slot 5" }, 1)
 local profileName = profileSection:Input("Profile name", profileNames[1], "example: main setup")
@@ -7256,13 +7315,13 @@ local agentWidget = agentListSection.ws[#agentListSection.ws]
 
 agentsTab:Col()
 local agentControlSection = agentsTab:Section("Local operator")
-local agentEnabled = agentControlSection:Checkbox("Enable agent changer", savedBool("_agent_enabled", false))
-_MULTI.setAgentEnabled = function(enabled)
+local agentEnabled = agentControlSection:Checkbox("Enable agent changer", savedBool("MOI_agent_enabled", false))
+MOI_MULTI.setAgentEnabled = function(enabled)
     enabled = enabled and true or false
     agentEnabled:Set(enabled)
-    if C then C.setOpt("_agent_enabled", enabled) end
+    if C then C.setOpt("MOI_agent_enabled", enabled) end
 end
-if agentEnabled:Get() then _MULTI.activateAgents("saved agent configuration") end
+if agentEnabled:Get() then MOI_MULTI.activateAgents("saved agent configuration") end
 
 local function agentTeamKey()
     return (agentTeam:Get() or 1) == 1 and "CT" or "T"
@@ -7277,26 +7336,26 @@ agentControlSection:Button("Apply selected agent", function()
     if not C then M:Notify(engineError or "weapon engine unavailable", "error"); return end
     local agent = selectedAgent()
     if not agent then M:Notify("select an agent first", "error"); return end
-    C.setOpt(agent.team == "CT" and "_agent_ct" or "_agent_t", agent.path)
-    C.setOpt("_agent_enabled", true)
+    C.setOpt(agent.team == "CT" and "MOI_agent_ct" or "MOI_agent_t", agent.path)
+    C.setOpt("MOI_agent_enabled", true)
     agentEnabled:Set(true)
-    _MULTI.activateAgents("official agent selected")
+    MOI_MULTI.activateAgents("official agent selected")
     M:Notify(agent.team .. " agent saved: " .. agent.name, "success")
 end)
 
 agentControlSection:Button("Turn agent changer OFF", function()
-    if C then C.setOpt("_agent_enabled", false) end
+    if C then C.setOpt("MOI_agent_enabled", false) end
     agentEnabled:Set(false)
-    _MULTI.deactivateAgents("official agents disabled")
+    MOI_MULTI.deactivateAgents("official agents disabled")
     M:Notify("agents off; enable Skins Custom if you want a custom character", "info")
 end)
 
 local agentInfoSection = agentsTab:Section("Status")
 agentInfoSection:Button("Show saved agents", function()
     if not C then M:Notify(engineError or "weapon engine unavailable", "error"); return end
-    local ct, tt = tostring(C.getOpt("_agent_ct") or "not selected"), tostring(C.getOpt("_agent_t") or "not selected")
-    print("[WEAPONS] CT agent: " .. ct)
-    print("[WEAPONS] T agent: " .. tt)
+    local ct, tt = tostring(C.getOpt("MOI_agent_ct") or "not selected"), tostring(C.getOpt("MOI_agent_t") or "not selected")
+    print("[MOIWEAPONS] CT agent: " .. ct)
+    print("[MOIWEAPONS] T agent: " .. tt)
     M:Notify("saved CT/T agent paths printed in console", "info")
 end)
 
@@ -7307,7 +7366,7 @@ local function syncAgentList()
     lastAgentTeam = selectedTeam
     local key = selectedTeam == 1 and "CT" or "T"
     local list, names = agentsByTeam[key], agentNamesByTeam[key]
-    local wanted = C and C.getOpt(key == "CT" and "_agent_ct" or "_agent_t") or nil
+    local wanted = C and C.getOpt(key == "CT" and "MOI_agent_ct" or "MOI_agent_t") or nil
     local index = 1
     for i, agent in ipairs(list) do if agent.path == wanted then index = i; break end end
     agentWidget.items, agentWidget.value, agentWidget.scroll = names, index, 0
@@ -7383,22 +7442,22 @@ M:OnFrame(function()
     local agentOn = agentEnabled:Get()
     if C and agentOn ~= lastAgentEnabled then
         lastAgentEnabled = agentOn
-        C.setOpt("_agent_enabled", agentOn)
+        C.setOpt("MOI_agent_enabled", agentOn)
         if agentOn then
-            _MULTI.activateAgents("agent checkbox enabled")
+            MOI_MULTI.activateAgents("agent checkbox enabled")
         else
-            _MULTI.deactivateAgents("agent checkbox disabled")
+            MOI_MULTI.deactivateAgents("agent checkbox disabled")
         end
     elseif C then
-        local configured = C.getOpt("_agent_enabled")
+        local configured = C.getOpt("MOI_agent_enabled")
         local configuredOn = configured == true or configured == 1 or configured == "1"
         if configuredOn ~= agentOn then
             agentEnabled:Set(configuredOn)
             lastAgentEnabled = configuredOn
             if configuredOn then
-                _MULTI.activateAgents("agent profile loaded")
+                MOI_MULTI.activateAgents("agent profile loaded")
             else
-                _MULTI.deactivateAgents("agent profile loaded with agents off")
+                MOI_MULTI.deactivateAgents("agent profile loaded with agents off")
             end
         end
     end
@@ -7406,26 +7465,26 @@ M:OnFrame(function()
 end)
 
 pcall(function()
-    callbacks.Register("Unload", "MAHANMOI_WeaponsUnload", function()
-        pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_WeaponsEngine")
-        pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_WeaponsSessionEvents")
+    callbacks.Register("Unload", "MOIMAHANMOI_WeaponsUnload", function()
+        pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_WeaponsEngine")
+        pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_WeaponsSessionEvents")
 
     end)
 end)
 
 
-if not C then print("[] WEAPONS: " .. tostring(engineError)) end
+if not C then print("[MOI] WEAPONS: " .. tostring(engineError)) end
 end)
 
 loadModule("MOVEMENT", function()
 local M = M
 
--- MAHANMOI movement module. Movement is attached to the multitool's
+-- MOIMAHANMOI movement module. Movement is attached to the MAHANMOI's
 -- already-live Draw/CreateMove callbacks so Aimware cannot discard it as a
 -- second callback for the same event.
 local bitlib = rawget(_G, "bit")
 -- v2 starts with every feature disabled; choices are persisted after opt-in.
-local CONFIG_FILE = "movement_config_v2.txt"
+local CONFIG_FILE = "MOImovement_config_v2.txt"
 local IN_DUCK = 4
 local FL_ONGROUND = 1
 local KEY_W, KEY_A, KEY_S, KEY_D = 0x57, 0x41, 0x53, 0x44
@@ -7468,7 +7527,7 @@ local function safe(label, fn, ...)
         local key = label .. ":" .. tostring(a)
         if not errors[key] then
             errors[key] = true
-            print("[Movement] " .. label .. " error: " .. tostring(a))
+            print("[MOIMovement] " .. label .. " error: " .. tostring(a))
         end
         return nil
     end
@@ -7697,7 +7756,7 @@ local function resetMovement(reason)
     traceSource = "not probed"
     clearTrail()
     if reason and reason ~= "player_spawn" then
-        print("[Movement] state reset: " .. tostring(reason))
+        print("[MOIMovement] state reset: " .. tostring(reason))
     end
 end
 
@@ -8023,7 +8082,7 @@ local function drawDebug()
     if not debugEnabled:Get() then return end
     if smallFont then draw.SetFont(smallFont) end
     local lines = {
-        string.format("Movement | valid=%s speed=%.1f vz=%.1f", tostring(state.valid), state.speed, state.vz),
+        string.format("MOIMovement | valid=%s speed=%.1f vz=%.1f", tostring(state.valid), state.speed, state.vz),
         string.format("move callback=%s age=%s", tostring(moveActiveEvent or moveRegistered or "none"), lastMovementAt and string.format("%.2fs", math.max(0, now() - lastMovementAt)) or "never"),
         string.format("ground=%s ladder=%s distance=%s", tostring(state.onGround), tostring(state.onLadder), state.groundDistance and string.format("%.1f", state.groundDistance) or "nil"),
         string.format("edge active=%s inject duck=%s", tostring(state.edgeActive), tostring(state.edgeDuck)),
@@ -8085,11 +8144,11 @@ statusSection:Button("Reset movement state", function()
 end)
 
 pcall(function()
-    callbacks.Unregister("PreMove", "MAHANMOI_MovementPreMove")
-    callbacks.Unregister("CreateMove", "MAHANMOI_MovementCreateMove")
-    callbacks.Unregister("Draw", "MAHANMOI_MovementDraw")
-    callbacks.Unregister("FireGameEvent", "MAHANMOI_MovementEvents")
-    callbacks.Unregister("Unload", "MAHANMOI_MovementUnload")
+    callbacks.Unregister("PreMove", "MOIMAHANMOI_MovementPreMove")
+    callbacks.Unregister("CreateMove", "MOIMAHANMOI_MovementCreateMove")
+    callbacks.Unregister("Draw", "MOIMAHANMOI_MovementDraw")
+    callbacks.Unregister("FireGameEvent", "MOIMAHANMOI_MovementEvents")
+    callbacks.Unregister("Unload", "MOIMAHANMOI_MovementUnload")
 end)
 
 local function onMovementCommand(cmd)
@@ -8152,7 +8211,7 @@ pcall(function()
         client.AllowListener("game_newmap")
         client.AllowListener("cs_game_disconnected")
     end
-    callbacks.Register("FireGameEvent", "MAHANMOI_MovementEvents", function(event)
+    callbacks.Register("FireGameEvent", "MOIMAHANMOI_MovementEvents", function(event)
         if type(M._movementCommandActive) == "function" and not M._movementCommandActive() then return end
         local name
         pcall(function() name = event:GetName() end)
@@ -8168,16 +8227,16 @@ pcall(function()
     end)
 end)
 
-callbacks.Register("Unload", "MAHANMOI_MovementUnload", function()
+callbacks.Register("Unload", "MOIMAHANMOI_MovementUnload", function()
     saveSettings()
     M._movementCommandCallback = nil
     M._movementCommandActive = nil
     M._movementDrawCallback = nil
     M._movementDrawActive = nil
-    pcall(callbacks.Unregister, "PreMove", "MAHANMOI_MovementPreMove")
-    pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_MovementCreateMove")
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_MovementDraw")
-    pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_MovementEvents")
+    pcall(callbacks.Unregister, "PreMove", "MOIMAHANMOI_MovementPreMove")
+    pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_MovementCreateMove")
+    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_MovementDraw")
+    pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_MovementEvents")
 end)
 
 end)
@@ -8188,7 +8247,7 @@ local M = M
 -- Compatible with femboytap's sound pack: place compiled .vsnd_c files in
 -- game/csgo/sounds or one of its subfolders. Discovery happens once at load
 -- and only when Refresh is pressed; no directory scan runs during gameplay.
-local CONFIG_FILE = "customsounds_config.txt"
+local CONFIG_FILE = "MOIcustomsounds_config.txt"
 local f = rawget(_G, "ffi")
 local config = {}
 local soundDir, soundNames, soundPaths = nil, {}, {}
@@ -8245,7 +8304,7 @@ if type(f) == "table" then
             uint32_t reserved0, reserved1;
             char filename[260];
             char alternate[14];
-        } _SOUND_FIND_DATA;
+        } MOI_SOUND_FIND_DATA;
     ]] end)
     pcall(function() f.cdef[[
         void* GetModuleHandleA(const char*);
@@ -8320,7 +8379,7 @@ end
 
 local function scanSoundDirectory(absoluteDir, relativeDir, paths, depth)
     if depth > 6 then return end
-    local data = f.new("_SOUND_FIND_DATA")
+    local data = f.new("MOI_SOUND_FIND_DATA")
     local invalid = f.cast("void*", f.cast("intptr_t", -1))
     local handle = findFirstA(absoluteDir .. "\\*", data)
     if handle == nil or handle == invalid then return end
@@ -8430,21 +8489,21 @@ local function refreshSounds()
     killCombo:Set(soundIndex(oldKill))
     observedConfig = currentSnapshot()
     saveConfig()
-    print(string.format("[Sounds] refreshed: %d .vsnd_c files in %s", #soundPaths, tostring(soundDir or "unresolved")))
+    print(string.format("[MOISounds] refreshed: %d .vsnd_c files in %s", #soundPaths, tostring(soundDir or "unresolved")))
 end
 
 librarySection:Button("Preview hit sound", function()
-    if not playSound(selectedSound(hitCombo), hitVolume:Get()) then print("[Sounds] select a valid hit sound") end
+    if not playSound(selectedSound(hitCombo), hitVolume:Get()) then print("[MOISounds] select a valid hit sound") end
 end)
 librarySection:Button("Preview kill sound", function()
-    if not playSound(selectedSound(killCombo), killVolume:Get()) then print("[Sounds] select a valid kill sound") end
+    if not playSound(selectedSound(killCombo), killVolume:Get()) then print("[MOISounds] select a valid kill sound") end
 end)
 librarySection:Button("Refresh csgo/sounds", refreshSounds)
 librarySection:Button("Open sounds folder", function()
     if ensureSoundDirectory() and winExec then
         pcall(function() winExec('explorer.exe "' .. soundDir .. '"', 5) end)
     else
-        print("[Sounds] csgo/sounds could not be resolved")
+        print("[MOISounds] csgo/sounds could not be resolved")
     end
 end)
 librarySection:Custom(44, function(ui)
@@ -8643,7 +8702,7 @@ local M = M
 
 -- Clean event-driven killsay. It deliberately avoids the obfuscated upstream
 -- payload and sends at most one sanitized public-chat message per local kill.
-local CONFIG_FILE = "killsay_config.txt"
+local CONFIG_FILE = "MOIkillsay_config.txt"
 local PACK_NAMES = {
     "English / Competitive", "English / Savage", "Argentina / Cancha", "Short",
     "Portuguese BR", "Spanish LATAM", "French", "German", "Italian", "Polish",
@@ -8941,15 +9000,22 @@ local lastDeathSignature, lastDeathAt = nil, -100
 local eventKillCredits = 0
 local lastTestAt = -100
 local awaitingChat, chatConfirmed, chatTimeouts = nil, 0, 0
-local RUNTIME_FILE = "killsay_runtime.txt"
+local RUNTIME_FILE = "MOIkillsay_runtime.txt"
 local callbackEvents = 0
 local runtimeHistory = {}
 local armed = false
 local nextSessionPoll, nextListenerRefresh = 0, 0
 local lastSessionKey, sessionEpoch = nil, 0
 
+local function killTimerRequested()
+    local active = M._killTimerSignalActive
+    if type(active) ~= "function" then return false end
+    local ok, value = pcall(active)
+    return ok and value == true
+end
+
 M._killsayEventActive = function()
-    return armed == true
+    return armed == true or killTimerRequested()
 end
 
 local function requestKillsayListeners()
@@ -8958,11 +9024,13 @@ local function requestKillsayListeners()
         client.AllowListener("player_death")
         client.AllowListener("player_hurt")
         client.AllowListener("player_chat")
+        client.AllowListener("round_start")
         client.AllowListener("server_spawn")
         client.AllowListener("game_newmap")
         client.AllowListener("cs_game_disconnected")
     end)
 end
+M._killTimerListenerRefresh = requestKillsayListeners
 
 local function currentSessionKey()
     local server, map, localIndex = "", "", 0
@@ -9124,7 +9192,7 @@ end
 statusSection:Button("Preview next message", function()
     local template, selected = chooseTemplate(false)
     local message = formatMessage(template, "Player", selected)
-    print("[Killsay] preview: " .. message)
+    print("[MOIKillsay] preview: " .. message)
     M:Notify(message, "info")
 end)
 statusSection:Button("Send test message to chat", function()
@@ -9136,17 +9204,17 @@ statusSection:Button("Send test message to chat", function()
     local ok, method = sendPublic(message)
     if ok then
         lastMessage, sendMethod, status = message, method, "test sent"
-        print("[Killsay] test sent via " .. method .. ": " .. message)
+        print("[MOIKillsay] test sent via " .. method .. ": " .. message)
         M:Notify("test sent via " .. method, "success")
     else
         status = "test failed"
-        print("[Killsay] test send error: " .. tostring(method))
+        print("[MOIKillsay] test send error: " .. tostring(method))
         M:Notify("chat send failed; check console", "error")
     end
 end)
 statusSection:Button("Show killsay status", function()
     M:Notify(string.format("%s | deaths=%d local=%d queued=%d | %s", status, deathEvents, localKills, #pending, sendMethod), "info")
-    print(string.format("[Killsay] pack=%s | victim=%s | last=%s", PACK_NAMES[pack:Get()] or "?", lastVictim, lastMessage))
+    print(string.format("[MOIKillsay] pack=%s | victim=%s | last=%s", PACK_NAMES[pack:Get()] or "?", lastVictim, lastMessage))
 end)
 statusSection:Button("Clear pending messages", function()
     pending = {}
@@ -9410,10 +9478,10 @@ M._killsayDrawCallback = function()
         if ok then
             lastSentAt, lastVictim, lastMessage, sendMethod, status = t, item.victim or lastVictim, item.text, method, "sent"
             awaitingChat = { text = item.text, at = t }
-            print("[Killsay] sent via " .. method .. ": " .. item.text)
+            print("[MOIKillsay] sent via " .. method .. ": " .. item.text)
         else
             status = "send failed"
-            print("[Killsay] send error: " .. tostring(method))
+            print("[MOIKillsay] send error: " .. tostring(method))
             writeRuntime("queued message send failed", {
                 victim = item.victim,
                 message = item.text,
@@ -9440,7 +9508,12 @@ M._killsayEventCallback = function(event)
         end
         return
     end
+    if eventName == "round_start" then
+        M._localRoundSerial = (tonumber(M._localRoundSerial) or 0) + 1
+        return
+    end
     if eventName == "server_spawn" or eventName == "game_newmap" or eventName == "cs_game_disconnected" then
+        M._localRoundSerial = (tonumber(M._localRoundSerial) or 0) + 1
         requestKillsayListeners()
         resetKillsaySession(eventName)
         return
@@ -9449,7 +9522,7 @@ M._killsayEventCallback = function(event)
     -- With Killsay disabled, deaths must be a true zero-work path. The stable
     -- build used to open/write its diagnostics file twice for every death in
     -- the server even though no message could be sent.
-    if not armed then return end
+    if not armed and not killTimerRequested() then return end
     callbackEvents = callbackEvents + 1
 
     -- Current CS2/Aimware exposes player_controller_and_pawn event members
@@ -9511,8 +9584,12 @@ M._killsayEventCallback = function(event)
         local signature, eventTime = "pawn:" .. tostring(attackerPawnIndex) .. ":" .. tostring(victimPawnIndex), now()
         if signature == lastDeathSignature and eventTime - lastDeathAt < 0.10 then return end
         lastDeathSignature, lastDeathAt = signature, eventTime
-        deathEvents, localKills = deathEvents + 1, localKills + 1
-        queueForVictim(victimName)
+        M._localKillSerial = (tonumber(M._localKillSerial) or 0) + 1
+        M._localKillAt = eventTime
+        if armed then
+            deathEvents, localKills = deathEvents + 1, localKills + 1
+            queueForVictim(victimName)
+        end
         return
     end
 
@@ -9574,6 +9651,9 @@ M._killsayEventCallback = function(event)
         return
     end
     if victimIndex == localIndex then return end
+    M._localKillSerial = (tonumber(M._localKillSerial) or 0) + 1
+    M._localKillAt = eventTime
+    if not armed then return end
     eventKillCredits = eventKillCredits + 1
     localKills = localKills + 1
     local legacyVictim = playerName(victimID, victimIndex or victimID % 32768)
@@ -9584,6 +9664,143 @@ requestKillsayListeners()
 lastSessionKey = currentSessionKey()
 
 end)
+loadModule("KILL TIMER", function()
+local tab = M:Tab("KILL TIMER")
+tab:Row()
+local controls = tab:Section("Kill delay")
+local enabled = controls:Checkbox("Enable kill delay", false)
+local delay = controls:Slider("Delay after a kill", 5.0, 1.0, 15.0, 0.5, "%.1fs")
+local limit = controls:Slider("Round kill limit", 5, 1, 5, 1)
+local keepVisible = controls:Checkbox("Keep counter visible", false)
+
+tab:Col()
+local statusSection = tab:Section("Round status")
+local kills, deadline, cooling = 0, 0, false
+local status = "Disabled"
+local killSerial = tonumber(M._localKillSerial) or 0
+local roundSerial = tonumber(M._localRoundSerial) or 0
+local armed, previousEnabled = false, false
+local nextListenerRefresh, lastFrame, alpha = 0, 0, 0
+
+local function now()
+    local value
+    pcall(function() value = globals.RealTime() end)
+    if type(value) ~= "number" then pcall(function() value = globals.CurTime() end) end
+    return tonumber(value) or 0
+end
+
+local function reset(reason)
+    kills, deadline, cooling = 0, 0, false
+    killSerial = tonumber(M._localKillSerial) or 0
+    roundSerial = tonumber(M._localRoundSerial) or 0
+    status = enabled:Get() and (reason or "Ready") or "Disabled"
+end
+
+statusSection:Custom(76, function(ui)
+    local maximum = math.max(1, math.floor(tonumber(limit:Get()) or 5))
+    ui.label(string.format("Round kills: %d / %d", kills, maximum), ui.T.texthi)
+    ui.label(status, ui.T.textdim)
+    ui.label("Uses the existing local-kill detector.", ui.T.textdim)
+    ui.label("No additional game-event callback.", ui.T.textdim)
+end)
+statusSection:Button("Reset counter", function() reset("Manual reset") end)
+
+local font, smallFont
+pcall(function() font = draw.CreateFont("Segoe UI Semibold", 14, 700) end)
+pcall(function() smallFont = draw.CreateFont("Segoe UI", 12, 600) end)
+
+M._killTimerSignalActive = function() return armed == true end
+
+local function runtime()
+    local t = now()
+    local dt = lastFrame > 0 and math.max(0, math.min(0.10, t - lastFrame)) or 0
+    lastFrame = t
+    local requested = enabled:Get() == true
+    armed = requested
+
+    if requested ~= previousEnabled then
+        previousEnabled = requested
+        reset(requested and "Ready" or "Disabled")
+        nextListenerRefresh = 0
+    end
+
+    if requested and t >= nextListenerRefresh then
+        nextListenerRefresh = t + 2.0
+        local refresh = M._killTimerListenerRefresh
+        if type(refresh) == "function" then pcall(refresh) end
+    end
+
+    if requested then
+        local currentRound = tonumber(M._localRoundSerial) or 0
+        if currentRound ~= roundSerial then
+            reset("New round")
+            roundSerial = currentRound
+        end
+        local currentKills = tonumber(M._localKillSerial) or 0
+        if currentKills < killSerial then
+            killSerial = currentKills
+        elseif currentKills > killSerial then
+            kills = kills + (currentKills - killSerial)
+            killSerial = currentKills
+            deadline, cooling = t + math.max(1, tonumber(delay:Get()) or 5), true
+            local maximum = math.max(1, math.floor(tonumber(limit:Get()) or 5))
+            status = kills >= maximum and "ROUND LIMIT REACHED" or "Wait before the next kill"
+        end
+    end
+
+    local remaining = math.max(0, deadline - t)
+    if cooling and remaining <= 0 then
+        cooling = false
+        if kills < math.max(1, math.floor(tonumber(limit:Get()) or 5)) then status = "Ready" end
+    end
+
+    local visible = requested and (keepVisible:Get() == true or kills > 0 or cooling)
+    alpha = alpha + ((visible and 1 or 0) - alpha) * math.min(1, dt * 12)
+    if alpha < 0.01 then return end
+
+    local sw = select(1, draw.GetScreenSize())
+    if not sw then return end
+    local maximum = math.max(1, math.floor(tonumber(limit:Get()) or 5))
+    local danger = kills >= maximum
+    local width, height = 300, 52
+    local x, y = math.floor((sw - width) * 0.5), 120
+    draw.Color(7, 11, 17, math.floor(238 * alpha))
+    draw.FilledRect(x, y, x + width, y + height)
+    draw.Color(danger and 255 or 74, danger and 76 or 166, danger and 96 or 255, math.floor(255 * alpha))
+    draw.FilledRect(x, y, x + 3, y + height)
+    draw.OutlinedRect(x, y, x + width, y + height)
+    if font then draw.SetFont(font) end
+    draw.Color(238, 244, 252, math.floor(255 * alpha))
+    draw.Text(x + 14, y + 8, string.format("ROUND KILLS  %d / %d", kills, maximum))
+    if smallFont then draw.SetFont(smallFont) end
+    draw.Color(danger and 255 or 144, danger and 76 or 190, danger and 96 or 225, math.floor(255 * alpha))
+    local state = danger and "STOP ENGAGING" or (cooling and string.format("READY IN %.1fs", remaining) or "READY")
+    draw.Text(x + 14, y + 29, state)
+    local barX, barY, barW = x + 14, y + height - 6, width - 28
+    draw.Color(40, 45, 55, math.floor(130 * alpha))
+    draw.FilledRect(barX, barY, barX + barW, barY + 2)
+    local ratio = 0
+    if danger then ratio = 1
+    elseif cooling then ratio = math.max(0, math.min(1, remaining / math.max(1, tonumber(delay:Get()) or 5))) end
+    if ratio > 0 then
+        draw.Color(danger and 255 or 74, danger and 76 or 166, danger and 96 or 255, math.floor(235 * alpha))
+        draw.FilledRect(barX, barY, barX + math.floor(barW * ratio), barY + 2)
+    end
+end
+
+M._killTimerDrawCallback = runtime
+M._killTimerDrawActive = function()
+    return enabled:Get() == true or alpha > 0.01
+end
+callbacks.Register("Unload", "MOIMAHANMOI_KillTimerUnload", function()
+    armed = false
+    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_KillTimerDraw")
+    if M._killTimerDrawCallback == runtime then M._killTimerDrawCallback = nil end
+    M._killTimerDrawActive = nil
+    M._killTimerSignalActive = nil
+    M._localKillSerial, M._localKillAt, M._localRoundSerial = nil, nil, nil
+end)
+end)
 loadModule("IDENTITY", function()
 local M = M
 
@@ -9591,8 +9808,8 @@ local M = M
 -- scoreboard-visible equivalent is a prefix composed with the user name.
 -- This module follows the working engine2.dll name-ConVar route from the
 -- Aimware reference, but validates every signature and pointer before use.
-local CONFIG_FILE = "identity_config.txt"
-local RUNTIME_FILE = "identity_runtime.txt"
+local CONFIG_FILE = "MOIidentity_config.txt"
+local RUNTIME_FILE = "MOIidentity_runtime.txt"
 local ENGINE_DLL = "engine2.dll"
 local CVAR_PATTERN = "48 8B 0D ?? ?? ?? ?? 48 8B 16 48 89 7C 24 ?? 4C 89 4C 24 ??"
 local RESOLVE_PATTERN = "48 8B D3 E8 ?? ?? ?? ?? 48 8B 44 24"
@@ -9651,13 +9868,13 @@ local tab = M:Tab("IDENTITY")
 tab:Row()
 local nameSection = tab:Section("Custom name")
 local nameEnabled = nameSection:Checkbox("Enable custom name", cfgBool("name_enabled", false))
-local nameText = nameSection:Input("Name text", config.name_text or "MAHANMOI", "custom player name...")
+local nameText = nameSection:Input("Name text", config.name_text or "MOIMAHANMOI", "custom player name...")
 local nameAnimated = nameSection:Checkbox("Animate custom name", cfgBool("name_animated", false))
 local nameSpeed = nameSection:Slider("Name animation speed", cfgNumber("name_speed", 0.60, 0.35, 2.0), 0.35, 2.0, 0.05, "%.2fs")
 
 local clanSection = tab:Section("Clan tag / prefix")
 local clanEnabled = clanSection:Checkbox("Enable clan prefix", cfgBool("clan_enabled", false))
-local clanText = clanSection:Input("Clan text", config.clan_text or "", "prefix shown before name...")
+local clanText = clanSection:Input("Clan text", config.clan_text or "MOI", "prefix shown before name...")
 local clanAnimated = clanSection:Checkbox("Animate clan text", cfgBool("clan_animated", false))
 local separatorBar = clanSection:Checkbox("Use middle bar |", cfgBool("separator_bar", true))
 local clanSpeed = clanSection:Slider("Clan animation speed", cfgNumber("clan_speed", 0.60, 0.35, 2.0), 0.35, 2.0, 0.05, "%.2fs")
@@ -9668,10 +9885,10 @@ local statusSection = tab:Section("Status")
 
 local f = rawget(_G, "ffi")
 local bitlib = rawget(_G, "bit") or rawget(_G, "bit32")
-local sharedState = rawget(_G, "_IDENTITY_SHARED_STATE")
+local sharedState = rawget(_G, "MOI_IDENTITY_SHARED_STATE")
 if type(sharedState) ~= "table" then
     sharedState = {}
-    rawset(_G, "_IDENTITY_SHARED_STATE", sharedState)
+    rawset(_G, "MOI_IDENTITY_SHARED_STATE", sharedState)
 end
 local flagsPointer, originalFlags = sharedState.flagsPointer, sharedState.originalFlags
 local patchReady = flagsPointer ~= nil and originalFlags ~= nil
@@ -9959,11 +10176,11 @@ M._identityHandles = {
 }
 M._identityComposeForTest = composeIdentity
 
-local generation = (tonumber(rawget(_G, "_IDENTITY_GENERATION")) or 0) + 1
-rawset(_G, "_IDENTITY_GENERATION", generation)
+local generation = (tonumber(rawget(_G, "MOI_IDENTITY_GENERATION")) or 0) + 1
+rawset(_G, "MOI_IDENTITY_GENERATION", generation)
 
 local function identityDraw()
-    if rawget(_G, "_IDENTITY_GENERATION") ~= generation then return end
+    if rawget(_G, "MOI_IDENTITY_GENERATION") ~= generation then return end
     local wantsIdentity = nameEnabled:Get() or clanEnabled:Get()
     -- The stable callback kept polling the server/map clock while identity was
     -- completely idle. If we do not own a changed name there is nothing to
@@ -10006,18 +10223,18 @@ M._identityDrawCallback = identityDraw
 callbacks.Register("Draw", identityDraw)
 
 callbacks.Register("Unload", function()
-    if rawget(_G, "_IDENTITY_GENERATION") ~= generation then return end
+    if rawget(_G, "MOI_IDENTITY_GENERATION") ~= generation then return end
     pcall(saveConfig)
     if changed and originalName ~= "" then pcall(function() writeName(originalName, true) end) end
     restoreFlags()
-    rawset(_G, "_IDENTITY_GENERATION", generation + 1)
+    rawset(_G, "MOI_IDENTITY_GENERATION", generation + 1)
 end)
 
 writeRuntime("module loaded")
 end)
 
 loadModule("VOTES", function()
--- MAHANMOI vote revealer.
+-- MOIMAHANMOI vote revealer.
 -- Uses documented game events and ordinary entity APIs. The only FFI call is
 -- the current local HUD-chat printer; Steam avatar vtables remain excluded.
 -- The service is always enabled and intentionally has no tab. Event/session
@@ -10043,7 +10260,7 @@ local eventCount, status = 0, "ready"
 local callbackEvents = 0
 local nextListenerRefresh, nextSessionPoll, nextLogicTick = 0, 0, 0
 local lastSessionKey
-local RUNTIME_FILE = "votes_runtime.txt"
+local RUNTIME_FILE = "MOIvotes_runtime.txt"
 local runtimeHistory = {}
 local localChatPrint, localChatStatus
 local localPrintCount = 0
@@ -10749,7 +10966,7 @@ local function sendQueued(t)
         -- Reset immediately after the marker so the vote description stays readable.
         local teamColor = teamName == "T" and string.char(2) or (teamName == "CT" and string.char(11) or reset)
         local colorMarker = teamName == "T" and "(T)" or (teamName == "CT" and "(CT)" or "")
-        local formatted = prefixColor .. "[Votes] " .. reset
+        local formatted = prefixColor .. "[MOIVotes] " .. reset
         if colorMarker ~= "" then formatted = formatted .. teamColor .. colorMarker .. reset .. " " end
         formatted = formatted .. message
         M._voteLastFormattedChat = formatted
@@ -10759,7 +10976,7 @@ local function sendQueued(t)
         if type(localChatPrint) == "function" then
             ok = localChatPrint(formatted) == true
         end
-        if not ok then print("[Votes/local] " .. plainMarker .. message) end
+        if not ok then print("[MOIVotes/local] " .. plainMarker .. message) end
         localPrintCount = localPrintCount + 1
         M._voteLocalPrintCount = localPrintCount
         count = count + 1
@@ -10794,14 +11011,14 @@ local function voteLogicTick(t)
     if endAt > 0 and t >= endAt then clearVote("ready"); return end
 end
 
-pcall(function() callbacks.Unregister("Draw", "MAHANMOI_VoteDraw") end)
-pcall(function() callbacks.Unregister("CreateMove", "MAHANMOI_VoteLogic") end)
-pcall(function() callbacks.Unregister("FireGameEvent", "MAHANMOI_VoteEvents") end)
-local runtimeGeneration = (tonumber(rawget(_G, "_VOTE_RUNTIME_GENERATION")) or 0) + 1
-rawset(_G, "_VOTE_RUNTIME_GENERATION", runtimeGeneration)
+pcall(function() callbacks.Unregister("Draw", "MOIMAHANMOI_VoteDraw") end)
+pcall(function() callbacks.Unregister("CreateMove", "MOIMAHANMOI_VoteLogic") end)
+pcall(function() callbacks.Unregister("FireGameEvent", "MOIMAHANMOI_VoteEvents") end)
+local runtimeGeneration = (tonumber(rawget(_G, "MOI_VOTE_RUNTIME_GENERATION")) or 0) + 1
+rawset(_G, "MOI_VOTE_RUNTIME_GENERATION", runtimeGeneration)
 local logicBusy = false
-callbacks.Register("CreateMove", "MAHANMOI_VoteLogic", function()
-    if rawget(_G, "_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration or logicBusy then return end
+callbacks.Register("CreateMove", "MOIMAHANMOI_VoteLogic", function()
+    if rawget(_G, "MOI_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration or logicBusy then return end
     -- Vote/session work runs at 20 Hz.
     local t = clock()
     if t < nextLogicTick then return end
@@ -10817,9 +11034,9 @@ initLocalChat()
 writeRuntime("module loaded", { session = lastSessionKey, chat = localChatStatus })
 
 callbacks.Register("Unload", function()
-    if rawget(_G, "_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration then return end
-    rawset(_G, "_VOTE_RUNTIME_GENERATION", runtimeGeneration + 1)
-    pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_VoteLogic")
+    if rawget(_G, "MOI_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration then return end
+    rawset(_G, "MOI_VOTE_RUNTIME_GENERATION", runtimeGeneration + 1)
+    pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_VoteLogic")
     logicBusy = false
 end)
 
@@ -10831,7 +11048,7 @@ loadModule("REGION", function()
 local tab = M:Tab("REGION")
 tab:Row()
 
-local CONFIG_FILE = "region_config.txt"
+local CONFIG_FILE = "MOIregion_config.txt"
 local SDR_ENDPOINT = "https://api.steampowered.com/ISteamApps/GetSDRConfig/v1/?appid=730"
 local fallbackRegions = {
     { "ams", "Amsterdam (Netherlands)" },
@@ -11338,9 +11555,9 @@ statusSection:Custom(62, function(ui)
     ui.label(total and ("Samples: " .. total .. " (direct " .. direct .. " / relay " .. relayed .. ")") or relayProbe.detail, ui.T.textdim)
 end)
 
-pcall(function() callbacks.Unregister("Draw", "MAHANMOI_RegionDraw") end)
-pcall(function() callbacks.Unregister("Unload", "MAHANMOI_RegionUnload") end)
-callbacks.Register("Draw", "MAHANMOI_RegionDraw", function()
+pcall(function() callbacks.Unregister("Draw", "MOIMAHANMOI_RegionDraw") end)
+pcall(function() callbacks.Unregister("Unload", "MOIMAHANMOI_RegionUnload") end)
+callbacks.Register("Draw", "MOIMAHANMOI_RegionDraw", function()
     local t = 0
     pcall(function() t = globals.RealTime() end)
     if t < nextPoll then return end
@@ -11380,17 +11597,17 @@ end)
 -- usable while Steam finishes its asynchronous latency measurement.
 nextProbe = (globals.RealTime() or 0) + 0.5
 
-callbacks.Register("Unload", "MAHANMOI_RegionUnload", function()
+callbacks.Register("Unload", "MOIMAHANMOI_RegionUnload", function()
     saveSettings()
     if applied then restoreAutomatic(false) end
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_RegionDraw")
+    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_RegionDraw")
 end)
 
 end)
 
 loadModule("WHITELIST", function()
 -- Session whitelist with the original immunity behavior, presented inside the
--- multitool instead of opening a second Aimware window.
+-- MAHANMOI instead of opening a second Aimware window.
 local tab = M:Tab("WHITELIST")
 tab:Row()
 local playersSection = tab:Section("Enemy players")
@@ -11400,6 +11617,7 @@ tab:Col()
 local controlSection = tab:Section("Whitelist control")
 local whitelistEnabled = controlSection:Checkbox("Enable whitelist", false)
 local forceAll = controlSection:Checkbox("Ignore whitelist / target everyone", false)
+local invertStatesKey = controlSection:Keybox("Invert TARGET / PROTECTED", 0)
 -- The original whitelist stored its state by C_CSPlayerPawn index.  Ragebot
 -- and DrawESP both receive that pawn, whereas a CCSPlayerController can keep
 -- a different index after a respawn or side change.  Keep the same identity
@@ -11409,15 +11627,32 @@ local refreshRequested = true
 local lastEnabled = false
 local detectionStatus = "Waiting for a match"
 local enforcementStatus = "Protection inactive"
+local whitelistBindHeld = false
+local invertModeActive = false
+local invertBaseStates = {}
 
 local colorSection = tab:Section("Visuals")
 local protectedColor = colorSection:ColorPicker("Protected color", { 76, 201, 156, 255 })
 local targetColor = colorSection:ColorPicker("Target color", { 255, 166, 74, 255 })
+local whitelistTitleFont, whitelistRowFont
+pcall(function() whitelistTitleFont = draw.CreateFont("Bahnschrift SemiBold", 15, 700) end)
+pcall(function() whitelistRowFont = draw.CreateFont("Bahnschrift", 13, 600) end)
+if not whitelistTitleFont then pcall(function() whitelistTitleFont = draw.CreateFont("Verdana", 13, 700) end) end
+if not whitelistRowFont then pcall(function() whitelistRowFont = draw.CreateFont("Verdana", 12, 600) end) end
 
 local function safeCall(fn, fallback)
     local ok, value = pcall(fn)
     if ok then return value end
     return fallback
+end
+
+local function whitelistClock()
+    local value = 0
+    pcall(function()
+        if type(common) == "table" and type(common.Time) == "function" then value = common.Time()
+        elseif type(globals) == "table" and type(globals.RealTime) == "function" then value = globals.RealTime() end
+    end)
+    return tonumber(value) or 0
 end
 
 local function entityIndex(entity)
@@ -11426,10 +11661,42 @@ local function entityIndex(entity)
 end
 
 local function entityTeam(entity)
+    if not entity then return nil end
     local value = safeCall(function() return tonumber(entity:GetTeamNumber()) end)
-    if value == nil then value = safeCall(function() return tonumber(entity:GetPropInt("m_iTeamNum")) end) end
-    if value == nil then value = safeCall(function() return tonumber(entity:GetFieldInt("m_iTeamNum")) end) end
+    if value ~= 2 and value ~= 3 then
+        value = safeCall(function() return tonumber(entity:GetPropInt("m_iTeamNum")) end)
+    end
+    if value ~= 2 and value ~= 3 then
+        value = safeCall(function() return tonumber(entity:GetFieldInt("m_iTeamNum")) end)
+    end
+    if value ~= 2 and value ~= 3 then
+        local controller = safeCall(function() return entity:GetFieldEntity("m_hOriginalController") end)
+        if controller and controller ~= entity then
+            value = safeCall(function() return tonumber(controller:GetTeamNumber()) end)
+            if value ~= 2 and value ~= 3 then
+                value = safeCall(function() return tonumber(controller:GetPropInt("m_iTeamNum")) end)
+            end
+            if value ~= 2 and value ~= 3 then
+                value = safeCall(function() return tonumber(controller:GetFieldInt("m_iTeamNum")) end)
+            end
+        end
+    end
     return value
+end
+
+-- Keep the exact local-pawn route used by the standalone whitelist.  Some
+-- Aimware builds briefly report team 0 while the CS2 pawn is already valid;
+-- rejecting that transition was the reason the integrated list stayed empty.
+local function localPawnAndTeam()
+    local pawn = safeCall(function() return entities.GetLocalPawn() end)
+    if pawn == nil then pawn = safeCall(function() return entities.GetLocalPlayer() end) end
+    if not pawn then return nil, nil end
+    return pawn, entityTeam(pawn)
+end
+
+local function whitelistSessionReady()
+    local pawn = localPawnAndTeam()
+    return pawn ~= nil
 end
 
 local function fieldBool(entity, name)
@@ -11469,10 +11736,8 @@ local function cleanupImmortalStates()
     local pawns = safeCall(function() return entities.FindByClass("C_CSPlayerPawn") end, {}) or {}
     for i = 1, #pawns do
         local entity = pawns[i]
-        if safeCall(function() return entity:IsPlayer() end, false) then setImmortal(entity, false) end
+        if entity and safeCall(function() return entity:IsPlayer() end, false) then setImmortal(entity, false) end
     end
-    local controllers = safeCall(function() return entities.FindByClass("CCSPlayerController") end, {}) or {}
-    for i = 1, #controllers do setImmortal(controllerPawn(controllers[i]), false) end
 end
 
 local function cleanPlayerName(value)
@@ -11529,12 +11794,6 @@ local function playerName(entity, controller)
     return name or ("Player #" .. tostring(controllerIndex or pawnIndex or "?"))
 end
 
-local function localPawn()
-    local pawn = safeCall(function() return entities.GetLocalPawn() end)
-    if pawn == nil then pawn = safeCall(function() return entities.GetLocalPlayer() end) end
-    return pawn
-end
-
 local function isEnemy(entity, team)
     if not entity or safeCall(function() return entity:IsPlayer() end, false) ~= true then return false end
     local otherTeam = entityTeam(entity)
@@ -11550,22 +11809,37 @@ end
 
 local function refreshPlayers()
     local current, rows = {}, {}
-    local pawn = localPawn()
-    local team = entityTeam(pawn)
+    local pawn, team = localPawnAndTeam()
     local pawns = safeCall(function() return entities.FindByClass("C_CSPlayerPawn") end, {}) or {}
+    local localIndex = entityIndex(pawn)
+
+    if not pawn or type(team) ~= "number" then
+        detectionStatus = "Waiting for a match"
+        enforcementStatus = "Protection inactive"
+    end
+
+    -- Match the standalone whitelist's cleanup/reapply cycle, but only while
+    -- enforcement is enabled.  All writes use entities returned by this scan;
+    -- no pawn userdata is retained across a respawn, map or side change.
+    if whitelistEnabled:Get() == true then
+        for i = 1, #pawns do
+            local entity = pawns[i]
+            if entity and safeCall(function() return entity:IsPlayer() end, false) then setImmortal(entity, false) end
+        end
+    end
 
     -- This is intentionally the original whitelist enumeration path.  It is
     -- the only source used for the row key and for the immunity write below.
-    if type(team) == "number" then
+    if pawn and type(team) == "number" then
         for i = 1, #pawns do
             local entity = pawns[i]
-            if isEnemy(entity, team) then
-                local index = entityIndex(entity)
+            local index = entityIndex(entity)
+            if index and index ~= localIndex and isEnemy(entity, team) then
                 if index then
                     if protectedByIndex[index] == nil then protectedByIndex[index] = false end
-                    current[index] = entity
-                    applyState(entity, index)
-                    rows[#rows + 1] = { index = index, entity = entity, name = playerName(entity) }
+                    current[index] = true
+                    if whitelistEnabled:Get() == true then applyState(entity, index) end
+                    rows[#rows + 1] = { index = index, name = playerName(entity) }
                 end
             end
         end
@@ -11575,18 +11849,15 @@ local function refreshPlayers()
     if whitelistEnabled:Get() == true then
         local protectedCount = 0
         if forceAll:Get() ~= true then
-            for index, entity in pairs(current) do
-                if entity and protectedByIndex[index] == true then protectedCount = protectedCount + 1 end
+            for index in pairs(current) do
+                if protectedByIndex[index] == true then protectedCount = protectedCount + 1 end
             end
         end
         enforcementStatus = string.format("Protected: %d | Targets: %d", protectedCount, math.max(0, #rows - protectedCount))
     else
         enforcementStatus = "Protection inactive"
     end
-    for index, entity in pairs(knownEntities) do
-        if current[index] == nil or current[index] ~= entity then
-            setImmortal(entity, false)
-        end
+    for index in pairs(knownEntities) do
         if current[index] == nil then
             protectedByIndex[index] = nil
         end
@@ -11620,11 +11891,51 @@ local function selectedRow()
     return rowsBySelection[tonumber(playerList:Get()) or 1]
 end
 
+local function invertCurrentStates()
+    if whitelistEnabled:Get() ~= true then return end
+    forceAll:Set(false)
+    local changed = 0
+    if not invertModeActive then
+        invertBaseStates = {}
+        for index in pairs(knownEntities) do
+            local original = protectedByIndex[index] == true
+            invertBaseStates[index] = original
+            protectedByIndex[index] = not original
+            changed = changed + 1
+        end
+        if changed > 0 then invertModeActive = true end
+    else
+        for index in pairs(knownEntities) do
+            local original = invertBaseStates[index]
+            if original ~= nil then
+                protectedByIndex[index] = original
+                changed = changed + 1
+            end
+        end
+        invertModeActive = false
+        invertBaseStates = {}
+    end
+    if changed > 0 then
+        refreshRequested = true
+    end
+end
+
+local function pollInvertKey()
+    local key = tonumber(invertStatesKey:Get()) or 0
+    local down = false
+    if key ~= 0 then
+        pcall(function() down = input.IsButtonDown(key) and true or false end)
+    end
+    local pressed = down and not whitelistBindHeld
+    whitelistBindHeld = down
+    if pressed then invertCurrentStates() end
+end
+
 controlSection:Button("Toggle selected protection", function()
     local row = selectedRow()
     if not row then M:Notify("select an enemy first", "info"); return end
     protectedByIndex[row.index] = not (protectedByIndex[row.index] == true)
-    applyState(row.entity, row.index)
+    refreshRequested = true
     refreshPlayers()
 end)
 controlSection:Button("Protect every enemy", function()
@@ -11656,7 +11967,48 @@ statusSection:Custom(72, function(ui)
     ui.label(enforcementStatus, ui.T.textdim)
 end)
 
-cleanupImmortalStates()
+-- Uses the main MAHANMOI Draw dispatcher, just like Manual AA.  It reads the
+-- already validated rows and never performs an entity scan of its own.
+local function drawWhitelistHud()
+    if whitelistEnabled:Get() ~= true then return end
+    local count = math.min(#rowsBySelection, 5)
+    if count <= 0 then return end
+
+    local _, sh = draw.GetScreenSize()
+    if not sh then return end
+    local x = 11
+    local manualY = math.min(math.max(120, math.floor(sh * 0.55)), sh - 92)
+    local y = math.min(manualY + 84, sh - (28 + count * 18))
+    local width = 214
+
+    if whitelistTitleFont then draw.SetFont(whitelistTitleFont) end
+    draw.Color(8, 12, 18, 205)
+    draw.FilledRect(x, y, x + width, y + 18)
+    draw.Color(74, 166, 255, 235)
+    draw.FilledRect(x, y, x + 3, y + 18)
+    draw.Color(226, 232, 240, 245)
+    draw.Text(x + 9, y + 2, "WHITELIST")
+
+    if whitelistRowFont then draw.SetFont(whitelistRowFont) end
+    for i = 1, count do
+        local row = rowsBySelection[i]
+        if row then
+            local protected = forceAll:Get() ~= true and protectedByIndex[row.index] == true
+            local rowY = y + 22 + (i - 1) * 18
+            local name = tostring(row.name or ("Player #" .. tostring(row.index)))
+            if #name > 19 then name = name:sub(1, 18) .. "..." end
+            draw.Color(7, 10, 15, 180)
+            draw.FilledRect(x, rowY, x + width, rowY + 15)
+            if protected then draw.Color(76, 201, 156, 255)
+            else draw.Color(255, 166, 74, 255) end
+            draw.FilledRect(x, rowY, x + 3, rowY + 15)
+            draw.Text(x + 9, rowY + 1, protected and "PROTECTED" or "TARGET")
+            draw.Color(211, 218, 229, 245)
+            draw.Text(x + 91, rowY + 1, name)
+        end
+    end
+end
+
 local function clock()
     local value = 0
     pcall(function()
@@ -11668,7 +12020,11 @@ end
 local nextRefresh = 0
 local function whitelistRuntime()
     local currentEnabled = whitelistEnabled:Get() == true
-    if lastEnabled and not currentEnabled then cleanupImmortalStates() end
+    if lastEnabled and not currentEnabled then
+        cleanupImmortalStates()
+        invertModeActive, invertBaseStates = false, {}
+        whitelistBindHeld = false
+    end
     if currentEnabled and not lastEnabled then refreshRequested = true end
     lastEnabled = currentEnabled
     local t = clock()
@@ -11677,22 +12033,31 @@ local function whitelistRuntime()
         nextRefresh = t + 0.35
         refreshPlayers()
     end
+    -- Key input only transforms an already validated list. It never starts a
+    -- nested entity scan, so detection remains identical with or without a bind.
+    if currentEnabled then pollInvertKey()
+    else whitelistBindHeld = false end
 end
-callbacks.Register("Draw", "MAHANMOI_WhitelistRefresh", whitelistRuntime)
+-- Run from the already proven UI/overlay dispatcher.  Registering another
+-- named Draw callback can silently collide with a stale callback after a Lua
+-- reload, leaving the initial "Waiting for a match" text forever.
+M._whitelistRuntimeCallback = whitelistRuntime
+M._whitelistRuntimeActive = function() return true end
 
 -- DrawESP owns the label, but Ragebot can resolve a target before that draw
 -- pass.  Mirror the exact pawn state from CreateMove as well, so a click on
 -- any whitelist action is effective for the very next target calculation.
 local function whitelistCommand()
+    pollInvertKey()
     if whitelistEnabled:Get() ~= true then return end
-    local pawn = localPawn()
-    local team = entityTeam(pawn)
-    if type(team) ~= "number" then return end
+    local pawn, team = localPawnAndTeam()
+    if not pawn or type(team) ~= "number" then return end
+    local localIndex = entityIndex(pawn)
     local pawns = safeCall(function() return entities.FindByClass("C_CSPlayerPawn") end, {}) or {}
     for i = 1, #pawns do
         local entity = pawns[i]
-        if isEnemy(entity, team) then
-            local index = entityIndex(entity)
+        local index = entityIndex(entity)
+        if index and index ~= localIndex and isEnemy(entity, team) then
             if index then
                 if protectedByIndex[index] == nil then
                     protectedByIndex[index] = false
@@ -11704,15 +12069,18 @@ local function whitelistCommand()
     end
 end
 M._whitelistCommandCallback = whitelistCommand
-M._whitelistCommandActive = function() return whitelistEnabled:Get() == true end
-refreshPlayers()
+M._whitelistCommandActive = function()
+    return whitelistEnabled:Get() == true
+end
+M._whitelistDrawCallback = drawWhitelistHud
+M._whitelistDrawActive = function() return whitelistEnabled:Get() == true end
 
-callbacks.Register("DrawESP", "MAHANMOI_WhitelistESP", function(esp)
+callbacks.Register("DrawESP", "MOIMAHANMOI_WhitelistESP", function(esp)
     if whitelistEnabled:Get() ~= true or not esp then return end
     local entity = safeCall(function() return esp:GetEntity() end)
-    local pawn = localPawn()
+    local pawn, team = localPawnAndTeam()
     if not entity or not pawn then return end
-    local team = entityTeam(pawn)
+    if entityIndex(entity) == entityIndex(pawn) then return end
     if not isEnemy(entity, team) or safeCall(function() return entity:IsAlive() end, false) ~= true then return end
     local pawnIndex = entityIndex(entity)
     if not pawnIndex then return end
@@ -11724,20 +12092,25 @@ callbacks.Register("DrawESP", "MAHANMOI_WhitelistESP", function(esp)
     pcall(function() esp:AddTextTop(protected and "WHITELISTED" or "TARGET") end)
 end)
 
-callbacks.Register("Unload", "MAHANMOI_WhitelistUnload", function()
+callbacks.Register("Unload", "MOIMAHANMOI_WhitelistUnload", function()
     cleanupImmortalStates()
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_WhitelistRefresh")
-    pcall(callbacks.Unregister, "DrawESP", "MAHANMOI_WhitelistESP")
+    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_WhitelistRefresh")
+    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_WhitelistPanel")
+    pcall(callbacks.Unregister, "DrawESP", "MOIMAHANMOI_WhitelistESP")
     if M._whitelistCommandCallback == whitelistCommand then M._whitelistCommandCallback = nil end
+    if M._whitelistDrawCallback == drawWhitelistHud then M._whitelistDrawCallback = nil end
+    if M._whitelistRuntimeCallback == whitelistRuntime then M._whitelistRuntimeCallback = nil end
     M._whitelistCommandActive = nil
+    M._whitelistDrawActive = nil
+    M._whitelistRuntimeActive = nil
 end)
 end)
 
 -- Aimware's anonymous event bridge is tokened so reloads cannot double-dispatch.
 do
-    local callbackId = "MAHANMOI_GameEvents"
-    local unloadId = "MAHANMOI_GameEventsUnload"
-    local bridgeKey = "MOI_MULTSCRIPT_EVENT_BRIDGE_V1"
+    local callbackId = "MOIMAHANMOI_GameEvents"
+    local unloadId = "MOIMAHANMOI_GameEventsUnload"
+    local bridgeKey = "MOI_MAHANMOI_EVENT_BRIDGE_V1"
     local dispatchBusy = false
     local handlers = {
         { field = "_killsayEventCallback", active = "_killsayEventActive", label = "Killsay" },
@@ -11756,7 +12129,7 @@ do
                 and (type(active) ~= "function" or active()) then
                 local ok, err = pcall(handler, event)
                 if not ok then
-                    print(string.format("[MAHANMOI] %s event error: %s", entry.label, tostring(err)))
+                    print(string.format("[MOIMAHANMOI] %s event error: %s", entry.label, tostring(err)))
                 end
             end
         end
@@ -11784,13 +12157,13 @@ do
             local ok, err = pcall(dispatcher, event)
             if not ok then
                 current.lastError = tostring(err)
-                print("[MAHANMOI] event bridge error: " .. tostring(err))
+                print("[MOIMAHANMOI] event bridge error: " .. tostring(err))
             end
         end)
     end)
     bridge.registered = registered == true
     if not registered then
-        print("[MAHANMOI] stable event bridge failed: " .. tostring(registerError))
+        print("[MOIMAHANMOI] stable event bridge failed: " .. tostring(registerError))
     end
 
     callbacks.Register("Unload", unloadId, function()
@@ -11801,6 +12174,7 @@ do
         end
         M._killsayEventCallback = nil
         M._killsayEventActive = nil
+        M._killTimerListenerRefresh = nil
         M._customSoundsEventCallback = nil
         M._customSoundsEventActive = nil
         M._voteEventCallback = nil
@@ -11810,7 +12184,7 @@ do
 end
 
 do
-    local wanted = { "WEAPONS", "AGENTS", "SKINS CUSTOM", "VIEWMODEL", "SCOPE OVERLAY", "CUSTOM SOUNDS", "MOVEMENT", "REGION", "IDENTITY", "KILLSAY", "WHITELIST", "CONFIGS" }
+    local wanted = { "WEAPONS", "AGENTS", "SKINS CUSTOM", "VIEWMODEL", "SCOPE OVERLAY", "CUSTOM SOUNDS", "MOVEMENT", "REGION", "IDENTITY", "KILLSAY", "KILL TIMER", "WHITELIST", "CONFIGS" }
     local byName, ordered = {}, {}
     for _, tab in ipairs(M._tabs) do byName[tab.name] = tab end
     for _, name in ipairs(wanted) do
@@ -11821,4 +12195,4 @@ do
 end
 
 M:Build({ w = 940, h = 560, autoH = false, resize = true })
-print("[] ready " .. MOI_MULTSCRIPT_VERSION)
+print("[MOI] ready " .. MOI_MAHANMOI_VERSION)
