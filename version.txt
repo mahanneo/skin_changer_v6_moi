@@ -1,4 +1,4 @@
-version=1.4.0
+version=1.4.1
 source=MAHANMOI.lua
 min_bytes=300000
 signature=MOI_MULTSCRIPT_SOURCE_V1
