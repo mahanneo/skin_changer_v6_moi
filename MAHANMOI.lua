@@ -1,6 +1,6 @@
 -- MAHANMOI 1.4.2
 local MOI_MAHANMOI_VERSION = "1.4.2"
-local MOI_MAHANMOI_SIGNATURE = "MOI_MAHANMOI_SOURCE_V1"
+local MOI_MAHANMOI_SIGNATURE = "MOI_MULTSCRIPT_SOURCE_V1"
 _G.MOI_MAHANMOI_VERSION = MOI_MAHANMOI_VERSION
 
 local staleEvents = { "Draw", "CreateMove", "PreMove", "DrawESP", "FireGameEvent", "Unload" }
