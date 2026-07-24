@@ -1,5 +1,5 @@
--- MOIMAHANMOI 1.4.1
-local MOI_MAHANMOI_VERSION = "1.4.1"
+-- MAHANMOI 1.4.2
+local MOI_MAHANMOI_VERSION = "1.4.2"
 local MOI_MAHANMOI_SIGNATURE = "MOI_MAHANMOI_SOURCE_V1"
 _G.MOI_MAHANMOI_VERSION = MOI_MAHANMOI_VERSION
 
@@ -13,10 +13,10 @@ local function clearCallbacks(ids)
 end
 
 clearCallbacks({
-    "MOIMAHANMOI_Watermark", "MOIMAHANMOI_MISCLogic",
-    "MOIMAHANMOI_MISCLogicMove", "MOIMAHANMOI_MISCEvents",
-    "MOIMAHANMOI_WeaponsSessionEvents", "MOIMAHANMOI_GameEvents",
-    "MOIMAHANMOI_GameEventsUnload", "MOIMAHANMOI_MISCUnload"
+    "MAHANMOI_Watermark", "MAHANMOI_MISCLogic",
+    "MAHANMOI_MISCLogicMove", "MAHANMOI_MISCEvents",
+    "MAHANMOI_WeaponsSessionEvents", "MAHANMOI_GameEvents",
+    "MAHANMOI_GameEventsUnload", "MAHANMOI_MISCUnload"
 })
 if type(M) == "table" and type(M.Watermark) == "function" then
     pcall(M.Watermark, M, false)
@@ -38,11 +38,11 @@ clearCallbacks({
     "MOIWEAPONS_UIDraw", "MOIWEAPONS_UIInput", "MOIWEAPONS_UIUnload",
     "MOIWEAPONS_Engine", "MOIWEAPONS_Unload", "MOIWEAPONS_Watermark",
     "MOIWEAPONS_LateMesh",
-    "MOIMAHANMOI_ManualAADraw", "MOIMAHANMOI_ManualAAMove",
-    "MOIMAHANMOI_ManualAAUnload", "MOIMAHANMOI_WhitelistRefresh",
-    "MOIMAHANMOI_WhitelistPanel", "MOIMAHANMOI_WhitelistESP", "MOIMAHANMOI_WhitelistUnload",
-    "MOIMAHANMOI_KillTimerDraw", "MOIMAHANMOI_KillTimerUnload",
-    "MOIMAHANMOI_RegionDraw", "MOIMAHANMOI_RegionUnload"
+    "MAHANMOI_ManualAADraw", "MAHANMOI_ManualAAMove",
+    "MAHANMOI_ManualAAUnload", "MAHANMOI_WhitelistRefresh",
+    "MAHANMOI_WhitelistPanel", "MAHANMOI_WhitelistESP", "MAHANMOI_WhitelistUnload",
+    "MAHANMOI_KillTimerDraw", "MAHANMOI_KillTimerUnload",
+    "MAHANMOI_RegionDraw", "MAHANMOI_RegionUnload"
 })
 
 local __MOI_GUILIB = [===[
@@ -68,7 +68,7 @@ local T = {
     shadow    = { 0, 0, 0, 115 },
 
     title     = "MOI",
-    title_tld = "MAHANMOI",
+    title_tld = "MAHAnMOIL",
     titlebar  = 58,
     pad       = 18,
     sec_gap   = 16,
@@ -688,7 +688,7 @@ function Section:_widget(wd, x, y, w)
         local buttonText = fitText(wd.label, mmax(20, w - 18), FONT)
         text(x + w / 2, y + 6, lerpc(T.text, T.texthi, wd._h), buttonText, FONT, "center")
         if clicked(x, y + 1, w, bh) then
-            local ok, err = pcall(wd.cb); if not ok then print("[MOIMAHANMOI] button error: " .. tostring(err)) end
+            local ok, err = pcall(wd.cb); if not ok then print("[MAHANMOI] button error: " .. tostring(err)) end
         end
 
     elseif wd.kind == "slider" then
@@ -886,7 +886,7 @@ function Section:_widget(wd, x, y, w)
         if wd.fn then
             UI._x, UI._cy, UI._w = x, y, w
             local ok, err = pcall(wd.fn, UI, x, y, w)
-            if not ok then print("[MOIMAHANMOI] custom widget error: " .. tostring(err)) end
+            if not ok then print("[MAHANMOI] custom widget error: " .. tostring(err)) end
             local used = UI._cy - y
             wd._measured = used > 0 and used or wd.h
         end
@@ -945,7 +945,7 @@ local function renderSectionAt(s, x, y, w)
     if clipTop and (y + h) <= clipTop then return h end
     local rh = h
     local ok, err = pcall(function() rh = s:render(x, y, w) or h end)
-    if not ok then print("[MOIMAHANMOI] section '" .. tostring(s.title) .. "' error: " .. tostring(err)); return h end
+    if not ok then print("[MAHANMOI] section '" .. tostring(s.title) .. "' error: " .. tostring(err)); return h end
     return rh
 end
 
@@ -1164,7 +1164,7 @@ M._watermark = {
     enabled    = false,
     parts      = { cheat = false, lua = true, user = false, nick = true, fps = true, ping = true },
     cheat_name = "AIMWARE.NET",
-    lua_name   = "MOIMAHANMOI",
+    lua_name   = "MAHANMOI",
     user       = nil,
     nick       = nil,
     ping       = nil,
@@ -1644,7 +1644,7 @@ end
 
 function M:_drawTabBar(win)
     drawLogo(win.x + 15, win.y + 15, 40, 28)
-    text(win.x + 67, win.y + 11, T.texthi, "MOIMAHANMOI", FONT_LOGO)
+    text(win.x + 67, win.y + 11, T.texthi, "MAHANMOI", FONT_LOGO)
     text(win.x + 67, win.y + 33, T.textdim, "Aimware Lua Suite", FONT_SMALL)
     local credit = fitText("Made by " .. aimwareHeaderUser(), 180, FONT_SMALL)
     text(win.x + win.w - 50, win.y + 22, T.textdim, credit, FONT_SMALL, "right")
@@ -1909,7 +1909,7 @@ function M:_frame()
         rbox(real.x, real.y, miniW, miniH, 9, T.bg, T.border)
         rfill(real.x, real.y, miniW, 2, 9, T.accent, true, true, false, false)
         drawLogo(real.x + 7, real.y + 8, 36, 26)
-        text(real.x + 53, real.y + 13, T.texthi, "MOIMAHANMOI", FONT_LOGO)
+        text(real.x + 53, real.y + 13, T.texthi, "MAHANMOI", FONT_LOGO)
         rbox(expandX, real.y + 10, 22, 22, 5, T.widget, T.border)
         text(expandX + 11, real.y + 12, T.texthi, "+", FONT_B, "center")
         return
@@ -2003,7 +2003,7 @@ function M:_frame()
     clipTop, clipBottom = win.y + T.titlebar, win.y + win.h - 2
     if tab then
         local ok, err = pcall(function() tab:render(cx, cy, cw) end)
-        if not ok then print("[MOIMAHANMOI] tab '" .. tostring(tab.name) .. "' error: " .. tostring(err)) end
+        if not ok then print("[MAHANMOI] tab '" .. tostring(tab.name) .. "' error: " .. tostring(err)) end
     end
     clipTop, clipBottom = nil, nil
 
@@ -2084,7 +2084,7 @@ function M:Build(opts)
     _getWheel = resolveWheel()
     _clock    = resolveClock()
     initFonts()
-    if not _getMouse then print("[MOIMAHANMOI] WARNING: mouse position API not found -- cursor won't track") end
+    if not _getMouse then print("[MAHANMOI] WARNING: mouse position API not found -- cursor won't track") end
 
     local menuRef
     pcall(function() menuRef = gui.Reference("MENU") end)
@@ -2199,7 +2199,7 @@ function M:Build(opts)
         end
     end
 
-    callbacks.Register("Draw", "MOIMAHANMOI_UIDraw", function()
+    callbacks.Register("Draw", "MAHANMOI_UIDraw", function()
         local open = true
         if menuRef then pcall(function() open = menuRef:IsActive() end) end
         self._open = open
@@ -2242,12 +2242,12 @@ function M:Build(opts)
         end
 
         local ok, err = pcall(function() self:_frame() end)
-        if not ok then print("[MOIMAHANMOI] frame error: " .. tostring(err)) end
+        if not ok then print("[MAHANMOI] frame error: " .. tostring(err)) end
         drawRuntimeOverlays(t)
     end)
 
     pcall(function()
-        callbacks.Register("CreateMove", "MOIMAHANMOI_UIInput", function(cmd)
+        callbacks.Register("CreateMove", "MAHANMOI_UIInput", function(cmd)
         local viewmodelCommandActive = M._viewmodelCommandActive
         if cmd and type(M._viewmodelCommandCallback) == "function"
             and (type(viewmodelCommandActive) ~= "function" or viewmodelCommandActive()) then
@@ -2259,7 +2259,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if M._viewmodelCommandError ~= message then
                     M._viewmodelCommandError = message
-                    print("[MOIMAHANMOI] viewmodel command hook error: " .. message)
+                    print("[MAHANMOI] viewmodel command hook error: " .. message)
                 end
             end
         end
@@ -2321,9 +2321,9 @@ function M:Build(opts)
     end)
 
     pcall(function()
-        callbacks.Register("Unload", "MOIMAHANMOI_UIUnload", function()
-            pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_UIDraw")
-            pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_UIInput")
+        callbacks.Register("Unload", "MAHANMOI_UIUnload", function()
+            pcall(callbacks.Unregister, "Draw", "MAHANMOI_UIDraw")
+            pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_UIInput")
         end)
     end)
 
@@ -2332,12 +2332,12 @@ end
 
 return M
 ]===]
-local __chunk, __err = loadstring(__MOI_GUILIB, "=MOIMAHANMOI_guilib.lua")
-if not __chunk then print("[MOIMAHANMOI] UI compile error: " .. tostring(__err)); return end
+local __chunk, __err = loadstring(__MOI_GUILIB, "=MAHANMOI_guilib.lua")
+if not __chunk then print("[MAHANMOI] UI compile error: " .. tostring(__err)); return end
 local __ok, M = pcall(__chunk)
-if not __ok or type(M) ~= "table" then print("[MOIMAHANMOI] UI load error: " .. tostring(M)); return end
+if not __ok or type(M) ~= "table" then print("[MAHANMOI] UI load error: " .. tostring(M)); return end
 local MOI_MULTI = rawget(_G, "MOI_MAHANMOI_STATE") or {}
-local CUSTOM_MODE_FILE = "MOIMAHANMOI_custom_enabled.txt"
+local CUSTOM_MODE_FILE = "MAHANMOI_custom_enabled.txt"
 local function loadCustomEnabled()
     local value
     pcall(function()
@@ -2405,9 +2405,225 @@ local function loadModule(name, fn)
     return true
 end
 
+-- Portable asset discovery shared by Custom skins and Custom sounds.
+-- The old ANSI WinAPI path worked on the author's PC, but silently returned
+-- an empty catalogue when a Steam library contained non-ASCII characters.
+-- Keep all paths UTF-8 in Lua and use the wide Windows APIs at the boundary.
+local MOI_ASSET_FS = {
+    available = false,
+    reason = "Allow insecure FFI is disabled",
+}
+
+do
+    local f = rawget(_G, "ffi")
+    local bitlib = rawget(_G, "bit") or rawget(_G, "bit32")
+    if type(f) == "table" and type(bitlib) == "table" then
+        pcall(function() f.cdef[[
+            typedef struct {
+                uint32_t attributes;
+                uint32_t creation_lo, creation_hi;
+                uint32_t access_lo, access_hi;
+                uint32_t write_lo, write_hi;
+                uint32_t size_hi, size_lo;
+                uint32_t reserved0, reserved1;
+                uint16_t filename[260];
+                uint16_t alternate[14];
+            } MOI_ASSET_FIND_DATAW;
+            void* GetModuleHandleA(const char*);
+            void* GetProcAddress(void*, const char*);
+        ]] end)
+
+        local ok, err = pcall(function()
+            local kernel32 = f.C.GetModuleHandleA("kernel32.dll")
+            if kernel32 == nil then error("kernel32 unavailable") end
+
+            local function proc(name, ctype)
+                local address = f.C.GetProcAddress(kernel32, name)
+                if address == nil then error(name .. " unavailable") end
+                return f.cast(ctype, address)
+            end
+
+            local getCurrentDirectoryW = proc(
+                "GetCurrentDirectoryW",
+                "uint32_t(*)(uint32_t, uint16_t*)"
+            )
+            local getModuleFileNameW = proc(
+                "GetModuleFileNameW",
+                "uint32_t(*)(void*, uint16_t*, uint32_t)"
+            )
+            local findFirstW = proc(
+                "FindFirstFileW",
+                "void*(*)(const uint16_t*, void*)"
+            )
+            local findNextW = proc(
+                "FindNextFileW",
+                "int(*)(void*, void*)"
+            )
+            local findCloseW = proc("FindClose", "int(*)(void*)")
+            local createDirectoryW = proc(
+                "CreateDirectoryW",
+                "int(*)(const uint16_t*, void*)"
+            )
+            local multiByteToWide = proc(
+                "MultiByteToWideChar",
+                "int(*)(uint32_t, uint32_t, const char*, int, uint16_t*, int)"
+            )
+            local wideToMultiByte = proc(
+                "WideCharToMultiByte",
+                "int(*)(uint32_t, uint32_t, const uint16_t*, int, char*, int, const char*, int*)"
+            )
+
+            local CP_UTF8 = 65001
+            local INVALID = f.cast("void*", f.cast("intptr_t", -1))
+            local cachedRoot
+
+            local function utf8ToWide(text)
+                text = tostring(text or "")
+                local count = multiByteToWide(CP_UTF8, 0, text, #text, nil, 0)
+                if not count or count <= 0 then return nil end
+                local buffer = f.new("uint16_t[?]", count + 1)
+                if multiByteToWide(CP_UTF8, 0, text, #text, buffer, count) <= 0 then
+                    return nil
+                end
+                buffer[count] = 0
+                return buffer
+            end
+
+            local function wideToUtf8(buffer, count)
+                if buffer == nil then return nil end
+                if not count then
+                    count = 0
+                    while count < 32767 and buffer[count] ~= 0 do count = count + 1 end
+                end
+                if count <= 0 then return "" end
+                local bytes = wideToMultiByte(CP_UTF8, 0, buffer, count, nil, 0, nil, nil)
+                if not bytes or bytes <= 0 then return nil end
+                local output = f.new("char[?]", bytes + 1)
+                if wideToMultiByte(CP_UTF8, 0, buffer, count, output, bytes, nil, nil) <= 0 then
+                    return nil
+                end
+                output[bytes] = 0
+                return f.string(output, bytes)
+            end
+
+            local function deriveCsgoRoot(path)
+                if type(path) ~= "string" or path == "" then return nil end
+                local normalized = path:gsub("/", "\\"):gsub("\\+$", "")
+                local lower = normalized:lower()
+                if lower:sub(-5) == "\\csgo" then return normalized end
+                local executableSuffix = "\\bin\\win64\\cs2.exe"
+                if lower:sub(-#executableSuffix) == executableSuffix then
+                    return normalized:sub(1, #normalized - #executableSuffix) .. "\\csgo"
+                end
+                local marker = "\\bin\\win64"
+                local position = lower:find(marker, 1, true)
+                if position then return normalized:sub(1, position - 1) .. "\\csgo" end
+                return nil
+            end
+
+            local function gameRoot()
+                if cachedRoot then return cachedRoot end
+                local buffer = f.new("uint16_t[32768]")
+                local count = getModuleFileNameW(nil, buffer, 32768)
+                if count and count > 0 and count < 32768 then
+                    cachedRoot = deriveCsgoRoot(wideToUtf8(buffer, count))
+                    if cachedRoot then return cachedRoot end
+                end
+                count = getCurrentDirectoryW(32768, buffer)
+                if count and count > 0 and count < 32768 then
+                    cachedRoot = deriveCsgoRoot(wideToUtf8(buffer, count))
+                end
+                return cachedRoot
+            end
+
+            local function hasAttribute(value, flag)
+                return bitlib.band(tonumber(value) or 0, flag) ~= 0
+            end
+
+            function MOI_ASSET_FS.resolve(relativeDirectory)
+                local root = gameRoot()
+                if not root then return nil, "CS2 game/csgo folder could not be resolved" end
+                relativeDirectory = tostring(relativeDirectory or ""):gsub("/", "\\")
+                relativeDirectory = relativeDirectory:gsub("^\\+", ""):gsub("\\+$", "")
+                if relativeDirectory == "" then return root end
+                return root .. "\\" .. relativeDirectory
+            end
+
+            function MOI_ASSET_FS.ensureDirectory(relativeDirectory)
+                local path, reason = MOI_ASSET_FS.resolve(relativeDirectory)
+                if not path then return nil, reason end
+                local wide = utf8ToWide(path)
+                if not wide then return nil, "folder path is not valid UTF-8" end
+                pcall(createDirectoryW, wide, nil)
+                return path
+            end
+
+            function MOI_ASSET_FS.scan(relativeDirectory, extension, maxDepth, maxFiles)
+                local root = gameRoot()
+                if not root then
+                    return nil, nil, nil, "CS2 game/csgo folder could not be resolved"
+                end
+
+                relativeDirectory = tostring(relativeDirectory or ""):gsub("/", "\\")
+                relativeDirectory = relativeDirectory:gsub("^\\+", ""):gsub("\\+$", "")
+                extension = tostring(extension or ""):lower()
+                maxDepth = math.max(0, tonumber(maxDepth) or 8)
+                maxFiles = math.max(1, tonumber(maxFiles) or 20000)
+
+                local base = relativeDirectory == "" and root or (root .. "\\" .. relativeDirectory)
+                local files, rootOpened, capped = {}, false, false
+
+                local function walk(directory, relative, depth)
+                    if depth > maxDepth or capped then return end
+                    local pattern = utf8ToWide(directory .. "\\*")
+                    if not pattern then return end
+                    local data = f.new("MOI_ASSET_FIND_DATAW")
+                    local handle = findFirstW(pattern, data)
+                    if handle == nil or handle == INVALID then return end
+                    if depth == 0 then rootOpened = true end
+
+                    repeat
+                        local name = wideToUtf8(data.filename)
+                        if name and name ~= "." and name ~= ".." then
+                            local childRelative = relative == "" and name or (relative .. "\\" .. name)
+                            local attributes = tonumber(data.attributes) or 0
+                            if hasAttribute(attributes, 0x10) then
+                                -- Do not follow junctions/symlinks outside the asset folder.
+                                if not hasAttribute(attributes, 0x400) then
+                                    walk(directory .. "\\" .. name, childRelative, depth + 1)
+                                end
+                            elseif extension == "" or name:lower():sub(-#extension) == extension then
+                                files[#files + 1] = childRelative
+                                if #files >= maxFiles then capped = true end
+                            end
+                        end
+                    until capped or findNextW(handle, data) == 0
+                    findCloseW(handle)
+                end
+
+                walk(base, "", 0)
+                if not rootOpened then
+                    return {}, root, base, "folder not found or not readable: " .. base
+                end
+                table.sort(files, function(a, b) return a:lower() < b:lower() end)
+                local reason = capped and ("catalogue limited to " .. tostring(maxFiles) .. " files") or nil
+                return files, root, base, reason
+            end
+
+            MOI_ASSET_FS.available = true
+            MOI_ASSET_FS.reason = nil
+        end)
+
+        if not ok then
+            MOI_ASSET_FS.available = false
+            MOI_ASSET_FS.reason = tostring(err)
+        end
+    end
+end
+
 loadModule("MANUAL AA", function()
 -- Native Aimware controls stay under Ragebot > Anti-Aim. Runtime drawing and
--- callbacks are owned by MOIMAHANMOI so reloading cannot duplicate them.
+-- callbacks are owned by MAHANMOI so reloading cannot duplicate them.
 local rbotAA = gui.Reference("Ragebot", "Anti-Aim")
 local yawOffsetRef = gui.Reference("Ragebot", "Anti-Aim", "Yaw Offset")
 local pitchRef = gui.Reference("Ragebot", "Anti-Aim", "Pitch Angle")
@@ -2607,7 +2823,7 @@ M._manualAADrawActive = function() return true end
 M._manualAACommandCallback = manualMove
 M._manualAACommandActive = function() return enabled:GetValue() == true end
 
-callbacks.Register("Unload", "MOIMAHANMOI_ManualAAUnload", function()
+callbacks.Register("Unload", "MAHANMOI_ManualAAUnload", function()
     releaseJumpBug()
     restoreOrientation()
     if M._manualAADrawCallback == manualDraw then M._manualAADrawCallback = nil end
@@ -2899,7 +3115,7 @@ else
     end)
 
     pcall(function()
-        callbacks.Register("FireGameEvent", "MOIMAHANMOI_SkinsEvents", function(event)
+        callbacks.Register("FireGameEvent", "MAHANMOI_SkinsEvents", function(event)
 
             local name
             pcall(function() name = event:GetName() end)
@@ -2936,7 +3152,7 @@ else
         if SetModel.path then SetModel.phase = "custom characters disabled" end
     end
 
-    callbacks.Register("CreateMove", "MOIMAHANMOI_SkinsSpawnWatch", function()
+    callbacks.Register("CreateMove", "MAHANMOI_SkinsSpawnWatch", function()
         tick = tick + 1
         if tick % 8 == 0 then
             local _, alive, pawnKey = pawnState()
@@ -2987,9 +3203,9 @@ else
     end)
 
     pcall(function()
-        callbacks.Register("Unload", "MOIMAHANMOI_SkinsUnload", function()
-            pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_SkinsEvents")
-            pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_SkinsSpawnWatch")
+        callbacks.Register("Unload", "MAHANMOI_SkinsUnload", function()
+            pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_SkinsEvents")
+            pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_SkinsSpawnWatch")
         end)
     end)
 end
@@ -3156,20 +3372,53 @@ local function listCharacterModels(directory, root, output)
 end
 
 local root
+local characterScanFolder
+local characterScanReason
 if type(ffi) == "table" and type(bit_) == "table" then
-    local rootOk, resolvedRoot = pcall(charactersGameRoot)
-    if rootOk then root = resolvedRoot end
-    if root then
-        local ok, err = pcall(listCharacterModels, root .. "\\characters", root, VALIDATED_MODELS)
-        if not ok then
-            VALIDATED_MODELS = {}
-            print("[MOISkins] characters listing failed: " .. tostring(err))
+    if MOI_ASSET_FS.available then
+        local ok, files, resolvedRoot, folder, reason = pcall(
+            MOI_ASSET_FS.scan,
+            "characters",
+            ".vmdl_c",
+            16,
+            20000
+        )
+        if ok and type(files) == "table" then
+            root, characterScanFolder, characterScanReason = resolvedRoot, folder, reason
+            for _, relative in ipairs(files) do
+                local normalized = tostring(relative):gsub("\\", "/")
+                local filename = normalized:match("([^/]+)$") or normalized
+                local sourcePath = "characters/" .. normalized:sub(1, #normalized - 2)
+                if not BLOCKED_MODEL_PATHS[sourcePath:lower()] then
+                    VALIDATED_MODELS[#VALIDATED_MODELS + 1] = {
+                        name = filename:sub(1, #filename - 7),
+                        path = sourcePath,
+                    }
+                end
+            end
+        else
+            characterScanReason = ok and "portable scanner returned no catalogue" or tostring(files)
         end
     else
-        print("[MOISkins] game/csgo/characters could not be resolved on this PC")
+        characterScanReason = MOI_ASSET_FS.reason
+        local rootOk, resolvedRoot = pcall(charactersGameRoot)
+        if rootOk then root = resolvedRoot end
+        if root then
+            characterScanFolder = root .. "\\characters"
+            local ok, err = pcall(listCharacterModels, characterScanFolder, root, VALIDATED_MODELS)
+            if not ok then
+                VALIDATED_MODELS = {}
+                characterScanReason = tostring(err)
+            end
+        end
     end
 else
-    print("[MOISkins] FFI unavailable: enable 'Allow insecure FFI' and rerun")
+    characterScanReason = "Allow insecure FFI is disabled"
+end
+
+if #VALIDATED_MODELS == 0 then
+    print("[MOISkins] catalogue empty: " .. tostring(characterScanReason or "no compiled .vmdl_c files found"))
+    print("[MOISkins] expected folder: " .. tostring(characterScanFolder or "game\\csgo\\characters"))
 end
 
 table.sort(VALIDATED_MODELS, function(a, b)
@@ -3323,10 +3572,19 @@ safetySection:Button("Portable status / requirements", function()
     if setModelError then
         M:Notify("SetModel unavailable; check console", "error")
     elseif #VALIDATED_MODELS == 0 then
-        M:Notify("no models: copy the complete csgo/characters folder", "error")
+        print("[MOISkins] scan reason: " .. tostring(characterScanReason or "no compiled files"))
+        print("[MOISkins] scan folder: " .. tostring(characterScanFolder or "game\\csgo\\characters"))
+        if tostring(characterScanReason):find("FFI", 1, true) then
+            M:Notify("enable Allow insecure FFI, then rerun", "error")
+        elseif tostring(characterScanReason):find("folder", 1, true) then
+            M:Notify("game/csgo/characters was not found", "error")
+        else
+            M:Notify("no compiled .vmdl_c models found", "error")
+        end
     elseif not SetModel.persistence then
         M:Notify(tostring(#VALIDATED_MODELS) .. " models | enable file permission to save", "info")
     else
+        print("[MOISkins] scan folder: " .. tostring(characterScanFolder or "game\\csgo\\characters"))
         M:Notify(tostring(#VALIDATED_MODELS) .. " models | portable setup ready", "success")
     end
 end)
@@ -3338,7 +3596,7 @@ local M = M
 -- Lightweight XYZ-only viewmodel positioning for this CS2 build.
 
 local ffi = rawget(_G, "ffi")
-local CONFIG_FILE = "MOIMAHANMOI_viewmodel.txt"
+local CONFIG_FILE = "MAHANMOI_viewmodel.txt"
 local DEFAULT = { enabled = false, knifeLeft = false, x = 1.0, y = 1.0, z = -1.0 }
 local original = { x = DEFAULT.x, y = DEFAULT.y, z = DEFAULT.z, preset = 1 }
 local status = "ready"
@@ -3773,7 +4031,7 @@ local function knifeHandTick()
 end
 
 -- Aimware may discard additional CreateMove callbacks. Route this through the
--- MAHANMOI's proven main command hook, shared with Movement, and emit a hand
+-- MAHAnMOIl's proven main command hook, shared with Movement, and emit a hand
 -- command only on spawn or weapon transitions.
 M._viewmodelCommandActive = function()
     -- Keep one final command tick available after disabling so an owned
@@ -3785,7 +4043,7 @@ M._viewmodelCommandCallback = function()
     if not ok then
         knifeHandWasAlive = false
         knifeHandStatus = "error"
-        print("[MOIMAHANMOI] knife-hand error: " .. tostring(err))
+        print("[MAHANMOI] knife-hand error: " .. tostring(err))
     end
 end
 
@@ -3810,14 +4068,14 @@ M:OnFrame(function()
 end)
 
 pcall(function()
-    callbacks.Register("Unload", "MOIMAHANMOI_ViewmodelUnload", function()
+    callbacks.Register("Unload", "MAHANMOI_ViewmodelUnload", function()
         pcall(saveConfig)
         if knifeLeftOwned then pcall(commandHand, false) end
         M._viewmodelCommandCallback = nil
         M._viewmodelCommandActive = nil
         if enabled:Get() then pcall(restore) end
         pcall(EXT.uninstall)
-        pcall(callbacks.Unregister, "Unload", "MOIMAHANMOI_ViewmodelUnload")
+        pcall(callbacks.Unregister, "Unload", "MAHANMOI_ViewmodelUnload")
     end)
 end)
 
@@ -4253,14 +4511,14 @@ end)
 syncRemoval()
 
 pcall(function()
-    callbacks.Register("Unload", "MOIMAHANMOI_ScopeUnload", function()
+    callbacks.Register("Unload", "MAHANMOI_ScopeUnload", function()
         pcall(saveConfig)
         pcall(restoreRemoval)
         pcall(draw.SetTexture, nil)
         scopeTexture = nil
         M._scopeDrawCallback = nil
         M._scopeDrawActive = nil
-        pcall(callbacks.Unregister, "Unload", "MOIMAHANMOI_ScopeUnload")
+        pcall(callbacks.Unregister, "Unload", "MAHANMOI_ScopeUnload")
     end)
 end)
 
@@ -5969,7 +6227,7 @@ end]])
         'local CFG_FILE = "MOIweapons_config.txt"')
     source, okCallback = replaceLiteral(source,
         'callbacks.Register("CreateMove", function()',
-        'callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()')
+        'callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()')
     local runtimeLiteral = string.format(
         "{ dwEntityList=%s, dwLocalPlayerController=%s, dwNetworkGameClient=%s, dwNetworkGameClient_signOnState=%s }",
         tostring(runtimeOffsets.dwEntityList), tostring(runtimeOffsets.dwLocalPlayerController),
@@ -6762,9 +7020,9 @@ end]])
     -- Aimware may invoke CreateMove well over 100 times per second. Detect
     -- inventory/pawn changes at 20 Hz, which is still effectively immediate to
     -- the player, instead of traversing Source 2 entities on every command.
-    source, okEngineThrottle = replaceLiteral(source, [[callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
+    source, okEngineThrottle = replaceLiteral(source, [[callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
     local okd, d = pcall(active_weapon_def); g_activeDef = okd and d or nil]], [[local MOINextEngineTick = 0
-callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
+callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
     local tickNow = now_s()
     if tickNow < MOINextEngineTick then return end
     MOINextEngineTick = tickNow + 0.05
@@ -6865,11 +7123,11 @@ local function run()
     end]])
 
     source, okLocalSessionClock = replaceLiteral(source, [[local MOINextEngineTick = 0
-callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
+callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
     local tickNow = now_s()
     if tickNow < MOINextEngineTick then return end]], [[local MOINextEngineTick = 0
 local MOILastEngineClock = 0
-callbacks.Register("CreateMove", "MOIMAHANMOI_WeaponsEngine", function()
+callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
     local tickNow = now_s()
     if tickNow + 0.25 < MOILastEngineClock then
         MOINextEngineTick = 0
@@ -6887,7 +7145,7 @@ local MOILastEngineClock = 0]], [[pcall(function()
         client.AllowListener("cs_game_disconnected")
         client.AllowListener("round_start")
     end
-    callbacks.Register("FireGameEvent", "MOIMAHANMOI_WeaponsSessionEvents", function(event)
+    callbacks.Register("FireGameEvent", "MAHANMOI_WeaponsSessionEvents", function(event)
         local name
         pcall(function() name = event:GetName() end)
         if name == "server_spawn" or name == "game_newmap" or name == "cs_game_disconnected" or name == "round_start" then
@@ -7012,8 +7270,8 @@ if C then
         if type(C.offsets[key]) ~= "number" then missing[#missing + 1] = key end
     end
     if #missing > 0 then
-        pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_WeaponsEngine")
-        pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_WeaponsSessionEvents")
+        pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_WeaponsEngine")
+        pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_WeaponsSessionEvents")
         engineError = "current offsets unavailable: " .. table.concat(missing, ", ")
         C = nil
     end
@@ -7228,7 +7486,7 @@ autoConfigSection:Button("Show automatic save status", function()
 end)autoConfigSection:Button("Check for updates", function()
     local updater = rawget(_G, "MOI_MAHANMOI_UPDATER")
     if type(updater) ~= "table" or type(updater.check) ~= "function" then
-        M:Notify("updates are available when MOIMAHANMOI is launched with loader.lua", "info")
+        M:Notify("updates are available when MAHANMOI is launched with loader.lua", "info")
         return
     end
     local callOk, success, message, state = pcall(updater.check)
@@ -7465,9 +7723,9 @@ M:OnFrame(function()
 end)
 
 pcall(function()
-    callbacks.Register("Unload", "MOIMAHANMOI_WeaponsUnload", function()
-        pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_WeaponsEngine")
-        pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_WeaponsSessionEvents")
+    callbacks.Register("Unload", "MAHANMOI_WeaponsUnload", function()
+        pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_WeaponsEngine")
+        pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_WeaponsSessionEvents")
 
     end)
 end)
@@ -7479,7 +7737,7 @@ end)
 loadModule("MOVEMENT", function()
 local M = M
 
--- MOIMAHANMOI movement module. Movement is attached to the MAHANMOI's
+-- MAHANMOI movement module. Movement is attached to the MAHAnMOIl's
 -- already-live Draw/CreateMove callbacks so Aimware cannot discard it as a
 -- second callback for the same event.
 local bitlib = rawget(_G, "bit")
@@ -8144,11 +8402,11 @@ statusSection:Button("Reset movement state", function()
 end)
 
 pcall(function()
-    callbacks.Unregister("PreMove", "MOIMAHANMOI_MovementPreMove")
-    callbacks.Unregister("CreateMove", "MOIMAHANMOI_MovementCreateMove")
-    callbacks.Unregister("Draw", "MOIMAHANMOI_MovementDraw")
-    callbacks.Unregister("FireGameEvent", "MOIMAHANMOI_MovementEvents")
-    callbacks.Unregister("Unload", "MOIMAHANMOI_MovementUnload")
+    callbacks.Unregister("PreMove", "MAHANMOI_MovementPreMove")
+    callbacks.Unregister("CreateMove", "MAHANMOI_MovementCreateMove")
+    callbacks.Unregister("Draw", "MAHANMOI_MovementDraw")
+    callbacks.Unregister("FireGameEvent", "MAHANMOI_MovementEvents")
+    callbacks.Unregister("Unload", "MAHANMOI_MovementUnload")
 end)
 
 local function onMovementCommand(cmd)
@@ -8211,7 +8469,7 @@ pcall(function()
         client.AllowListener("game_newmap")
         client.AllowListener("cs_game_disconnected")
     end
-    callbacks.Register("FireGameEvent", "MOIMAHANMOI_MovementEvents", function(event)
+    callbacks.Register("FireGameEvent", "MAHANMOI_MovementEvents", function(event)
         if type(M._movementCommandActive) == "function" and not M._movementCommandActive() then return end
         local name
         pcall(function() name = event:GetName() end)
@@ -8227,16 +8485,16 @@ pcall(function()
     end)
 end)
 
-callbacks.Register("Unload", "MOIMAHANMOI_MovementUnload", function()
+callbacks.Register("Unload", "MAHANMOI_MovementUnload", function()
     saveSettings()
     M._movementCommandCallback = nil
     M._movementCommandActive = nil
     M._movementDrawCallback = nil
     M._movementDrawActive = nil
-    pcall(callbacks.Unregister, "PreMove", "MOIMAHANMOI_MovementPreMove")
-    pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_MovementCreateMove")
-    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_MovementDraw")
-    pcall(callbacks.Unregister, "FireGameEvent", "MOIMAHANMOI_MovementEvents")
+    pcall(callbacks.Unregister, "PreMove", "MAHANMOI_MovementPreMove")
+    pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_MovementCreateMove")
+    pcall(callbacks.Unregister, "Draw", "MAHANMOI_MovementDraw")
+    pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_MovementEvents")
 end)
 
 end)
@@ -8251,6 +8509,7 @@ local CONFIG_FILE = "MOIcustomsounds_config.txt"
 local f = rawget(_G, "ffi")
 local config = {}
 local soundDir, soundNames, soundPaths = nil, {}, {}
+local soundScanReason
 local hitComboWidget, killComboWidget
 local nextConfigPoll, nextListenerRefresh, observedConfig = 0, 0, nil
 
@@ -8342,6 +8601,11 @@ local function deriveCsgoRoot(path)
 end
 
 local function resolveSoundDirectory()
+    if MOI_ASSET_FS.available then
+        local path, reason = MOI_ASSET_FS.resolve("sounds")
+        soundScanReason = reason
+        return path
+    end
     if not getCurrentDirectoryA or not getModuleFileNameA or type(f) ~= "table" then return nil end
     local buffer = f.new("char[1024]")
     local count = getCurrentDirectoryA(1024, buffer)
@@ -8358,6 +8622,11 @@ local function resolveSoundDirectory()
 end
 
 local function ensureSoundDirectory()
+    if MOI_ASSET_FS.available then
+        local path, reason = MOI_ASSET_FS.ensureDirectory("sounds")
+        soundDir, soundScanReason = path, reason
+        return soundDir ~= nil
+    end
     if not soundDir then soundDir = resolveSoundDirectory() end
     if soundDir and createDirectoryA then pcall(createDirectoryA, soundDir, nil) end
     return soundDir ~= nil
@@ -8403,13 +8672,46 @@ end
 
 local function scanSounds()
     local names, paths = {}, {}
+    if MOI_ASSET_FS.available then
+        local ok, files, _, folder, reason = pcall(
+            MOI_ASSET_FS.scan,
+            "sounds",
+            ".vsnd_c",
+            12,
+            10000
+        )
+        if not ok then
+            soundScanReason = tostring(files)
+            print("[MOISounds] scan failed: " .. soundScanReason)
+            return { "[ custom sounds unavailable; check console ]" }, paths
+        end
+        soundDir, soundScanReason = folder or soundDir, reason
+        for _, relative in ipairs(files or {}) do
+            relative = tostring(relative)
+            if relative:lower():sub(-7) == ".vsnd_c" and safeRelativeSoundPath(relative) then
+                paths[#paths + 1] = relative:sub(1, #relative - 7)
+            end
+        end
+        table.sort(paths, function(a, b) return a:lower() < b:lower() end)
+        for i = 1, #paths do names[i] = paths[i] end
+        if #names == 0 then
+            soundScanReason = soundScanReason or "no compiled .vsnd_c files found"
+            names[1] = "[ put compiled .vsnd_c in csgo\\sounds ]"
+        end
+        return names, paths
+    end
+
+    soundScanReason = MOI_ASSET_FS.reason
     if not ensureSoundDirectory() or not findFirstA or not findNextA or not findClose or type(f) ~= "table" then
         return { "[ csgo\\sounds unavailable ]" }, paths
     end
     scanSoundDirectory(soundDir, "", paths, 0)
     table.sort(paths, function(a, b) return a:lower() < b:lower() end)
     for i = 1, #paths do names[i] = paths[i] end
-    if #names == 0 then names[1] = "[ put .vsnd_c in csgo\\sounds ]" end
+    if #names == 0 then
+        soundScanReason = soundScanReason or "no compiled .vsnd_c files found"
+        names[1] = "[ put compiled .vsnd_c in csgo\\sounds ]"
+    end
     return names, paths
 end
 
@@ -8490,6 +8792,10 @@ local function refreshSounds()
     observedConfig = currentSnapshot()
     saveConfig()
     print(string.format("[MOISounds] refreshed: %d .vsnd_c files in %s", #soundPaths, tostring(soundDir or "unresolved")))
+    if #soundPaths == 0 then
+        print("[MOISounds] scan reason: " .. tostring(soundScanReason or "no compiled files"))
+        print("[MOISounds] expected folder: " .. tostring(soundDir or "game\\csgo\\sounds"))
+    end
 end
 
 librarySection:Button("Preview hit sound", function()
@@ -8508,7 +8814,19 @@ librarySection:Button("Open sounds folder", function()
 end)
 librarySection:Custom(44, function(ui)
     ui.label("Detected: " .. tostring(#soundPaths) .. " compiled sounds", ui.T.text)
-    ui.label("Folder: csgo\\sounds (.vsnd_c)", ui.T.textdim)
+    if #soundPaths == 0 then
+        local shortReason = tostring(soundScanReason or "no .vsnd_c files")
+        if shortReason:find("FFI", 1, true) then
+            shortReason = "Enable Allow insecure FFI and rerun"
+        elseif shortReason:find("folder", 1, true) then
+            shortReason = "Folder not found: game\\csgo\\sounds"
+        else
+            shortReason = "Expected compiled .vsnd_c files"
+        end
+        ui.label(shortReason, ui.T.textdim)
+    else
+        ui.label("Folder: game\\csgo\\sounds (.vsnd_c)", ui.T.textdim)
+    end
 end)
 
 local function entityIndex(entity)
@@ -9792,9 +10110,9 @@ M._killTimerDrawCallback = runtime
 M._killTimerDrawActive = function()
     return enabled:Get() == true or alpha > 0.01
 end
-callbacks.Register("Unload", "MOIMAHANMOI_KillTimerUnload", function()
+callbacks.Register("Unload", "MAHANMOI_KillTimerUnload", function()
     armed = false
-    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_KillTimerDraw")
+    pcall(callbacks.Unregister, "Draw", "MAHANMOI_KillTimerDraw")
     if M._killTimerDrawCallback == runtime then M._killTimerDrawCallback = nil end
     M._killTimerDrawActive = nil
     M._killTimerSignalActive = nil
@@ -9868,7 +10186,7 @@ local tab = M:Tab("IDENTITY")
 tab:Row()
 local nameSection = tab:Section("Custom name")
 local nameEnabled = nameSection:Checkbox("Enable custom name", cfgBool("name_enabled", false))
-local nameText = nameSection:Input("Name text", config.name_text or "MOIMAHANMOI", "custom player name...")
+local nameText = nameSection:Input("Name text", config.name_text or "MAHANMOI", "custom player name...")
 local nameAnimated = nameSection:Checkbox("Animate custom name", cfgBool("name_animated", false))
 local nameSpeed = nameSection:Slider("Name animation speed", cfgNumber("name_speed", 0.60, 0.35, 2.0), 0.35, 2.0, 0.05, "%.2fs")
 
@@ -10234,7 +10552,7 @@ writeRuntime("module loaded")
 end)
 
 loadModule("VOTES", function()
--- MOIMAHANMOI vote revealer.
+-- MAHANMOI vote revealer.
 -- Uses documented game events and ordinary entity APIs. The only FFI call is
 -- the current local HUD-chat printer; Steam avatar vtables remain excluded.
 -- The service is always enabled and intentionally has no tab. Event/session
@@ -11011,13 +11329,13 @@ local function voteLogicTick(t)
     if endAt > 0 and t >= endAt then clearVote("ready"); return end
 end
 
-pcall(function() callbacks.Unregister("Draw", "MOIMAHANMOI_VoteDraw") end)
-pcall(function() callbacks.Unregister("CreateMove", "MOIMAHANMOI_VoteLogic") end)
-pcall(function() callbacks.Unregister("FireGameEvent", "MOIMAHANMOI_VoteEvents") end)
+pcall(function() callbacks.Unregister("Draw", "MAHANMOI_VoteDraw") end)
+pcall(function() callbacks.Unregister("CreateMove", "MAHANMOI_VoteLogic") end)
+pcall(function() callbacks.Unregister("FireGameEvent", "MAHANMOI_VoteEvents") end)
 local runtimeGeneration = (tonumber(rawget(_G, "MOI_VOTE_RUNTIME_GENERATION")) or 0) + 1
 rawset(_G, "MOI_VOTE_RUNTIME_GENERATION", runtimeGeneration)
 local logicBusy = false
-callbacks.Register("CreateMove", "MOIMAHANMOI_VoteLogic", function()
+callbacks.Register("CreateMove", "MAHANMOI_VoteLogic", function()
     if rawget(_G, "MOI_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration or logicBusy then return end
     -- Vote/session work runs at 20 Hz.
     local t = clock()
@@ -11036,7 +11354,7 @@ writeRuntime("module loaded", { session = lastSessionKey, chat = localChatStatus
 callbacks.Register("Unload", function()
     if rawget(_G, "MOI_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration then return end
     rawset(_G, "MOI_VOTE_RUNTIME_GENERATION", runtimeGeneration + 1)
-    pcall(callbacks.Unregister, "CreateMove", "MOIMAHANMOI_VoteLogic")
+    pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_VoteLogic")
     logicBusy = false
 end)
 
@@ -11256,6 +11574,16 @@ local nextProbe, probeAttempts = 0, 0
 local PROBE_MAX_ATTEMPTS = 12
 local PROBE_RETRY_SECONDS = 6.0
 
+local function inLiveServer()
+    local server = ""
+    pcall(function()
+        if engine and type(engine.GetServerIP) == "function" then
+            server = tostring(engine.GetServerIP() or "")
+        end
+    end)
+    return server ~= "" and not server:lower():find("loopback", 1, true)
+end
+
 local selectedCodes, bestSelectedCode, selectionSignature, restoreSelectedCodes
 
 selectedCodes = function()
@@ -11298,11 +11626,16 @@ restoreSelectedCodes = function(codes)
     regionCombo:Set(selected)
 end
 
--- Steam publishes this interface specifically for estimating relay latency.
--- It is a read-only V4 call: no signatures, RVA offsets, memory patches, or
--- per-frame native calls are used here.  A failed probe simply leaves the
--- normal official list intact.
-local relayProbe = { tried = false, ready = false, detail = "Relay probe pending" }
+-- Do not call SteamNetworkingUtils through LuaJIT FFI here.  Even though the
+-- public V4 layout is documented, the interface owned by CS2 can be replaced
+-- while a connection is being created.  A stale cdata/vtable call then escapes
+-- Lua's pcall and crashes the process.  Region forcing itself only needs the
+-- regular CS2 console command below, so keep the native probe disabled.
+local relayProbe = {
+    tried = true,
+    ready = false,
+    detail = "Native relay ping probe disabled for stability",
+}
 
 local function decodePop(id)
     local text = ""
@@ -11314,96 +11647,12 @@ local function decodePop(id)
 end
 
 local function openRelayProbe()
-    if relayProbe.tried then return relayProbe.ready end
-    relayProbe.tried = true
-    if type(ffi) ~= "table" then
-        relayProbe.detail = "Aimware FFI is unavailable"
-        return false
-    end
-
-    local ok, reason = pcall(function()
-        local module = ffi.C.GetModuleHandleA("steamnetworkingsockets.dll")
-        if module == nil then error("steamnetworkingsockets.dll is not loaded") end
-        local accessor = ffi.C.GetProcAddress(module, "SteamNetworkingUtils_LibV4")
-        if accessor == nil then error("SteamNetworkingUtils V4 is unavailable") end
-
-        local utils = ffi.cast("void*(*)(void)", accessor)()
-        if utils == nil then error("SteamNetworkingUtils returned no interface") end
-        local vtable = ffi.cast("void***", utils)[0]
-        if vtable == nil then error("SteamNetworkingUtils returned no vtable") end
-
-        -- ISteamNetworkingUtils V4 public methods: CheckPingDataUpToDate=7,
-        -- GetPingToDataCenter=8, GetPOPCount=10 and GetPOPList=11.
-        relayProbe.utils = utils
-        relayProbe.checkFresh = ffi.cast("bool(*)(void*, float)", vtable[7])
-        relayProbe.getPing = ffi.cast("int(*)(void*, uint32_t, uint32_t*)", vtable[8])
-        relayProbe.getDirectPing = ffi.cast("int(*)(void*, uint32_t)", vtable[9])
-        relayProbe.getCount = ffi.cast("int(*)(void*)", vtable[10])
-        relayProbe.getList = ffi.cast("int(*)(void*, uint32_t*, int)", vtable[11])
-    end)
-    relayProbe.ready = ok and relayProbe.utils ~= nil and relayProbe.getPing ~= nil
-        and relayProbe.getDirectPing ~= nil and relayProbe.getCount ~= nil and relayProbe.getList ~= nil
-    relayProbe.detail = relayProbe.ready and "Steam relay latency API ready" or ("Relay API unavailable: " .. tostring(reason))
-    return relayProbe.ready
+    return false
 end
 
 local function refreshRelayPings(keepCodes)
-    if not openRelayProbe() then return 0 end
-    -- This runs only after a user refresh or during the bounded startup pass.
-    -- Asking for fresh data here starts Steam's measurement if it has not
-    -- already started; it does not patch or alter matchmaking state.
-    pcall(function() relayProbe.checkFresh(relayProbe.utils, 0.0) end)
-
-    local okCount, count = pcall(function() return tonumber(relayProbe.getCount(relayProbe.utils)) or 0 end)
-    if not okCount or count <= 0 then
-        relayProbe.detail = "Steam relay list is still initializing"
-        return 0
-    end
-    count = math.min(count, 256)
-    local ids = ffi.new("uint32_t[?]", count)
-    local okList, filled = pcall(function() return tonumber(relayProbe.getList(relayProbe.utils, ids, count)) or 0 end)
-    if not okList or filled <= 0 then
-        relayProbe.detail = "Steam returned no relay list yet"
-        return 0
-    end
-
-    local measured, directCount, relayedCount = {}, 0, 0
-    for i = 0, math.min(filled, count) - 1 do
-        local id, code = tonumber(ids[i]), decodePop(ids[i])
-        if code ~= "" then
-            local ping
-            local okDirect, direct = pcall(function() return tonumber(relayProbe.getDirectPing(relayProbe.utils, id)) end)
-            if okDirect and type(direct) == "number" and direct >= 0 and direct <= 2000 then
-                ping, directCount = direct, directCount + 1
-            else
-                local via = ffi.new("uint32_t[1]")
-                local okPing, relayed = pcall(function() return tonumber(relayProbe.getPing(relayProbe.utils, id, via)) end)
-                if okPing and type(relayed) == "number" and relayed >= 0 and relayed <= 2000 then
-                    ping, relayedCount = relayed, relayedCount + 1
-                end
-            end
-            if ping then
-                measured[code] = math.floor(ping + 0.5)
-            end
-        end
-    end
-    if next(measured) == nil then
-        relayProbe.detail = "Steam is measuring relay latency (" .. tostring(count) .. " relays found, no samples yet)"
-        return 0
-    end
-
-    local measuredCount = 0
-    for _ in pairs(measured) do measuredCount = measuredCount + 1 end
-    regionPings = measured
-    local keep = keepCodes or selectedCodes()
-    replaceRegions(regionCatalog, "")
-    regionWidget.options = regionNames
-    regionWidget.optionColors = regionColors
-    regionWidget.optionSuffixes = regionSuffixes
-    restoreSelectedCodes(keep)
-    relayProbe.detail = "Measured " .. tostring(measuredCount) .. " Steam relays (direct "
-        .. tostring(directCount) .. ", relayed " .. tostring(relayedCount) .. ")"
-    return measuredCount
+    relayProbe.detail = "Native relay ping probe disabled for stability"
+    return 0
 end
 
 local function settingsSignature()
@@ -11453,6 +11702,11 @@ end
 local function applySelection(showNotice)
     local code, selectedCount = bestSelectedCode()
     regionForceEnabled = code ~= ""
+    if inLiveServer() then
+        statusText = "Relay change queued until the main menu"
+        if showNotice then M:Notify(statusText, "info") end
+        return false
+    end
     local ping = math.max(25, math.min(350, math.floor(tonumber(maxPing:Get()) or 80)))
     local pingOK = pcall(function() client.SetConVar("mm_dedicated_search_maxping", ping, true) end)
     local relayOK
@@ -11515,9 +11769,7 @@ local function refreshOfficialRegions(showNotice)
         regionWidget.optionColors = regionColors
         regionWidget.optionSuffixes = regionSuffixes
         restoreSelectedCodes(keep)
-        -- Steam takes a few seconds to create fresh ping measurements.  Retry
-        -- only a handful of times, never on every frame.
-        nextProbe, probeAttempts = (globals.RealTime() or 0) + 1.0, 0
+        nextProbe, probeAttempts = 0, 0
     end
 
     if measured > 0 and nearestCode ~= "" then
@@ -11531,7 +11783,7 @@ local function refreshOfficialRegions(showNotice)
     return loadedOfficial or measured > 0
 end
 
-actionSection:Button("Reload relay pings", function()
+actionSection:Button("Reload relay list", function()
     refreshOfficialRegions(true)
     saveSettings()
 end)
@@ -11555,59 +11807,38 @@ statusSection:Custom(62, function(ui)
     ui.label(total and ("Samples: " .. total .. " (direct " .. direct .. " / relay " .. relayed .. ")") or relayProbe.detail, ui.T.textdim)
 end)
 
-pcall(function() callbacks.Unregister("Draw", "MOIMAHANMOI_RegionDraw") end)
-pcall(function() callbacks.Unregister("Unload", "MOIMAHANMOI_RegionUnload") end)
-callbacks.Register("Draw", "MOIMAHANMOI_RegionDraw", function()
+pcall(function() callbacks.Unregister("Draw", "MAHANMOI_RegionDraw") end)
+pcall(function() callbacks.Unregister("Unload", "MAHANMOI_RegionUnload") end)
+callbacks.Register("Draw", "MAHANMOI_RegionDraw", function()
     local t = 0
     pcall(function() t = globals.RealTime() end)
     if t < nextPoll then return end
     nextPoll = t + 0.25
     local signature = settingsSignature()
     if signature ~= lastSavedSignature then saveSettings() end
-    if regionForceEnabled then
+    if inLiveServer() then
+        return
+    elseif regionForceEnabled then
         if signature ~= lastAppliedSignature then applySelection(false) end
     elseif applied then
         restoreAutomatic(false)
     end
 
-    -- One bounded initialization pass obtains the local Steam relay pings
-    -- without leaving an expensive polling loop running during a match.
-    if nextProbe > 0 and t >= nextProbe and probeAttempts < PROBE_MAX_ATTEMPTS then
-        probeAttempts = probeAttempts + 1
-        local keep = selectedCodes()
-        local measured = refreshRelayPings(keep)
-        if measured > 0 then
-            nextProbe = 0
-            statusText = "Nearest: " .. nearestName .. " (" .. tostring(nearestPing) .. " ms)"
-        else
-            nextProbe = t + 2.0
-        end
-    elseif nextProbe > 0 and probeAttempts >= PROBE_MAX_ATTEMPTS then
-        -- The relay subsystem may only become ready after CS2 has completed
-        -- its own connection work.  Keep trying at a very low frequency so
-        -- the user never needs to press Refresh, while avoiding render-rate
-        -- polling or any meaningful FPS cost.
-        nextProbe = t + PROBE_RETRY_SECONDS
-        probeAttempts = 0
-        relayProbe.detail = "Waiting for Steam relay samples; retrying automatically"
-    end
 end)
 
--- Begin one low-frequency local probe on load.  The static catalogue remains
--- usable while Steam finishes its asynchronous latency measurement.
-nextProbe = (globals.RealTime() or 0) + 0.5
+nextProbe = 0
 
-callbacks.Register("Unload", "MOIMAHANMOI_RegionUnload", function()
+callbacks.Register("Unload", "MAHANMOI_RegionUnload", function()
     saveSettings()
     if applied then restoreAutomatic(false) end
-    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_RegionDraw")
+    pcall(callbacks.Unregister, "Draw", "MAHANMOI_RegionDraw")
 end)
 
 end)
 
 loadModule("WHITELIST", function()
 -- Session whitelist with the original immunity behavior, presented inside the
--- MAHANMOI instead of opening a second Aimware window.
+-- MAHAnMOIl instead of opening a second Aimware window.
 local tab = M:Tab("WHITELIST")
 tab:Row()
 local playersSection = tab:Section("Enemy players")
@@ -11967,7 +12198,7 @@ statusSection:Custom(72, function(ui)
     ui.label(enforcementStatus, ui.T.textdim)
 end)
 
--- Uses the main MAHANMOI Draw dispatcher, just like Manual AA.  It reads the
+-- Uses the main MAHAnMOIl Draw dispatcher, just like Manual AA.  It reads the
 -- already validated rows and never performs an entity scan of its own.
 local function drawWhitelistHud()
     if whitelistEnabled:Get() ~= true then return end
@@ -12075,7 +12306,7 @@ end
 M._whitelistDrawCallback = drawWhitelistHud
 M._whitelistDrawActive = function() return whitelistEnabled:Get() == true end
 
-callbacks.Register("DrawESP", "MOIMAHANMOI_WhitelistESP", function(esp)
+callbacks.Register("DrawESP", "MAHANMOI_WhitelistESP", function(esp)
     if whitelistEnabled:Get() ~= true or not esp then return end
     local entity = safeCall(function() return esp:GetEntity() end)
     local pawn, team = localPawnAndTeam()
@@ -12092,11 +12323,11 @@ callbacks.Register("DrawESP", "MOIMAHANMOI_WhitelistESP", function(esp)
     pcall(function() esp:AddTextTop(protected and "WHITELISTED" or "TARGET") end)
 end)
 
-callbacks.Register("Unload", "MOIMAHANMOI_WhitelistUnload", function()
+callbacks.Register("Unload", "MAHANMOI_WhitelistUnload", function()
     cleanupImmortalStates()
-    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_WhitelistRefresh")
-    pcall(callbacks.Unregister, "Draw", "MOIMAHANMOI_WhitelistPanel")
-    pcall(callbacks.Unregister, "DrawESP", "MOIMAHANMOI_WhitelistESP")
+    pcall(callbacks.Unregister, "Draw", "MAHANMOI_WhitelistRefresh")
+    pcall(callbacks.Unregister, "Draw", "MAHANMOI_WhitelistPanel")
+    pcall(callbacks.Unregister, "DrawESP", "MAHANMOI_WhitelistESP")
     if M._whitelistCommandCallback == whitelistCommand then M._whitelistCommandCallback = nil end
     if M._whitelistDrawCallback == drawWhitelistHud then M._whitelistDrawCallback = nil end
     if M._whitelistRuntimeCallback == whitelistRuntime then M._whitelistRuntimeCallback = nil end
@@ -12108,8 +12339,8 @@ end)
 
 -- Aimware's anonymous event bridge is tokened so reloads cannot double-dispatch.
 do
-    local callbackId = "MOIMAHANMOI_GameEvents"
-    local unloadId = "MOIMAHANMOI_GameEventsUnload"
+    local callbackId = "MAHANMOI_GameEvents"
+    local unloadId = "MAHANMOI_GameEventsUnload"
     local bridgeKey = "MOI_MAHANMOI_EVENT_BRIDGE_V1"
     local dispatchBusy = false
     local handlers = {
@@ -12129,7 +12360,7 @@ do
                 and (type(active) ~= "function" or active()) then
                 local ok, err = pcall(handler, event)
                 if not ok then
-                    print(string.format("[MOIMAHANMOI] %s event error: %s", entry.label, tostring(err)))
+                    print(string.format("[MAHANMOI] %s event error: %s", entry.label, tostring(err)))
                 end
             end
         end
@@ -12157,13 +12388,13 @@ do
             local ok, err = pcall(dispatcher, event)
             if not ok then
                 current.lastError = tostring(err)
-                print("[MOIMAHANMOI] event bridge error: " .. tostring(err))
+                print("[MAHANMOI] event bridge error: " .. tostring(err))
             end
         end)
     end)
     bridge.registered = registered == true
     if not registered then
-        print("[MOIMAHANMOI] stable event bridge failed: " .. tostring(registerError))
+        print("[MAHANMOI] stable event bridge failed: " .. tostring(registerError))
     end
 
     callbacks.Register("Unload", unloadId, function()
