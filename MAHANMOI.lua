@@ -1,6 +1,6 @@
--- MAHANMOI 1.4.2
-local MOI_MAHANMOI_VERSION = "1.4.2"
-local MOI_MAHANMOI_SIGNATURE = "MOI_MULTSCRIPT_SOURCE_V1"
+-- MOIMultitool 1.4.4
+local MOI_MAHANMOI_VERSION = "1.4.4"
+local MOI_MAHANMOI_SIGNATURE = "MOI_MAHANMOI_SOURCE_V1"
 _G.MOI_MAHANMOI_VERSION = MOI_MAHANMOI_VERSION
 
 local staleEvents = { "Draw", "CreateMove", "PreMove", "DrawESP", "FireGameEvent", "Unload" }
@@ -13,10 +13,10 @@ local function clearCallbacks(ids)
 end
 
 clearCallbacks({
-    "MAHANMOI_Watermark", "MAHANMOI_MISCLogic",
-    "MAHANMOI_MISCLogicMove", "MAHANMOI_MISCEvents",
-    "MAHANMOI_WeaponsSessionEvents", "MAHANMOI_GameEvents",
-    "MAHANMOI_GameEventsUnload", "MAHANMOI_MISCUnload"
+    "MOIMultitool_Watermark", "MOIMultitool_MISCLogic",
+    "MOIMultitool_MISCLogicMove", "MOIMultitool_MISCEvents",
+    "MOIMultitool_WeaponsSessionEvents", "MOIMultitool_GameEvents",
+    "MOIMultitool_GameEventsUnload", "MOIMultitool_MISCUnload"
 })
 if type(M) == "table" and type(M.Watermark) == "function" then
     pcall(M.Watermark, M, false)
@@ -38,11 +38,11 @@ clearCallbacks({
     "MOIWEAPONS_UIDraw", "MOIWEAPONS_UIInput", "MOIWEAPONS_UIUnload",
     "MOIWEAPONS_Engine", "MOIWEAPONS_Unload", "MOIWEAPONS_Watermark",
     "MOIWEAPONS_LateMesh",
-    "MAHANMOI_ManualAADraw", "MAHANMOI_ManualAAMove",
-    "MAHANMOI_ManualAAUnload", "MAHANMOI_WhitelistRefresh",
-    "MAHANMOI_WhitelistPanel", "MAHANMOI_WhitelistESP", "MAHANMOI_WhitelistUnload",
-    "MAHANMOI_KillTimerDraw", "MAHANMOI_KillTimerUnload",
-    "MAHANMOI_RegionDraw", "MAHANMOI_RegionUnload"
+    "MOIMultitool_ManualAADraw", "MOIMultitool_ManualAAMove",
+    "MOIMultitool_ManualAAUnload", "MOIMultitool_WhitelistRefresh",
+    "MOIMultitool_WhitelistPanel", "MOIMultitool_WhitelistESP", "MOIMultitool_WhitelistUnload",
+    "MOIMultitool_KillTimerDraw", "MOIMultitool_KillTimerUnload",
+    "MOIMultitool_RegionDraw", "MOIMultitool_RegionUnload"
 })
 
 local __MOI_GUILIB = [===[
@@ -68,7 +68,7 @@ local T = {
     shadow    = { 0, 0, 0, 115 },
 
     title     = "MOI",
-    title_tld = "MAHAnMOIL",
+    title_tld = "MULTITOOL",
     titlebar  = 58,
     pad       = 18,
     sec_gap   = 16,
@@ -688,7 +688,7 @@ function Section:_widget(wd, x, y, w)
         local buttonText = fitText(wd.label, mmax(20, w - 18), FONT)
         text(x + w / 2, y + 6, lerpc(T.text, T.texthi, wd._h), buttonText, FONT, "center")
         if clicked(x, y + 1, w, bh) then
-            local ok, err = pcall(wd.cb); if not ok then print("[MAHANMOI] button error: " .. tostring(err)) end
+            local ok, err = pcall(wd.cb); if not ok then print("[MOIMultitool] button error: " .. tostring(err)) end
         end
 
     elseif wd.kind == "slider" then
@@ -886,7 +886,7 @@ function Section:_widget(wd, x, y, w)
         if wd.fn then
             UI._x, UI._cy, UI._w = x, y, w
             local ok, err = pcall(wd.fn, UI, x, y, w)
-            if not ok then print("[MAHANMOI] custom widget error: " .. tostring(err)) end
+            if not ok then print("[MOIMultitool] custom widget error: " .. tostring(err)) end
             local used = UI._cy - y
             wd._measured = used > 0 and used or wd.h
         end
@@ -945,7 +945,7 @@ local function renderSectionAt(s, x, y, w)
     if clipTop and (y + h) <= clipTop then return h end
     local rh = h
     local ok, err = pcall(function() rh = s:render(x, y, w) or h end)
-    if not ok then print("[MAHANMOI] section '" .. tostring(s.title) .. "' error: " .. tostring(err)); return h end
+    if not ok then print("[MOIMultitool] section '" .. tostring(s.title) .. "' error: " .. tostring(err)); return h end
     return rh
 end
 
@@ -1164,7 +1164,7 @@ M._watermark = {
     enabled    = false,
     parts      = { cheat = false, lua = true, user = false, nick = true, fps = true, ping = true },
     cheat_name = "AIMWARE.NET",
-    lua_name   = "MAHANMOI",
+    lua_name   = "MOIMultitool",
     user       = nil,
     nick       = nil,
     ping       = nil,
@@ -1644,7 +1644,7 @@ end
 
 function M:_drawTabBar(win)
     drawLogo(win.x + 15, win.y + 15, 40, 28)
-    text(win.x + 67, win.y + 11, T.texthi, "MAHANMOI", FONT_LOGO)
+    text(win.x + 67, win.y + 11, T.texthi, "MOIMultitool", FONT_LOGO)
     text(win.x + 67, win.y + 33, T.textdim, "Aimware Lua Suite", FONT_SMALL)
     local credit = fitText("Made by " .. aimwareHeaderUser(), 180, FONT_SMALL)
     text(win.x + win.w - 50, win.y + 22, T.textdim, credit, FONT_SMALL, "right")
@@ -1909,7 +1909,7 @@ function M:_frame()
         rbox(real.x, real.y, miniW, miniH, 9, T.bg, T.border)
         rfill(real.x, real.y, miniW, 2, 9, T.accent, true, true, false, false)
         drawLogo(real.x + 7, real.y + 8, 36, 26)
-        text(real.x + 53, real.y + 13, T.texthi, "MAHANMOI", FONT_LOGO)
+        text(real.x + 53, real.y + 13, T.texthi, "MOIMultitool", FONT_LOGO)
         rbox(expandX, real.y + 10, 22, 22, 5, T.widget, T.border)
         text(expandX + 11, real.y + 12, T.texthi, "+", FONT_B, "center")
         return
@@ -2003,7 +2003,7 @@ function M:_frame()
     clipTop, clipBottom = win.y + T.titlebar, win.y + win.h - 2
     if tab then
         local ok, err = pcall(function() tab:render(cx, cy, cw) end)
-        if not ok then print("[MAHANMOI] tab '" .. tostring(tab.name) .. "' error: " .. tostring(err)) end
+        if not ok then print("[MOIMultitool] tab '" .. tostring(tab.name) .. "' error: " .. tostring(err)) end
     end
     clipTop, clipBottom = nil, nil
 
@@ -2084,7 +2084,7 @@ function M:Build(opts)
     _getWheel = resolveWheel()
     _clock    = resolveClock()
     initFonts()
-    if not _getMouse then print("[MAHANMOI] WARNING: mouse position API not found -- cursor won't track") end
+    if not _getMouse then print("[MOIMultitool] WARNING: mouse position API not found -- cursor won't track") end
 
     local menuRef
     pcall(function() menuRef = gui.Reference("MENU") end)
@@ -2199,7 +2199,7 @@ function M:Build(opts)
         end
     end
 
-    callbacks.Register("Draw", "MAHANMOI_UIDraw", function()
+    callbacks.Register("Draw", "MOIMultitool_UIDraw", function()
         local open = true
         if menuRef then pcall(function() open = menuRef:IsActive() end) end
         self._open = open
@@ -2242,12 +2242,12 @@ function M:Build(opts)
         end
 
         local ok, err = pcall(function() self:_frame() end)
-        if not ok then print("[MAHANMOI] frame error: " .. tostring(err)) end
+        if not ok then print("[MOIMultitool] frame error: " .. tostring(err)) end
         drawRuntimeOverlays(t)
     end)
 
     pcall(function()
-        callbacks.Register("CreateMove", "MAHANMOI_UIInput", function(cmd)
+        callbacks.Register("CreateMove", "MOIMultitool_UIInput", function(cmd)
         local viewmodelCommandActive = M._viewmodelCommandActive
         if cmd and type(M._viewmodelCommandCallback) == "function"
             and (type(viewmodelCommandActive) ~= "function" or viewmodelCommandActive()) then
@@ -2259,7 +2259,7 @@ function M:Build(opts)
                 local message = tostring(err)
                 if M._viewmodelCommandError ~= message then
                     M._viewmodelCommandError = message
-                    print("[MAHANMOI] viewmodel command hook error: " .. message)
+                    print("[MOIMultitool] viewmodel command hook error: " .. message)
                 end
             end
         end
@@ -2308,6 +2308,23 @@ function M:Build(opts)
                 end
             end
         end
+        -- Keep the always-on vote service on the same CreateMove bridge used
+        -- by the other runtime modules. Some Aimware builds accept a separate
+        -- named CreateMove callback but stop dispatching it after reconnects,
+        -- leaving correctly detected votes stuck in the local-chat queue.
+        if type(M._voteLogicCallback) == "function" then
+            local ok, err = pcall(M._voteLogicCallback)
+            M._voteLogicAliveAt = now()
+            if ok then
+                M._voteLogicError = nil
+            else
+                local message = tostring(err)
+                if M._voteLogicError ~= message then
+                    M._voteLogicError = message
+                    print("[MOIVotes] main CreateMove hook error: " .. message)
+                end
+            end
+        end
         if not (M._open and M._focus) or not cmd then return end
         pcall(function() cmd.forwardmove = 0 end)
         pcall(function() cmd.sidemove = 0 end)
@@ -2321,9 +2338,9 @@ function M:Build(opts)
     end)
 
     pcall(function()
-        callbacks.Register("Unload", "MAHANMOI_UIUnload", function()
-            pcall(callbacks.Unregister, "Draw", "MAHANMOI_UIDraw")
-            pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_UIInput")
+        callbacks.Register("Unload", "MOIMultitool_UIUnload", function()
+            pcall(callbacks.Unregister, "Draw", "MOIMultitool_UIDraw")
+            pcall(callbacks.Unregister, "CreateMove", "MOIMultitool_UIInput")
         end)
     end)
 
@@ -2332,12 +2349,12 @@ end
 
 return M
 ]===]
-local __chunk, __err = loadstring(__MOI_GUILIB, "=MAHANMOI_guilib.lua")
-if not __chunk then print("[MAHANMOI] UI compile error: " .. tostring(__err)); return end
+local __chunk, __err = loadstring(__MOI_GUILIB, "=MOIMultitool_guilib.lua")
+if not __chunk then print("[MOIMultitool] UI compile error: " .. tostring(__err)); return end
 local __ok, M = pcall(__chunk)
-if not __ok or type(M) ~= "table" then print("[MAHANMOI] UI load error: " .. tostring(M)); return end
+if not __ok or type(M) ~= "table" then print("[MOIMultitool] UI load error: " .. tostring(M)); return end
 local MOI_MULTI = rawget(_G, "MOI_MAHANMOI_STATE") or {}
-local CUSTOM_MODE_FILE = "MAHANMOI_custom_enabled.txt"
+local CUSTOM_MODE_FILE = "MOImultitool_custom_enabled.txt"
 local function loadCustomEnabled()
     local value
     pcall(function()
@@ -2451,6 +2468,10 @@ do
                 "GetModuleFileNameW",
                 "uint32_t(*)(void*, uint16_t*, uint32_t)"
             )
+            local getModuleHandleW = proc(
+                "GetModuleHandleW",
+                "void*(*)(const uint16_t*)"
+            )
             local findFirstW = proc(
                 "FindFirstFileW",
                 "void*(*)(const uint16_t*, void*)"
@@ -2511,6 +2532,16 @@ do
                 local normalized = path:gsub("/", "\\"):gsub("\\+$", "")
                 local lower = normalized:lower()
                 if lower:sub(-5) == "\\csgo" then return normalized end
+
+                -- GetCurrentDirectoryW may point at game\csgo\bin\win64 on
+                -- some installations. The older generic bin marker appended
+                -- a second "\csgo" in that case and produced an empty asset
+                -- catalogue. Resolve any path already below csgo first.
+                local csgoChild = lower:find("\\csgo\\", 1, true)
+                if csgoChild then
+                    return normalized:sub(1, csgoChild + 4)
+                end
+
                 local executableSuffix = "\\bin\\win64\\cs2.exe"
                 if lower:sub(-#executableSuffix) == executableSuffix then
                     return normalized:sub(1, #normalized - #executableSuffix) .. "\\csgo"
@@ -2529,6 +2560,19 @@ do
                     cachedRoot = deriveCsgoRoot(wideToUtf8(buffer, count))
                     if cachedRoot then return cachedRoot end
                 end
+
+                -- A module path is a stable fallback when the process current
+                -- directory was changed by Steam, an overlay or another Lua.
+                local clientName = utf8ToWide("client.dll")
+                local clientModule = clientName and getModuleHandleW(clientName) or nil
+                if clientModule ~= nil then
+                    count = getModuleFileNameW(clientModule, buffer, 32768)
+                    if count and count > 0 and count < 32768 then
+                        cachedRoot = deriveCsgoRoot(wideToUtf8(buffer, count))
+                        if cachedRoot then return cachedRoot end
+                    end
+                end
+
                 count = getCurrentDirectoryW(32768, buffer)
                 if count and count > 0 and count < 32768 then
                     cachedRoot = deriveCsgoRoot(wideToUtf8(buffer, count))
@@ -2623,7 +2667,7 @@ end
 
 loadModule("MANUAL AA", function()
 -- Native Aimware controls stay under Ragebot > Anti-Aim. Runtime drawing and
--- callbacks are owned by MAHANMOI so reloading cannot duplicate them.
+-- callbacks are owned by MOIMultitool so reloading cannot duplicate them.
 local rbotAA = gui.Reference("Ragebot", "Anti-Aim")
 local yawOffsetRef = gui.Reference("Ragebot", "Anti-Aim", "Yaw Offset")
 local pitchRef = gui.Reference("Ragebot", "Anti-Aim", "Pitch Angle")
@@ -2823,7 +2867,7 @@ M._manualAADrawActive = function() return true end
 M._manualAACommandCallback = manualMove
 M._manualAACommandActive = function() return enabled:GetValue() == true end
 
-callbacks.Register("Unload", "MAHANMOI_ManualAAUnload", function()
+callbacks.Register("Unload", "MOIMultitool_ManualAAUnload", function()
     releaseJumpBug()
     restoreOrientation()
     if M._manualAADrawCallback == manualDraw then M._manualAADrawCallback = nil end
@@ -3115,7 +3159,7 @@ else
     end)
 
     pcall(function()
-        callbacks.Register("FireGameEvent", "MAHANMOI_SkinsEvents", function(event)
+        callbacks.Register("FireGameEvent", "MOIMultitool_SkinsEvents", function(event)
 
             local name
             pcall(function() name = event:GetName() end)
@@ -3152,7 +3196,7 @@ else
         if SetModel.path then SetModel.phase = "custom characters disabled" end
     end
 
-    callbacks.Register("CreateMove", "MAHANMOI_SkinsSpawnWatch", function()
+    callbacks.Register("CreateMove", "MOIMultitool_SkinsSpawnWatch", function()
         tick = tick + 1
         if tick % 8 == 0 then
             local _, alive, pawnKey = pawnState()
@@ -3203,9 +3247,9 @@ else
     end)
 
     pcall(function()
-        callbacks.Register("Unload", "MAHANMOI_SkinsUnload", function()
-            pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_SkinsEvents")
-            pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_SkinsSpawnWatch")
+        callbacks.Register("Unload", "MOIMultitool_SkinsUnload", function()
+            pcall(callbacks.Unregister, "FireGameEvent", "MOIMultitool_SkinsEvents")
+            pcall(callbacks.Unregister, "CreateMove", "MOIMultitool_SkinsSpawnWatch")
         end)
     end)
 end
@@ -3592,16 +3636,26 @@ end)
 
 loadModule("VIEWMODEL", function()
 local M = M
-local M = M
--- Lightweight XYZ-only viewmodel positioning for this CS2 build.
+-- Lightweight verified viewmodel positioning for this CS2 build.
 
 local ffi = rawget(_G, "ffi")
-local CONFIG_FILE = "MAHANMOI_viewmodel.txt"
-local DEFAULT = { enabled = false, knifeLeft = false, x = 1.0, y = 1.0, z = -1.0 }
-local original = { x = DEFAULT.x, y = DEFAULT.y, z = DEFAULT.z, preset = 1 }
+local CONFIG_FILE = "MOImultitool_viewmodel.txt"
+local NATIVE_FOV_KEY = "world.fov"
+local DEFAULT = {
+    enabled = false, knifeLeft = false,
+    fovEnabled = false, fov = 90,
+    x = 1.0, y = 1.0, z = -1.0,
+}
+local original = {
+    x = DEFAULT.x, y = DEFAULT.y, z = DEFAULT.z,
+    preset = 1, fov = DEFAULT.fov,
+}
 local status = "ready"
 local lastApply, lastSignature, lastSave = -100, "", -100
 local lastEnabled, lastExtended = false, false
+local fovStatus = "native Aimware setting"
+local fovApplied = false
+local lastFovEnabled, lastFovValue, lastFovApply = false, nil, -100
 local knifeLeftOwned, knifeHandWasAlive = false, false
 local knifeHandStatus = "disabled"
 
@@ -3653,15 +3707,56 @@ end
 
 local function setConVar(name, value)
     local text = type(value) == "number" and string.format("%.3f", value) or tostring(value)
-    local apiOk, commandOk = false, false
-    pcall(function()
-        if client and type(client.SetConVar) == "function" then
-            local result = client.SetConVar(name, text, true)
-            apiOk = result ~= false
+    local expected = tonumber(value)
+    local canVerify = client and type(client.GetConVar) == "function" and expected ~= nil
+    local function verified()
+        if not canVerify then return nil end
+        local current
+        pcall(function() current = tonumber(client.GetConVar(name)) end)
+        return type(current) == "number" and math.abs(current - expected) <= 0.011
+    end
+
+    local apiOk = false
+    local hasSetter = client and type(client.SetConVar) == "function"
+    local callOk, result = pcall(function()
+        if hasSetter then
+            return client.SetConVar(name, text, true)
         end
     end)
-    commandOk = pcall(function() client.Command(name .. " " .. text, true) end)
+    apiOk = hasSetter and callOk and result ~= false
+    local matches = verified()
+    if matches == true or (matches == nil and apiOk) then return true end
+
+    -- Some Aimware builds expose SetConVar but leave protected viewmodel
+    -- variables unchanged. Use the documented unrestricted console path only
+    -- when the direct setter did not verify, avoiding duplicate commands.
+    local commandOk = pcall(function()
+        if not client or type(client.Command) ~= "function" then
+            error("client.Command unavailable")
+        end
+        client.Command(name .. " " .. text, true)
+    end)
+    matches = verified()
+    if matches ~= nil then return matches end
     return apiOk or commandOk
+end
+
+local function readGuiNumber(key, fallback)
+    local value
+    pcall(function()
+        if gui and type(gui.GetValue) == "function" then value = gui.GetValue(key) end
+    end)
+    return tonumber(value) or fallback
+end
+
+local function setGuiNumber(key, value)
+    if not gui or type(gui.SetValue) ~= "function" then return false, nil end
+    local ok = pcall(function() gui.SetValue(key, tonumber(value)) end)
+    if not ok then return false, nil end
+    local readback = readGuiNumber(key, nil)
+    local verified = type(readback) == "number"
+        and math.abs(readback - tonumber(value)) <= 0.51
+    return verified, readback
 end
 
 local function pointer(value)
@@ -3859,14 +3954,58 @@ original.x = readConVar("viewmodel_offset_x", DEFAULT.x)
 original.y = readConVar("viewmodel_offset_y", DEFAULT.y)
 original.z = readConVar("viewmodel_offset_z", DEFAULT.z)
 original.preset = readConVar("viewmodel_presetpos", 1)
+original.fov = clamp(readGuiNumber(NATIVE_FOV_KEY, DEFAULT.fov), 60, 120)
+
+local function legacyAspectToNativeFov(legacyAspect, baseFov)
+    legacyAspect = tonumber(legacyAspect)
+    baseFov = tonumber(baseFov)
+    if not legacyAspect or not baseFov or legacyAspect <= 0 then return nil end
+
+    local width, height = 1920, 1080
+    pcall(function()
+        if draw and type(draw.GetScreenSize) == "function" then
+            local w, h = draw.GetScreenSize()
+            if tonumber(w) and tonumber(h) and tonumber(h) > 0 then
+                width, height = tonumber(w), tonumber(h)
+            end
+        end
+    end)
+
+    local screenAspect = width / height
+    if screenAspect <= 0 then return nil end
+    local halfRadians = math.rad(clamp(baseFov, 1, 179)) * 0.5
+    local converted = math.deg(2 * math.atan(
+        math.tan(halfRadians) * (legacyAspect / screenAspect)
+    ))
+    return clamp(converted, 60, 120)
+end
 
 local config = loadConfig()
+local configuredFov = tonumber(config.view_fov)
+-- Migrate old configurations without treating the former aspect-ratio value
+-- (for example 3.00) as a FOV angle. Convert its horizontal projection to
+-- the closest synchronized Aimware FOV for the current screen resolution.
+if not configuredFov or configuredFov < 40 then
+    configuredFov = legacyAspectToNativeFov(config.aspect, original.fov) or original.fov
+end
+local configuredFovEnabled = config.view_fov_enabled
+if configuredFovEnabled == nil then configuredFovEnabled = config.aspect_enabled end
+if config.view_fov_enabled == nil and config.aspect_enabled == "1" then
+    -- Clear the legacy projection override immediately. It can survive a Lua
+    -- reload inside the same game session and would keep native ESP displaced.
+    pcall(setConVar, "r_aspectratio", 0)
+end
 local tab = M:Tab("VIEWMODEL")
 tab:Row()
 local control = tab:Section("Viewmodel override")
 local enabled = control:Checkbox("Enable viewmodel override", config.enabled == "1")
 local extended = control:Checkbox("Extended XYZ (validated hook)", false)
 local knifeLeft = control:Checkbox("Knife in left hand", config.knife_left == "1")
+local fovEnabled = control:Checkbox("Override FOV", configuredFovEnabled == "1")
+local viewFov = control:Slider(
+    "View FOV", clamp(configuredFov, 60, 120),
+    60, 120, 1, "%.0f"
+)
 local offsetX = control:Slider("Horizontal position (X)", clamp(config.x or DEFAULT.x, -30, 30), -30, 30, 0.1, "%.1f")
 local offsetY = control:Slider("Depth position (Y)", clamp(config.y or DEFAULT.y, -30, 30), -30, 30, 0.1, "%.1f")
 local offsetZ = control:Slider("Vertical position (Z)", clamp(config.z or DEFAULT.z, -30, 30), -30, 30, 0.1, "%.1f")
@@ -3885,6 +4024,7 @@ local function signature()
     local x, y, z = values()
     return table.concat({
         enabled:Get() and "1" or "0", extended:Get() and "1" or "0", knifeLeft:Get() and "1" or "0",
+        fovEnabled:Get() and "1" or "0", string.format("%.0f", clamp(viewFov:Get(), 60, 120)),
         x, y, z,
     }, ":")
 end
@@ -3894,6 +4034,8 @@ local function saveConfig()
     local data = table.concat({
         "enabled=" .. (enabled:Get() and "1" or "0"),
         "knife_left=" .. (knifeLeft:Get() and "1" or "0"),
+        "view_fov_enabled=" .. (fovEnabled:Get() and "1" or "0"),
+        "view_fov=" .. string.format("%.0f", clamp(viewFov:Get(), 60, 120)),
         "x=" .. tostring(x), "y=" .. tostring(y), "z=" .. tostring(z),
     }, "\n")
     local ok = false
@@ -3901,6 +4043,46 @@ local function saveConfig()
         local handle = file.Open(CONFIG_FILE, "w")
         if handle then handle:Write(data); handle:Close(); ok = true end
     end)
+    return ok
+end
+
+local function applyFov(force)
+    if not fovEnabled:Get() then return false end
+    local now = clock()
+    local value = clamp(viewFov:Get(), 60, 120)
+    -- world.fov is an Aimware-owned persistent value. Verify it only at a low
+    -- frequency so configuration reloads stay synchronized without rewriting
+    -- the setting every frame.
+    if not force and lastFovValue == value then
+        if now - lastFovApply < 2.50 then return true end
+        local current = readGuiNumber(NATIVE_FOV_KEY, nil)
+        lastFovApply = now
+        if type(current) == "number" and math.abs(current - value) <= 0.51 then
+            return true
+        end
+    end
+    local verified, readback = setGuiNumber(NATIVE_FOV_KEY, value)
+    lastFovApply = now
+    if verified then
+        lastFovValue = value
+        fovApplied = true
+        fovStatus = string.format("%.0f (Aimware synchronized)", readback)
+        return true
+    end
+
+    lastFovValue = nil
+    fovApplied = false
+    fovStatus = "native Aimware View FOV unavailable"
+    return false
+end
+
+local function restoreFov()
+    local value = clamp(original.fov, 60, 120)
+    local ok, readback = setGuiNumber(NATIVE_FOV_KEY, value)
+    fovApplied = false
+    lastFovValue, lastFovApply = nil, -100
+    fovStatus = ok and string.format("restored %.0f", readback or value)
+        or "native FOV restore failed"
     return ok
 end
 
@@ -3912,15 +4094,18 @@ local function apply(force)
     local nativeX = clamp(x, -2.0, 2.5)
     local nativeY = clamp(y, -2.0, 2.0)
     local nativeZ = clamp(z, -2.0, 2.0)
+    local fallbackReason
     if extended:Get() then
         local hooked, reason = EXT.install()
         if not hooked then
             extended:Set(false)
-            status = "extended mode refused: " .. tostring(reason or EXT.lastError or "validation failed")
-            lastSignature = ""
-            return false
+            fallbackReason = tostring(reason or EXT.lastError or "validation failed")
+            -- Keep the portable native viewmodel functional even when another
+            -- hook owns the call site or this CS2 build fails validation.
+            pcall(EXT.uninstall)
+        else
+            EXT.set(x - nativeX, y - nativeY, z - nativeZ)
         end
-        EXT.set(x - nativeX, y - nativeY, z - nativeZ)
     else
         EXT.uninstall()
     end
@@ -3928,9 +4113,12 @@ local function apply(force)
     ok = setConVar("viewmodel_offset_x", nativeX) and ok
     ok = setConVar("viewmodel_offset_y", nativeY) and ok
     ok = setConVar("viewmodel_offset_z", nativeZ) and ok
-    lastApply, lastSignature = now, sig
-    local mode = extended:Get() and "extended XYZ" or "native XYZ"
+    lastApply, lastSignature = now, signature()
+    local mode = extended:Get() and "extended XYZ" or (fallbackReason and "native fallback" or "native XYZ")
     status = string.format("%s | X %.1f Y %.1f Z %.1f", mode, x, y, z)
+    if fallbackReason then
+        status = status .. " | extended unavailable: " .. fallbackReason
+    end
     if not ok then status = "partial apply: " .. status end
     return ok
 end
@@ -3963,16 +4151,21 @@ presets:Button("Extreme", function() usePreset(8.0, 8.0, -5.0, "extreme", true) 
 
 actions:Button("Apply now", function()
     enabled:Set(true)
-    local ok = apply(true); saveConfig()
+    local ok = apply(true)
+    if fovEnabled:Get() then ok = applyFov(true) and ok end
+    saveConfig()
     M:Notify(ok and status or "viewmodel could not be applied", ok and "success" or "error")
 end)
 actions:Button("Restore original", function()
     enabled:Set(false)
-    local ok = restore(); saveConfig()
+    fovEnabled:Set(false)
+    local ok = restore()
+    ok = restoreFov() and ok
+    saveConfig()
     M:Notify(status, ok and "success" or "error")
 end)
 actions:Button("Show current values", function()
-    M:Notify(status .. " | knife hand: " .. knifeHandStatus, "info")
+    M:Notify(status .. " | FOV: " .. fovStatus .. " | knife hand: " .. knifeHandStatus, "info")
 end)
 
 local function commandHand(left)
@@ -4031,7 +4224,7 @@ local function knifeHandTick()
 end
 
 -- Aimware may discard additional CreateMove callbacks. Route this through the
--- MAHAnMOIl's proven main command hook, shared with Movement, and emit a hand
+-- Multitool's proven main command hook, shared with Movement, and emit a hand
 -- command only on spawn or weapon transitions.
 M._viewmodelCommandActive = function()
     -- Keep one final command tick available after disabling so an owned
@@ -4043,15 +4236,17 @@ M._viewmodelCommandCallback = function()
     if not ok then
         knifeHandWasAlive = false
         knifeHandStatus = "error"
-        print("[MAHANMOI] knife-hand error: " .. tostring(err))
+        print("[MOIMultitool] knife-hand error: " .. tostring(err))
     end
 end
 
 lastEnabled, lastExtended = enabled:Get(), extended:Get()
+lastFovEnabled = fovEnabled:Get()
 M:OnFrame(function()
     local now = clock()
     local on = enabled:Get()
     local ext = extended:Get()
+    local fovOn = fovEnabled:Get()
     if on then
         pcall(apply, false)
     elseif lastEnabled then
@@ -4059,7 +4254,13 @@ M:OnFrame(function()
     elseif EXT.installed then
         pcall(EXT.uninstall)
     end
+    if fovOn then
+        pcall(applyFov, false)
+    elseif lastFovEnabled or fovApplied then
+        pcall(restoreFov)
+    end
     lastEnabled, lastExtended = on, ext
+    lastFovEnabled = fovOn
     local sig = signature()
     if (sig ~= lastSignature or now - lastSave >= 2.50) and now - lastSave >= 0.50 then
         lastSave = now
@@ -4068,14 +4269,15 @@ M:OnFrame(function()
 end)
 
 pcall(function()
-    callbacks.Register("Unload", "MAHANMOI_ViewmodelUnload", function()
+    callbacks.Register("Unload", "MOIMultitool_ViewmodelUnload", function()
         pcall(saveConfig)
         if knifeLeftOwned then pcall(commandHand, false) end
         M._viewmodelCommandCallback = nil
         M._viewmodelCommandActive = nil
+        if fovApplied or fovEnabled:Get() then pcall(restoreFov) end
         if enabled:Get() then pcall(restore) end
         pcall(EXT.uninstall)
-        pcall(callbacks.Unregister, "Unload", "MAHANMOI_ViewmodelUnload")
+        pcall(callbacks.Unregister, "Unload", "MOIMultitool_ViewmodelUnload")
     end)
 end)
 
@@ -4511,14 +4713,14 @@ end)
 syncRemoval()
 
 pcall(function()
-    callbacks.Register("Unload", "MAHANMOI_ScopeUnload", function()
+    callbacks.Register("Unload", "MOIMultitool_ScopeUnload", function()
         pcall(saveConfig)
         pcall(restoreRemoval)
         pcall(draw.SetTexture, nil)
         scopeTexture = nil
         M._scopeDrawCallback = nil
         M._scopeDrawActive = nil
-        pcall(callbacks.Unregister, "Unload", "MAHANMOI_ScopeUnload")
+        pcall(callbacks.Unregister, "Unload", "MOIMultitool_ScopeUnload")
     end)
 end)
 
@@ -6227,7 +6429,7 @@ end]])
         'local CFG_FILE = "MOIweapons_config.txt"')
     source, okCallback = replaceLiteral(source,
         'callbacks.Register("CreateMove", function()',
-        'callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()')
+        'callbacks.Register("CreateMove", "MOIMultitool_WeaponsEngine", function()')
     local runtimeLiteral = string.format(
         "{ dwEntityList=%s, dwLocalPlayerController=%s, dwNetworkGameClient=%s, dwNetworkGameClient_signOnState=%s }",
         tostring(runtimeOffsets.dwEntityList), tostring(runtimeOffsets.dwLocalPlayerController),
@@ -7020,9 +7222,9 @@ end]])
     -- Aimware may invoke CreateMove well over 100 times per second. Detect
     -- inventory/pawn changes at 20 Hz, which is still effectively immediate to
     -- the player, instead of traversing Source 2 entities on every command.
-    source, okEngineThrottle = replaceLiteral(source, [[callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+    source, okEngineThrottle = replaceLiteral(source, [[callbacks.Register("CreateMove", "MOIMultitool_WeaponsEngine", function()
     local okd, d = pcall(active_weapon_def); g_activeDef = okd and d or nil]], [[local MOINextEngineTick = 0
-callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+callbacks.Register("CreateMove", "MOIMultitool_WeaponsEngine", function()
     local tickNow = now_s()
     if tickNow < MOINextEngineTick then return end
     MOINextEngineTick = tickNow + 0.05
@@ -7123,11 +7325,11 @@ local function run()
     end]])
 
     source, okLocalSessionClock = replaceLiteral(source, [[local MOINextEngineTick = 0
-callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+callbacks.Register("CreateMove", "MOIMultitool_WeaponsEngine", function()
     local tickNow = now_s()
     if tickNow < MOINextEngineTick then return end]], [[local MOINextEngineTick = 0
 local MOILastEngineClock = 0
-callbacks.Register("CreateMove", "MAHANMOI_WeaponsEngine", function()
+callbacks.Register("CreateMove", "MOIMultitool_WeaponsEngine", function()
     local tickNow = now_s()
     if tickNow + 0.25 < MOILastEngineClock then
         MOINextEngineTick = 0
@@ -7145,7 +7347,7 @@ local MOILastEngineClock = 0]], [[pcall(function()
         client.AllowListener("cs_game_disconnected")
         client.AllowListener("round_start")
     end
-    callbacks.Register("FireGameEvent", "MAHANMOI_WeaponsSessionEvents", function(event)
+    callbacks.Register("FireGameEvent", "MOIMultitool_WeaponsSessionEvents", function(event)
         local name
         pcall(function() name = event:GetName() end)
         if name == "server_spawn" or name == "game_newmap" or name == "cs_game_disconnected" or name == "round_start" then
@@ -7270,8 +7472,8 @@ if C then
         if type(C.offsets[key]) ~= "number" then missing[#missing + 1] = key end
     end
     if #missing > 0 then
-        pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_WeaponsEngine")
-        pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_WeaponsSessionEvents")
+        pcall(callbacks.Unregister, "CreateMove", "MOIMultitool_WeaponsEngine")
+        pcall(callbacks.Unregister, "FireGameEvent", "MOIMultitool_WeaponsSessionEvents")
         engineError = "current offsets unavailable: " .. table.concat(missing, ", ")
         C = nil
     end
@@ -7486,7 +7688,7 @@ autoConfigSection:Button("Show automatic save status", function()
 end)autoConfigSection:Button("Check for updates", function()
     local updater = rawget(_G, "MOI_MAHANMOI_UPDATER")
     if type(updater) ~= "table" or type(updater.check) ~= "function" then
-        M:Notify("updates are available when MAHANMOI is launched with loader.lua", "info")
+        M:Notify("updates are available when MOIMultitool is launched with loader.lua", "info")
         return
     end
     local callOk, success, message, state = pcall(updater.check)
@@ -7723,9 +7925,9 @@ M:OnFrame(function()
 end)
 
 pcall(function()
-    callbacks.Register("Unload", "MAHANMOI_WeaponsUnload", function()
-        pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_WeaponsEngine")
-        pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_WeaponsSessionEvents")
+    callbacks.Register("Unload", "MOIMultitool_WeaponsUnload", function()
+        pcall(callbacks.Unregister, "CreateMove", "MOIMultitool_WeaponsEngine")
+        pcall(callbacks.Unregister, "FireGameEvent", "MOIMultitool_WeaponsSessionEvents")
 
     end)
 end)
@@ -7737,7 +7939,7 @@ end)
 loadModule("MOVEMENT", function()
 local M = M
 
--- MAHANMOI movement module. Movement is attached to the MAHAnMOIl's
+-- MOIMultitool movement module. Movement is attached to the multitool's
 -- already-live Draw/CreateMove callbacks so Aimware cannot discard it as a
 -- second callback for the same event.
 local bitlib = rawget(_G, "bit")
@@ -8402,11 +8604,11 @@ statusSection:Button("Reset movement state", function()
 end)
 
 pcall(function()
-    callbacks.Unregister("PreMove", "MAHANMOI_MovementPreMove")
-    callbacks.Unregister("CreateMove", "MAHANMOI_MovementCreateMove")
-    callbacks.Unregister("Draw", "MAHANMOI_MovementDraw")
-    callbacks.Unregister("FireGameEvent", "MAHANMOI_MovementEvents")
-    callbacks.Unregister("Unload", "MAHANMOI_MovementUnload")
+    callbacks.Unregister("PreMove", "MOIMultitool_MovementPreMove")
+    callbacks.Unregister("CreateMove", "MOIMultitool_MovementCreateMove")
+    callbacks.Unregister("Draw", "MOIMultitool_MovementDraw")
+    callbacks.Unregister("FireGameEvent", "MOIMultitool_MovementEvents")
+    callbacks.Unregister("Unload", "MOIMultitool_MovementUnload")
 end)
 
 local function onMovementCommand(cmd)
@@ -8469,7 +8671,7 @@ pcall(function()
         client.AllowListener("game_newmap")
         client.AllowListener("cs_game_disconnected")
     end
-    callbacks.Register("FireGameEvent", "MAHANMOI_MovementEvents", function(event)
+    callbacks.Register("FireGameEvent", "MOIMultitool_MovementEvents", function(event)
         if type(M._movementCommandActive) == "function" and not M._movementCommandActive() then return end
         local name
         pcall(function() name = event:GetName() end)
@@ -8485,16 +8687,16 @@ pcall(function()
     end)
 end)
 
-callbacks.Register("Unload", "MAHANMOI_MovementUnload", function()
+callbacks.Register("Unload", "MOIMultitool_MovementUnload", function()
     saveSettings()
     M._movementCommandCallback = nil
     M._movementCommandActive = nil
     M._movementDrawCallback = nil
     M._movementDrawActive = nil
-    pcall(callbacks.Unregister, "PreMove", "MAHANMOI_MovementPreMove")
-    pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_MovementCreateMove")
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_MovementDraw")
-    pcall(callbacks.Unregister, "FireGameEvent", "MAHANMOI_MovementEvents")
+    pcall(callbacks.Unregister, "PreMove", "MOIMultitool_MovementPreMove")
+    pcall(callbacks.Unregister, "CreateMove", "MOIMultitool_MovementCreateMove")
+    pcall(callbacks.Unregister, "Draw", "MOIMultitool_MovementDraw")
+    pcall(callbacks.Unregister, "FireGameEvent", "MOIMultitool_MovementEvents")
 end)
 
 end)
@@ -10110,9 +10312,9 @@ M._killTimerDrawCallback = runtime
 M._killTimerDrawActive = function()
     return enabled:Get() == true or alpha > 0.01
 end
-callbacks.Register("Unload", "MAHANMOI_KillTimerUnload", function()
+callbacks.Register("Unload", "MOIMultitool_KillTimerUnload", function()
     armed = false
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_KillTimerDraw")
+    pcall(callbacks.Unregister, "Draw", "MOIMultitool_KillTimerDraw")
     if M._killTimerDrawCallback == runtime then M._killTimerDrawCallback = nil end
     M._killTimerDrawActive = nil
     M._killTimerSignalActive = nil
@@ -10186,7 +10388,7 @@ local tab = M:Tab("IDENTITY")
 tab:Row()
 local nameSection = tab:Section("Custom name")
 local nameEnabled = nameSection:Checkbox("Enable custom name", cfgBool("name_enabled", false))
-local nameText = nameSection:Input("Name text", config.name_text or "MAHANMOI", "custom player name...")
+local nameText = nameSection:Input("Name text", config.name_text or "MOIMultitool", "custom player name...")
 local nameAnimated = nameSection:Checkbox("Animate custom name", cfgBool("name_animated", false))
 local nameSpeed = nameSection:Slider("Name animation speed", cfgNumber("name_speed", 0.60, 0.35, 2.0), 0.35, 2.0, 0.05, "%.2fs")
 
@@ -10552,7 +10754,7 @@ writeRuntime("module loaded")
 end)
 
 loadModule("VOTES", function()
--- MAHANMOI vote revealer.
+-- MOIMultitool vote revealer.
 -- Uses documented game events and ordinary entity APIs. The only FFI call is
 -- the current local HUD-chat printer; Steam avatar vtables remain excluded.
 -- The service is always enabled and intentionally has no tab. Event/session
@@ -11329,13 +11531,23 @@ local function voteLogicTick(t)
     if endAt > 0 and t >= endAt then clearVote("ready"); return end
 end
 
-pcall(function() callbacks.Unregister("Draw", "MAHANMOI_VoteDraw") end)
-pcall(function() callbacks.Unregister("CreateMove", "MAHANMOI_VoteLogic") end)
-pcall(function() callbacks.Unregister("FireGameEvent", "MAHANMOI_VoteEvents") end)
+-- Primary runtime path. The UI library owns the durable CreateMove bridge and
+-- invokes this function before handling menu input. nextLogicTick makes this
+-- safe when the legacy callback below is also dispatched by Aimware.
+M._voteLogicCallback = function()
+    local t = clock()
+    if t < nextLogicTick then return end
+    nextLogicTick = t + 0.05
+    voteLogicTick(t)
+end
+
+pcall(function() callbacks.Unregister("Draw", "MOIMultitool_VoteDraw") end)
+pcall(function() callbacks.Unregister("CreateMove", "MOIMultitool_VoteLogic") end)
+pcall(function() callbacks.Unregister("FireGameEvent", "MOIMultitool_VoteEvents") end)
 local runtimeGeneration = (tonumber(rawget(_G, "MOI_VOTE_RUNTIME_GENERATION")) or 0) + 1
 rawset(_G, "MOI_VOTE_RUNTIME_GENERATION", runtimeGeneration)
 local logicBusy = false
-callbacks.Register("CreateMove", "MAHANMOI_VoteLogic", function()
+callbacks.Register("CreateMove", "MOIMultitool_VoteLogic", function()
     if rawget(_G, "MOI_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration or logicBusy then return end
     -- Vote/session work runs at 20 Hz.
     local t = clock()
@@ -11354,7 +11566,10 @@ writeRuntime("module loaded", { session = lastSessionKey, chat = localChatStatus
 callbacks.Register("Unload", function()
     if rawget(_G, "MOI_VOTE_RUNTIME_GENERATION") ~= runtimeGeneration then return end
     rawset(_G, "MOI_VOTE_RUNTIME_GENERATION", runtimeGeneration + 1)
-    pcall(callbacks.Unregister, "CreateMove", "MAHANMOI_VoteLogic")
+    pcall(callbacks.Unregister, "CreateMove", "MOIMultitool_VoteLogic")
+    M._voteLogicCallback = nil
+    M._voteLogicAliveAt = nil
+    M._voteLogicError = nil
     logicBusy = false
 end)
 
@@ -11807,9 +12022,9 @@ statusSection:Custom(62, function(ui)
     ui.label(total and ("Samples: " .. total .. " (direct " .. direct .. " / relay " .. relayed .. ")") or relayProbe.detail, ui.T.textdim)
 end)
 
-pcall(function() callbacks.Unregister("Draw", "MAHANMOI_RegionDraw") end)
-pcall(function() callbacks.Unregister("Unload", "MAHANMOI_RegionUnload") end)
-callbacks.Register("Draw", "MAHANMOI_RegionDraw", function()
+pcall(function() callbacks.Unregister("Draw", "MOIMultitool_RegionDraw") end)
+pcall(function() callbacks.Unregister("Unload", "MOIMultitool_RegionUnload") end)
+callbacks.Register("Draw", "MOIMultitool_RegionDraw", function()
     local t = 0
     pcall(function() t = globals.RealTime() end)
     if t < nextPoll then return end
@@ -11828,17 +12043,17 @@ end)
 
 nextProbe = 0
 
-callbacks.Register("Unload", "MAHANMOI_RegionUnload", function()
+callbacks.Register("Unload", "MOIMultitool_RegionUnload", function()
     saveSettings()
     if applied then restoreAutomatic(false) end
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_RegionDraw")
+    pcall(callbacks.Unregister, "Draw", "MOIMultitool_RegionDraw")
 end)
 
 end)
 
 loadModule("WHITELIST", function()
 -- Session whitelist with the original immunity behavior, presented inside the
--- MAHAnMOIl instead of opening a second Aimware window.
+-- multitool instead of opening a second Aimware window.
 local tab = M:Tab("WHITELIST")
 tab:Row()
 local playersSection = tab:Section("Enemy players")
@@ -12198,7 +12413,7 @@ statusSection:Custom(72, function(ui)
     ui.label(enforcementStatus, ui.T.textdim)
 end)
 
--- Uses the main MAHAnMOIl Draw dispatcher, just like Manual AA.  It reads the
+-- Uses the main multitool Draw dispatcher, just like Manual AA.  It reads the
 -- already validated rows and never performs an entity scan of its own.
 local function drawWhitelistHud()
     if whitelistEnabled:Get() ~= true then return end
@@ -12306,7 +12521,7 @@ end
 M._whitelistDrawCallback = drawWhitelistHud
 M._whitelistDrawActive = function() return whitelistEnabled:Get() == true end
 
-callbacks.Register("DrawESP", "MAHANMOI_WhitelistESP", function(esp)
+callbacks.Register("DrawESP", "MOIMultitool_WhitelistESP", function(esp)
     if whitelistEnabled:Get() ~= true or not esp then return end
     local entity = safeCall(function() return esp:GetEntity() end)
     local pawn, team = localPawnAndTeam()
@@ -12323,11 +12538,11 @@ callbacks.Register("DrawESP", "MAHANMOI_WhitelistESP", function(esp)
     pcall(function() esp:AddTextTop(protected and "WHITELISTED" or "TARGET") end)
 end)
 
-callbacks.Register("Unload", "MAHANMOI_WhitelistUnload", function()
+callbacks.Register("Unload", "MOIMultitool_WhitelistUnload", function()
     cleanupImmortalStates()
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_WhitelistRefresh")
-    pcall(callbacks.Unregister, "Draw", "MAHANMOI_WhitelistPanel")
-    pcall(callbacks.Unregister, "DrawESP", "MAHANMOI_WhitelistESP")
+    pcall(callbacks.Unregister, "Draw", "MOIMultitool_WhitelistRefresh")
+    pcall(callbacks.Unregister, "Draw", "MOIMultitool_WhitelistPanel")
+    pcall(callbacks.Unregister, "DrawESP", "MOIMultitool_WhitelistESP")
     if M._whitelistCommandCallback == whitelistCommand then M._whitelistCommandCallback = nil end
     if M._whitelistDrawCallback == drawWhitelistHud then M._whitelistDrawCallback = nil end
     if M._whitelistRuntimeCallback == whitelistRuntime then M._whitelistRuntimeCallback = nil end
@@ -12339,8 +12554,8 @@ end)
 
 -- Aimware's anonymous event bridge is tokened so reloads cannot double-dispatch.
 do
-    local callbackId = "MAHANMOI_GameEvents"
-    local unloadId = "MAHANMOI_GameEventsUnload"
+    local callbackId = "MOIMultitool_GameEvents"
+    local unloadId = "MOIMultitool_GameEventsUnload"
     local bridgeKey = "MOI_MAHANMOI_EVENT_BRIDGE_V1"
     local dispatchBusy = false
     local handlers = {
@@ -12360,7 +12575,7 @@ do
                 and (type(active) ~= "function" or active()) then
                 local ok, err = pcall(handler, event)
                 if not ok then
-                    print(string.format("[MAHANMOI] %s event error: %s", entry.label, tostring(err)))
+                    print(string.format("[MOIMultitool] %s event error: %s", entry.label, tostring(err)))
                 end
             end
         end
@@ -12388,13 +12603,13 @@ do
             local ok, err = pcall(dispatcher, event)
             if not ok then
                 current.lastError = tostring(err)
-                print("[MAHANMOI] event bridge error: " .. tostring(err))
+                print("[MOIMultitool] event bridge error: " .. tostring(err))
             end
         end)
     end)
     bridge.registered = registered == true
     if not registered then
-        print("[MAHANMOI] stable event bridge failed: " .. tostring(registerError))
+        print("[MOIMultitool] stable event bridge failed: " .. tostring(registerError))
     end
 
     callbacks.Register("Unload", unloadId, function()
