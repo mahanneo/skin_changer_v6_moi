@@ -11,8 +11,6 @@
 
 ## 1.4.3 - 2026-07-27
 
-## 1.4.3 - 2026-07-27
-
 ### Cross-PC compatibility and runtime verification
 
 - Fixed custom-character discovery when CS2 or another overlay changes the process working directory to `game/csgo/bin/win64`, which previously could resolve an invalid duplicated `csgo/csgo/characters` path.
