@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.4.4 - 2026-07-27
+## 1.4.4 - 2026-07-28
 
 ### Synchronized FOV hotfix
 
